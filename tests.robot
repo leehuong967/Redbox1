@@ -10,5 +10,5 @@ Access shipment list
     
 Check Shipments list page
     Login
-    Access page ${shipments} ${shipments_list}
-    Check text ${shipments_list_search_box} 729219712617 pa
+    Access page    ${shipments}    ${shipments_list}
+    Check text    ${shipments_list_search_box}    72921971261    pa
