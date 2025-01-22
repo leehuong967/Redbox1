@@ -13,3 +13,17 @@ Login
     Sleep    5s
     Wait Until Page Contains Element    ${logo}    timeout=10
     Page Should Contain Element    ${logo}
+
+Access page
+    id1    id2
+    Login
+    Click Element    id1
+    Sleep    5s
+    Click Element    id2
+
+Check text
+    locator    text    expected_text
+    Input Text locator    text
+    Press Key    None    \13
+    Sleep    5s
+    Page Should Contain    expected_text
