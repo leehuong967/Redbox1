@@ -57,27 +57,3 @@ Check Auto Pick Fail page
     Check text    ${auto_pick_fail_search_box}    WTH   No data available in table
     Sleep    10s
 
-
-Test
-    Login
-    #Open Redbox Dashboard
-    Click Link    /redbox
-    Sleep    5s
-    #Open shipment page
-    Click Element    ${shipments}
-    Sleep    5s
-    Click Link    /redbox/shipments
-    Sleep    5s
-    Check text    ${shipments_list_search_box}    WTF    No data available in table
-    Sleep    5s
-
-Test2
-    Login
-    #Open Redbox Dashboard
-    Click Link    /redbox
-    Sleep    5s
-    #Open shipment page
-    Click Element    menu-link-list
-    Sleep    10s
-    Check text    ${shipments_list_search_box}    72921971261    pa
-    Sleep    5s
