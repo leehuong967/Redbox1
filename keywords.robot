@@ -6,7 +6,7 @@ Resource          vaiables.robot
 *** Keywords ***
 Login
     Open browser    ${base_url}    chrome
-    Maximize Browser Window    
+    Maximize Browser Window
     Input Text    email-login    ${email_login}
     Input Text    password-login    ${password_login}
     Sleep    1s
@@ -28,4 +28,5 @@ Check text
     Input Text    ${locator}    ${text}
     Press Keys    None     RETURN
     Sleep    5s
-    Page Should Contain    ${expected_text}
+    Page Should Contain    expected_text
+
