@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.1.1 (Python 3.12.8 on win32)" generated="2025-02-05T16:04:25.268678" rpa="false" schemaversion="5">
+<suite id="s1" name="Redbox1" source="d:\Redbox_Auto\Redbox1">
+<suite id="s1-s1" name="Tests" source="d:\Redbox_Auto\Redbox1\tests.robot">
+<test id="s1-s1-t1" name="Check Auto Pick Fail page" line="52">
+<kw name="Login" owner="keywords">
+<kw name="Open Browser" owner="Selenium2Library">
+<msg time="2025-02-05T16:04:25.855772" level="INFO">Opening browser 'chrome' to base url 'https://dev.redboxsa.com/login'.</msg>
+<arg>${base_url}</arg>
+<arg>chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-02-05T16:04:25.854746" elapsed="6.695830"/>
+</kw>
+<kw name="Maximize Browser Window" owner="Selenium2Library">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2025-02-05T16:04:32.550576" elapsed="0.025031"/>
+</kw>
+<kw name="Input Text" owner="Selenium2Library">
+<msg time="2025-02-05T16:04:32.576605" level="INFO">Typing text 'anhth58.it.uet@gmail.com' into text field 'email-login'.</msg>
+<arg>email-login</arg>
+<arg>${email_login}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-02-05T16:04:32.575607" elapsed="0.094756"/>
+</kw>
+<kw name="Input Text" owner="Selenium2Library">
+<msg time="2025-02-05T16:04:32.671360" level="INFO">Typing text 'Re@@Bo2025' into text field 'password-login'.</msg>
+<arg>password-login</arg>
+<arg>${password_login}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-02-05T16:04:32.671360" elapsed="0.055536"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-02-05T16:04:33.727150" level="INFO">Slept 1 second.</msg>
+<arg>1s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-02-05T16:04:32.726896" elapsed="1.000254"/>
+</kw>
+<kw name="Click Button" owner="Selenium2Library">
+<msg time="2025-02-05T16:04:33.728152" level="INFO">Clicking button 'submit-login'.</msg>
+<arg>${submit_login}</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-02-05T16:04:33.728152" elapsed="6.755256"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-02-05T16:04:45.485129" level="INFO">Slept 5 seconds.</msg>
+<arg>5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-02-05T16:04:40.483408" elapsed="5.001721"/>
+</kw>
+<kw name="Wait Until Page Contains Element" owner="Selenium2Library">
+<arg>${logo}</arg>
+<arg>timeout=10</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" start="2025-02-05T16:04:45.486135" elapsed="0.018048"/>
+</kw>
+<kw name="Page Should Contain Element" owner="Selenium2Library">
+<msg time="2025-02-05T16:04:45.509744" level="INFO">Current page contains element 'logo'.</msg>
+<arg>${logo}</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="PASS" start="2025-02-05T16:04:45.504183" elapsed="0.005561"/>
+</kw>
+<status status="PASS" start="2025-02-05T16:04:25.853657" elapsed="19.656087"/>
+</kw>
+<kw name="Click Link" owner="Selenium2Library">
+<msg time="2025-02-05T16:04:45.510741" level="INFO">Clicking link '/redbox'.</msg>
+<arg>${redbox_dashboard_href}</arg>
+<doc>Clicks a link identified by ``locator``.</doc>
+<status status="PASS" start="2025-02-05T16:04:45.510741" elapsed="3.368546"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-02-05T16:04:53.879524" level="INFO">Slept 5 seconds.</msg>
+<arg>5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-02-05T16:04:48.879287" elapsed="5.000334"/>
+</kw>
+<kw name="Access page" owner="keywords">
+<kw name="Click Element" owner="Selenium2Library">
+<msg time="2025-02-05T16:04:53.884614" level="INFO">Clicking element 'menu-shipments'.</msg>
+<arg>${title}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-02-05T16:04:53.883618" elapsed="0.050203"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-02-05T16:04:58.934366" level="INFO">Slept 5 seconds.</msg>
+<arg>5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-02-05T16:04:53.933821" elapsed="5.000545"/>
+</kw>
+<kw name="Click Element" owner="Selenium2Library">
+<msg time="2025-02-05T16:04:58.935423" level="INFO">Clicking element 'menu-link-auto-pick-fail'.</msg>
+<arg>${subtitle}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-02-05T16:04:58.935346" elapsed="13.856295"/>
+</kw>
+<arg>${shipments}</arg>
+<arg>${auto_pick_fail}</arg>
+<doc>To access any page under the main operation tab</doc>
+<status status="PASS" start="2025-02-05T16:04:53.881624" elapsed="18.910017"/>
+</kw>
+<kw name="Search and check page contains text" owner="keywords">
+<kw name="Input Text" owner="Selenium2Library">
+<msg time="2025-02-05T16:05:12.793633" level="INFO">Typing text 'WTH' into text field 'customSearch'.</msg>
+<arg>${locator}</arg>
+<arg>${text}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-02-05T16:05:12.792636" elapsed="0.053027"/>
+</kw>
+<kw name="Press Keys" owner="Selenium2Library">
+<msg time="2025-02-05T16:05:12.846660" level="INFO">Sending key(s) ('RETURN',) to page.</msg>
+<msg time="2025-02-05T16:05:12.846660" level="INFO">Pressing special key RETURN to browser.</msg>
+<msg time="2025-02-05T16:05:12.846660" level="INFO">Releasing special key RETURN.</msg>
+<arg>None</arg>
+<arg>RETURN</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<status status="PASS" start="2025-02-05T16:05:12.845663" elapsed="0.009458"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-02-05T16:05:17.855429" level="INFO">Slept 5 seconds.</msg>
+<arg>5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-02-05T16:05:12.855121" elapsed="5.000308"/>
+</kw>
+<kw name="Page Should Contain" owner="Selenium2Library">
+<msg time="2025-02-05T16:05:17.875760" level="INFO">Current page contains text 'No data available in table'.</msg>
+<arg>${expected_text}</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="PASS" start="2025-02-05T16:05:17.856435" elapsed="0.019325"/>
+</kw>
+<arg>${auto_pick_fail_search_box}</arg>
+<arg>WTH</arg>
+<arg>No data available in table</arg>
+<doc>To search and check the page coontains text or not</doc>
+<status status="PASS" start="2025-02-05T16:05:12.792636" elapsed="5.083124"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-02-05T16:05:22.876909" level="INFO">Slept 5 seconds.</msg>
+<arg>5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-02-05T16:05:17.876788" elapsed="5.000121"/>
+</kw>
+<status status="PASS" start="2025-02-05T16:04:25.853657" elapsed="57.023252"/>
+</test>
+<status status="PASS" start="2025-02-05T16:04:25.846016" elapsed="57.032891"/>
+</suite>
+<status status="PASS" start="2025-02-05T16:04:25.272668" elapsed="57.607310"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Redbox1">Redbox1</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s1" name="Tests">Redbox1.Tests</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
