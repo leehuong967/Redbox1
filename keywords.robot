@@ -22,9 +22,9 @@ Access page
     Sleep    5s
     Click Element    ${subtitle}
 
-Check text
+Search and check page contains text
     [Arguments]    ${locator}    ${text}    ${expected_text}
-    [Documentation]    To check the page coontains text or not
+    [Documentation]    To search and check the page coontains text or not
     Input Text    ${locator}    ${text}
     Press Keys    None     RETURN
     Sleep    5s
