@@ -15,16 +15,18 @@ Login
     Wait Until Page Contains Element    ${logo}    timeout=10
     Page Should Contain Element    ${logo}
 
-Access page
-    id1    id2
-    Login
-    Click Element    id1
+Access page    
+    [Arguments]    ${title}    ${subtitle}
+    [Documentation]    To access any page under the main operation tab
+    Click Element    ${title}
     Sleep    5s
-    Click Element    id2
+    Click Element    ${subtitle}
 
 Check text
-    locator    text    expected_text
-    Input Text locator    text
-    Press Key    None    \13
+    [Arguments]    ${locator}    ${text}    ${expected_text}
+    [Documentation]    To check the page coontains text or not
+    Input Text    ${locator}    ${text}
+    Press Keys    None     RETURN
     Sleep    5s
     Page Should Contain    expected_text
+
