@@ -55,5 +55,5 @@ Check Auto Pick Fail page
     Sleep    5s
     Access page    ${shipments}    ${auto_pick_fail}
     Check text    ${auto_pick_fail_search_box}    WTH   No data available in table
-    Sleep    10s
+    Sleep    5s
 
