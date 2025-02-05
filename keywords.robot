@@ -28,5 +28,5 @@ Check text
     Input Text    ${locator}    ${text}
     Press Keys    None     RETURN
     Sleep    5s
-    Page Should Contain    expected_text
+    Page Should Contain    ${expected_text}
 
