@@ -6,6 +6,7 @@ Resource          vaiables.robot
 *** Keywords ***
 Login
     Open browser    ${base_url}    chrome
+    Maximize Browser Window
     Input Text    email-login    ${email_login}
     Input Text    password-login    ${password_login}
     Sleep    1s
