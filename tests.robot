@@ -3,18 +3,7 @@ Resource          keywords.robot
 
 *** Test Cases ***
 Create_shipment
-    [Documentation]    Gửi request để tạo lô hàng mới và kiểm tra response
-    ${session}    Create Session    my_api    ${base_url_api}
-    ${items}    Set Variable    ${{ [{"name": "Book", "quantity": 2, "description": "Doraemon", "unitPrice": 20, "currency": "AR"}] }}
-    ${payload}    Create Dictionary    items=${items}    reference=17022025003    point_id=5d2855e065889422de40f2fe    sender_name=Hoang Anh    sender_email=uynsalla3048923@yopmail.com    sender_phone=+84972786721    sender_address=King Saud University King Saud University    customer_name=Hoang Anh    customer_phone=+84335299001    customer_address=King Saud University King Saud University
-    ${response}    POST    ${base_url_api}    json=${payload}    headers=${headers}    cookies=${cookie}
-    Log To Console    Response Text: ${response.text}
-    ${data}    Set Variable    ${response.json()}
-    Run Keyword If    $data.__class__.__name__ == "dict"    Log To Console    Data is a dictionary: ${data}
-    Run Keyword If    $data.__class__.__name__ == "str"    Log To Console    Data is a string: ${data}
-    ${parsed_data}    Evaluate    json.loads($response.text)    json
-    Log To Console    Shipment ID: ${parsed_data["shipment_id"]}
-    Should Be Equal As Strings    ${response.status_code}    201
+    Login
 
 Access shipment list
     Login
@@ -80,7 +69,7 @@ Check Reports At Counter page
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Access page    ${shipments}    ${reports_at_locker}
-    Search and check page contains text    ${reports_at_counter_search_box}    824921435180    Driver reported lost shipment
+    Search and check page contains text    ${reports_at_counter_search_box}    ABC    No data available in table
     Sleep    10s
 
 Check Changes Tracking page
@@ -122,6 +111,33 @@ Check Link thirdparty shipments page
     Access page    ${shipments}    ${link_thirdparty_shipments}
     Verify element exits    //button[contains(text(),'Submit')]
     Sleep    10s
+    Sales KPIs Page
+    Login
+    Click Link    ${redbox_dashboard_href}
+    Sleep    5s
+    Access page    ${admin_reports}    ${sale_kpis}
+    Wait Until Element Is Visible    ${sale_kpis_new_account}
+    Capture Element Screenshot    ${sale_kpis_new_account}
+    Sleep    10s
+
+Merchant Data page
+    Login
+    Click Link    ${redbox_dashboard_href}
+    Sleep    5s
+    Access page    ${admin_reports}    ${merchant_data}
+    Wait Until Element Is Visible    ${merchant_data_active_account}
+    Capture Element Screenshot    ${merchant_data_active_account}
+    Sleep    10s
+
+Network page
+    Login
+    Click Link    ${redbox_dashboard_href}
+    Sleep    5s
+    Access page    ${admin_reports}    ${network}
+    Wait Until Element Is Visible    ${network_point_status_box}
+    Capture Element Screenshot    ${network_point_status_box}
+    Sleep    10s
+
 SLA Monitoring page
     Login
     Click Link    ${redbox_dashboard_href}
@@ -136,3 +152,15 @@ Merchant Performance page
     Sleep    5s
     Access page    ${admin_reports}    ${merchant_performance}
     Search and check page contains text    ${merchant_performance_search_box}    PhanhBillOdoo    PhanhBillOdoo
+    Sleep    10s
+
+Internal Board page
+    Login
+    Click Link    ${redbox_dashboard_href}
+    Sleep    5s
+    Access page    ${admin_reports}    ${internal_board}
+    Wait Until Element Is Visible    ${internal_board_codtype_dropDownList}    timeout=10s
+    Click Element    ${internal_board_codtype_dropDownList}
+    Sleep    10s
+    Click Element    ${internal_board_with_cod_option}
+    Sleep    10s

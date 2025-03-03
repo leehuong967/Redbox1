@@ -31,9 +31,17 @@ ${door_issue}     menu-link-door-issue
 ${door_issue_search_box}    customSearch
 ${mawb_monitoring}    menu-link-mawb-monitoring
 ${link_thirdparty_shipments}    menu-link-link-thirdparty-shipments
-${base_url_api}    https://dev.api.redboxsa.com
-${endpoint}       /v3/shipments
-${auth_token}     Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25faWQiOiI2NGZhZDU4MDY1ZWExYjJhNjUxZGIyZDIiLCJrZXkiOiIyMDIzLTA5LTA4VDA4OjA0OjE2LjkzOVoiLCJpYXQiOjE2OTQxNjAyNTZ9.ORJWJt_uwO1dHf4s-5bg_gwTTyawGGBIPuHAKOZvUpI
-@{headers}        Content-Type    application/json    Authorization    ${AUTH_TOKEN}
-${cookie}         connect.sid=s%3AWOAKd-qpcmp6vgEQo6FmIg5AUpEChN9d.8VOl2rP7eV61zNGDDVd1VLSpAP66cTBCmVnt%2B%2FF7AAc
-${hearders}       Content-Type=application/json    Authorization=${AUTH_TOKEN}
+${admin_reports}    sub-menu-admin-report
+${sale_kpis}      menu-link-sales-kpis
+${sale_kpis_new_account}    new-acount
+${merchant_data}    menu-link-merchant-data
+${merchant_data_active_account}    active-account
+${network}        menu-link-network
+${network_point_status_box}    chartTop10Cities
+${sla_monitoring}    menu-link-sla-monitoring
+${sla_monitoring_search_box}    customSearch
+${merchant_performance}    menu-link-merchant-performance
+${merchant_performance_search_box}    customSearchShipment
+${internal_board}    menu-link-internal-board
+${internal_board_codtype_dropDownList}    cod-type
+${internal_board_with_cod_option}    op-with-cod
