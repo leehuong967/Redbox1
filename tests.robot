@@ -122,3 +122,17 @@ Check Link thirdparty shipments page
     Access page    ${shipments}    ${link_thirdparty_shipments}
     Verify element exits    //button[contains(text(),'Submit')]
     Sleep    10s
+SLA Monitoring page
+    Login
+    Click Link    ${redbox_dashboard_href}
+    Sleep    5s
+    Access page    ${admin_reports}    ${sla_monitoring}
+    Search and check page contains text    ${sla_monitoring_search_box}    Riyadh    Riyadh
+    Sleep    10s
+
+Merchant Performance page
+    Login
+    Click Link    ${redbox_dashboard_href}
+    Sleep    5s
+    Access page    ${admin_reports}    ${merchant_performance}
+    Search and check page contains text    ${merchant_performance_search_box}    PhanhBillOdoo    PhanhBillOdoo
