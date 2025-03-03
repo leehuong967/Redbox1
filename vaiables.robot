@@ -31,3 +31,9 @@ ${door_issue}     menu-link-door-issue
 ${door_issue_search_box}    customSearch
 ${mawb_monitoring}    menu-link-mawb-monitoring
 ${link_thirdparty_shipments}    menu-link-link-thirdparty-shipments
+${base_url_api}    https://dev.api.redboxsa.com
+${endpoint}       /v3/shipments
+${auth_token}     Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25faWQiOiI2NGZhZDU4MDY1ZWExYjJhNjUxZGIyZDIiLCJrZXkiOiIyMDIzLTA5LTA4VDA4OjA0OjE2LjkzOVoiLCJpYXQiOjE2OTQxNjAyNTZ9.ORJWJt_uwO1dHf4s-5bg_gwTTyawGGBIPuHAKOZvUpI
+@{headers}        Content-Type    application/json    Authorization    ${AUTH_TOKEN}
+${cookie}         connect.sid=s%3AWOAKd-qpcmp6vgEQo6FmIg5AUpEChN9d.8VOl2rP7eV61zNGDDVd1VLSpAP66cTBCmVnt%2B%2FF7AAc
+${hearders}       Content-Type=application/json    Authorization=${AUTH_TOKEN}

@@ -3,7 +3,18 @@ Resource          keywords.robot
 
 *** Test Cases ***
 Create_shipment
-    Login
+    [Documentation]    Gửi request để tạo lô hàng mới và kiểm tra response
+    ${session}    Create Session    my_api    ${base_url_api}
+    ${items}    Set Variable    ${{ [{"name": "Book", "quantity": 2, "description": "Doraemon", "unitPrice": 20, "currency": "AR"}] }}
+    ${payload}    Create Dictionary    items=${items}    reference=17022025003    point_id=5d2855e065889422de40f2fe    sender_name=Hoang Anh    sender_email=uynsalla3048923@yopmail.com    sender_phone=+84972786721    sender_address=King Saud University King Saud University    customer_name=Hoang Anh    customer_phone=+84335299001    customer_address=King Saud University King Saud University
+    ${response}    POST    ${base_url_api}    json=${payload}    headers=${headers}    cookies=${cookie}
+    Log To Console    Response Text: ${response.text}
+    ${data}    Set Variable    ${response.json()}
+    Run Keyword If    $data.__class__.__name__ == "dict"    Log To Console    Data is a dictionary: ${data}
+    Run Keyword If    $data.__class__.__name__ == "str"    Log To Console    Data is a string: ${data}
+    ${parsed_data}    Evaluate    json.loads($response.text)    json
+    Log To Console    Shipment ID: ${parsed_data["shipment_id"]}
+    Should Be Equal As Strings    ${response.status_code}    201
 
 Access shipment list
     Login
@@ -69,7 +80,7 @@ Check Reports At Counter page
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Access page    ${shipments}    ${reports_at_locker}
-    Search and check page contains text    ${reports_at_counter_search_box}    ABC    No data available in table
+    Search and check page contains text    ${reports_at_counter_search_box}    824921435180    Driver reported lost shipment
     Sleep    10s
 
 Check Changes Tracking page
