@@ -1,5 +1,6 @@
 *** Variables ***
 ${base_url}       https://dev.redboxsa.com/login
+${BASE_API}       https://dev.api.redboxsa.com/v3/shipments
 ${email_login}    anhth58.it.uet@gmail.com
 ${password_login}    Re@@Bo2025
 ${submit_login}    submit-login
