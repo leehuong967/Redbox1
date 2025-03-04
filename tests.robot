@@ -1,5 +1,7 @@
 *** Settings ***
 Resource          keywords.robot
+Resource          Config.robot
+Resource          Environment.robot
 
 *** Test Cases ***
 Create_shipment
@@ -73,7 +75,7 @@ Check Reports At Counter page
     Sleep    10s
 
 Check Changes Tracking page
-    Login
+    Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Access page    ${shipments}    ${changes_tracking}
@@ -155,12 +157,15 @@ Merchant Performance page
     Sleep    10s
 
 Internal Board page
-    Login
+    Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
-    Access page    ${admin_reports} ${internal_board}
+    Access page    ${admin_reports}    ${internal_board}
     Wait Until Element Is Visible    ${internal_board_codtype_dropDownList}    timeout=10s
     Click Element    ${internal_board_codtype_dropDownList}
     Sleep    10s
     Click Element    ${internal_board_with_cod_option}
     Sleep    10s
+
+Login
+    Set Environment
