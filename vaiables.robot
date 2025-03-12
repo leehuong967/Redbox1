@@ -46,3 +46,4 @@ ${merchant_performance_search_box}    customSearchShipment
 ${internal_board}    menu-link-internal-board
 ${internal_board_codtype_dropDownList}    cod-type
 ${internal_board_with_cod_option}    op-with-cod
+${shipment_id_file}    shipment_id.txt

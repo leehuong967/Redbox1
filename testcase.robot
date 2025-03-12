@@ -2,16 +2,33 @@
 Resource          keywords.robot
 Resource          Config.robot
 Resource          Environment.robot
+Library           Collections
+Library           RequestsLibrary
+Library           OperatingSystem
 
 *** Test Cases ***
-Create_shipment
-    Create shipment    20250304_002
+API Create shipment
+    ${BODY}    Create Dictionary    reference=20250312_004    customer_name=Lee    customer_phone=+84335299001    customer_address=King Saud University King Saud University, 2813 - King Saud University, Riyadh 12372 - 7463, Saudi Arabia    cod_currency=SAR    cod_amount=10
+    ${HEADERS}    Create Dictionary    Content-Type=application/json    Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25faWQiOiI2NGZhZDU4MDY1ZWExYjJhNjUxZGIyZDIiLCJrZXkiOiIyMDIzLTA5LTA4VDA4OjA0OjE2LjkzOVoiLCJpYXQiOjE2OTQxNjAyNTZ9.ORJWJt_uwO1dHf4s-5bg_gwTTyawGGBIPuHAKOZvUpI    cookie=connect.sid=s%3AWOAKd-qpcmp6vgEQo6FmIg5AUpEChN9d.8VOl2rP7eV61zNGDDVd1VLSpAP66cTBCmVnt%2B%2FF7AAc
+    ${RESPONSE}    POST    ${BASE_API}    json=${BODY}    headers=${HEADERS}
+    ${json_data}    Set variable    ${RESPONSE.json()}
+    Log    ${RESPONSE.json()}
+    ${shipment_id}    Get From Dictionary    ${json_data}    shipment_id
+    #Set Suite Variable    ${shipment_id}
+    Create File    ${shipment_id_file}    ${shipment_id}
+    Should Not Be Empty    ${shipment_id}
 
-Access shipment list
-    Login
+API Get shipment details
+    ${shipment_id}    Get File    ${shipment_id_file}
+    ${header}    Create Dictionary    Content-Type=application/json    Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25faWQiOiI2NGZhZDU4MDY1ZWExYjJhNjUxZGIyZDIiLCJrZXkiOiIyMDIzLTA5LTA4VDA4OjA0OjE2LjkzOVoiLCJpYXQiOjE2OTQxNjAyNTZ9.ORJWJt_uwO1dHf4s-5bg_gwTTyawGGBIPuHAKOZvUpI
+    ${response}    Get    ${BASE_API}/${shipment_id}    headers=${header}
+    Should Be Equal As Numbers    ${response.status_code}    200
+    ${json_data}    Set Variable    ${response.json()}
+    ${succes}    Get From Dictionary    ${json_data}    success
+    Should Be True    ${succes}    Message=Shipment retrieval failed!
 
 Check Shipments list page
-    Login
+    Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Access page    ${shipments}    ${shipments_list}
@@ -19,7 +36,7 @@ Check Shipments list page
     Sleep    10s
 
 Check Home Delivery page
-    Login
+    Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Access page    ${shipments}    ${home_delivery}
@@ -27,7 +44,7 @@ Check Home Delivery page
     Sleep    10s
 
 Check Redbox Now page
-    Login
+    Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Access page    ${shipments}    ${redbox_now}
@@ -35,19 +52,11 @@ Check Redbox Now page
     Sleep    10s
 
 Check Customer Support page
-    Login
+    Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Access page    ${shipments}    ${customer_support}
     Search and check page contains text    ${customer_support_search_box}    WTH    No data available in table
-    Sleep    10s
-
-Check Expired Shipments page
-    Login
-    Click Link    ${redbox_dashboard_href}
-    Sleep    5s
-    Access page    ${shipments}    ${expired_shipments}
-    Search and check page contains text    ${expired_shipments_search_box}    WTH    No data available in table
     Sleep    10s
 
 Check Auto Pick Fail page
@@ -57,6 +66,14 @@ Check Auto Pick Fail page
     Access page    ${shipments}    ${auto_pick_fail}
     Search and check page contains text    ${auto_pick_fail_search_box}    WTH    No data available in table
     Sleep    5s
+
+Check Expired Shipments page
+    Login
+    Click Link    ${redbox_dashboard_href}
+    Sleep    5s
+    Access page    ${shipments}    ${expired_shipments}
+    Search and check page contains text    ${expired_shipments_search_box}    WTH    No data available in table
+    Sleep    10s
 
 Check Reports At Locker page
     Login
@@ -110,7 +127,7 @@ Check Link thirdparty shipments page
     Login
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
-    Access page    ${shipments} ${link_thirdparty_shipments}
+    Access page    ${shipments}    ${link_thirdparty_shipments}
     Verify element exits    //button[contains(text(),'Submit')]
     Sleep    10s
     Sales KPIs Page
@@ -152,8 +169,8 @@ Merchant Performance page
     Login
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
-    Access page    ${admin_reports} ${merchant_performance}
-    Search and check page contains text    ${merchant_performance_search_box}    PhanhBillOdoo PhanhBillOdoo
+    Access page    ${admin_reports}    ${merchant_performance}
+    Search and check page contains text    ${merchant_performance_search_box}    PhanhBillOdoo    PhanhBillOdoo
     Sleep    10s
 
 Internal Board page
