@@ -47,3 +47,10 @@ ${internal_board}    menu-link-internal-board
 ${internal_board_codtype_dropDownList}    cod-type
 ${internal_board_with_cod_option}    op-with-cod
 ${shipment_id_file}    shipment_id.txt
+${warehouses}    xpath=//*[text()='Warehouses']
+${warehouses_list}    /redbox/warehouse-management/redbox-warehouse
+${warehouses_shipment_scan_tracking}    /redbox/support-tool/shipment-tracking-tool
+${warehouses_shipment_scan_tracking_search_box}    customSearch
+${warehouses_returning_shipment}    /redbox/warehouse-management/returning-shipment
+${warehouses_returning_shipment_seach_box}    customSearch
+

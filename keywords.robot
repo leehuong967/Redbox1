@@ -1,6 +1,7 @@
 *** Settings ***
 Library           Selenium2Library
 Library           RequestsLibrary
+Library           Collections
 Resource          vaiables.robot
 
 *** Keywords ***

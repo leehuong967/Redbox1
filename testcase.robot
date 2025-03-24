@@ -130,7 +130,7 @@ Check Link thirdparty shipments page
     Access page    ${shipments}    ${link_thirdparty_shipments}
     Verify element exits    //button[contains(text(),'Submit')]
     Sleep    10s
-    Sales KPIs Page
+Sales KPIs Page
     Login
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
@@ -162,7 +162,7 @@ SLA Monitoring page
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Access page    ${admin_reports}    ${sla_monitoring}
-    Search and check page contains text    ${sla_monitoring_search_box}    Riyadh Riyadh
+    Search and check page contains text    ${sla_monitoring_search_box}    Riyadh    Riyadh
     Sleep    10s
 
 Merchant Performance page
@@ -186,3 +186,34 @@ Internal Board page
 
 Login
     Set Environment
+
+Check Warehouse List
+    Login
+    Click Link    ${redbox_dashboard_href}
+    Sleep    5s
+    Click Element    ${warehouses}
+    Sleep    5s
+    Click Link    ${warehouses_list}
+    Page Should Contain    966534502300
+    Sleep    5s
+
+Check WH Shipment Scan Tracking
+    Login
+    Click Link    ${redbox_dashboard_href}
+    Sleep    5s
+    Click Element    ${warehouses}
+    Sleep    5s
+    Click Link    ${warehouses_shipment_scan_tracking}
+    Search and check page contains text    ${warehouses_shipment_scan_tracking_search_box}    887599812683    887599812683
+    Sleep    5s
+
+Check WH Returning Shipment
+    Login
+    Click Link    ${redbox_dashboard_href}
+    Sleep    5s
+    Click Element    ${warehouses}
+    Sleep    5s
+    Click Link    ${warehouses_returning_shipment}
+    Search and check page contains text    ${warehouses_returning_shipment_seach_box}    811051885063    	66555666779
+    Sleep    5s
+    
