@@ -1,6 +1,6 @@
 *** Variables ***
 ${base_url}       https://dev.redboxsa.com/login
-${BASE_API}       https://dev.api.redboxsa.com/v3/shipments
+${BASE_API}       https://dev.api.redboxsa.com/v3
 ${email_login}    anhth58.it.uet@gmail.com
 ${password_login}    Re@@Bo2025
 ${submit_login}    submit-login
@@ -53,4 +53,5 @@ ${warehouses_shipment_scan_tracking}    /redbox/support-tool/shipment-tracking-t
 ${warehouses_shipment_scan_tracking_search_box}    customSearch
 ${warehouses_returning_shipment}    /redbox/warehouse-management/returning-shipment
 ${warehouses_returning_shipment_seach_box}    customSearch
+${warehouse_id}    67162398f4064122f9697b1e
 

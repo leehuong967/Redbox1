@@ -5,6 +5,7 @@ Resource          Environment.robot
 Library           Collections
 Library           RequestsLibrary
 Library           OperatingSystem
+Library           String
 
 *** Test Cases ***
 API Create shipment
@@ -184,8 +185,22 @@ Internal Board page
     Click Element    ${internal_board_with_cod_option}
     Sleep    10s
 
-Login
-    Set Environment
+Check WH Shipment Scan Tracking
+    Create shipment    Test_WH_Shipment_Scan_Tracking    dev
+    ${file_content}    Get File    ${shipment_id_file}
+    ${lines}    Split String    ${file_content}    \n
+    ${first_line} =    Set Variable    ${lines}[1]
+    ${values} =    Split String    ${first_line}
+    ${tracking_number}    Set Variable    ${values}[1]
+    API Driver picks up shipment from business    ${tracking_number}    ${warehouse_id}    dev
+    Login
+    Click Link    ${redbox_dashboard_href}
+    Sleep    5s
+    Click Element    ${warehouses}
+    Sleep    5s
+    Click Link    ${warehouses_shipment_scan_tracking}
+    Search and check page contains text    ${warehouses_shipment_scan_tracking_search_box}    ${tracking_number}    Driver submit pick up shipment
+    Sleep    5s
 
 Check Warehouse List
     Login
@@ -197,16 +212,7 @@ Check Warehouse List
     Page Should Contain    966534502300
     Sleep    5s
 
-Check WH Shipment Scan Tracking
-    Login
-    Click Link    ${redbox_dashboard_href}
-    Sleep    5s
-    Click Element    ${warehouses}
-    Sleep    5s
-    Click Link    ${warehouses_shipment_scan_tracking}
-    Search and check page contains text    ${warehouses_shipment_scan_tracking_search_box}    887599812683    887599812683
-    Sleep    5s
-
+    
 Check WH Returning Shipment
     Login
     Click Link    ${redbox_dashboard_href}
@@ -216,4 +222,5 @@ Check WH Returning Shipment
     Click Link    ${warehouses_returning_shipment}
     Search and check page contains text    ${warehouses_returning_shipment_seach_box}    811051885063    	66555666779
     Sleep    5s
+
     

@@ -2,6 +2,7 @@
 Library           Selenium2Library
 Library           RequestsLibrary
 Library           Collections
+Library           OperatingSystem
 Resource          vaiables.robot
 
 *** Keywords ***
@@ -38,10 +39,24 @@ Verify element exits
     Element Should Be Visible    ${element_locator}
 
 Create shipment
-    [Arguments]    ${reference_id}
+    [Arguments]    ${reference_id}    ${enviroment}
     ${BODY}    Create Dictionary    reference=${reference_id}    customer_name=Lee    customer_phone=+84335299001    customer_address=King Saud University King Saud University, 2813 - King Saud University, Riyadh 12372 - 7463, Saudi Arabia    cod_currency=SAR    cod_amount=10
-    ${HEADERS}    Create Dictionary    Content-Type=application/json    Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25faWQiOiI2NGZhZDU4MDY1ZWExYjJhNjUxZGIyZDIiLCJrZXkiOiIyMDIzLTA5LTA4VDA4OjA0OjE2LjkzOVoiLCJpYXQiOjE2OTQxNjAyNTZ9.ORJWJt_uwO1dHf4s-5bg_gwTTyawGGBIPuHAKOZvUpI    cookie=connect.sid=s%3AWOAKd-qpcmp6vgEQo6FmIg5AUpEChN9d.8VOl2rP7eV61zNGDDVd1VLSpAP66cTBCmVnt%2B%2FF7AAc
-    ${RESPONSE}    POST    ${BASE_API}    json=${BODY}    headers=${HEADERS}
+    ${HEADERS}    Create Dictionary    Content-Type=application/json    Authorization=${business_authorization["${enviroment}"]}    cookie=connect.sid=s%3AWOAKd-qpcmp6vgEQo6FmIg5AUpEChN9d.8VOl2rP7eV61zNGDDVd1VLSpAP66cTBCmVnt%2B%2FF7AAc
+    ${RESPONSE}    POST    ${shipments_api["${enviroment}"]}    json=${BODY}    headers=${HEADERS}
     ${json_data}    Set variable    ${RESPONSE.json()}
     Log    ${RESPONSE.json()}
     ${shipment_id}    Get From Dictionary    ${json_data}    shipment_id
+    ${tracking_number}    Get From Dictionary    ${json_data}    tracking_number
+    #Set Suite Variable    ${shipment_id}
+    Create File    ${shipment_id_file}    shipment_id: ${shipment_id}\ntracking_number: ${tracking_number}
+    Should Not Be Empty    ${shipment_id}
+
+API Driver picks up shipment from business
+    [Arguments]    ${tracking_number}    ${warehouse_id}    ${enviroment}
+    [Documentation]    
+    ${BODY}    Create Dictionary    tracking_number=["${tracking_number}"]    warehouse_id=["${warehouse_id}"]
+    ${driver_authorization_base}    Set Variable    ${driver_authorization["${enviroment}"]}
+    ${HEADERS}    Create Dictionary    Content-Type=application/json    Authorization=${driver_authorization_base}    cookie=connect.sid=s%3AWOAKd-qpcmp6vgEQo6FmIg5AUpEChN9d.8VOl2rP7eV61zNGDDVd1VLSpAP66cTBCmVnt%2B%2FF7AAc
+    ${RESPONSE}    POST    ${driver_api["${enviroment}"]}/assign-shipment    json=${BODY}    headers=${HEADERS}
+    ${json_data}    Set variable    ${RESPONSE.json()}
+    Log    ${RESPONSE.json()}
