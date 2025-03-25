@@ -29,11 +29,17 @@ API Get shipment details
     Should Be True    ${succes}    Message=Shipment retrieval failed!
 
 Check Shipments list page
-    Set Environment
+    Create shipment    Test_shipment_list    ${env}
+    ${file_content}    Get File    ${shipment_id_file}
+    ${lines}    Split String    ${file_content}    \n
+    ${first_line} =    Set Variable    ${lines}[1]
+    ${values} =    Split String    ${first_line}
+    ${tracking_number}    Set Variable    ${values}[1]
+    Set Environment    
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Access page    ${shipments}    ${shipments_list}
-    Search and check page contains text    ${shipments_list_search_box}    WTH    No data available in table
+    Search and check page contains text    ${shipments_list_search_box}    ${tracking_number}    DevSalla4
     Sleep    10s
 
 Check Home Delivery page
@@ -61,7 +67,7 @@ Check Customer Support page
     Sleep    10s
 
 Check Auto Pick Fail page
-    Login
+    Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Access page    ${shipments}    ${auto_pick_fail}
@@ -69,7 +75,7 @@ Check Auto Pick Fail page
     Sleep    5s
 
 Check Expired Shipments page
-    Login
+    Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Access page    ${shipments}    ${expired_shipments}
@@ -77,7 +83,7 @@ Check Expired Shipments page
     Sleep    10s
 
 Check Reports At Locker page
-    Login
+    Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Access page    ${shipments}    ${reports_at_locker}
@@ -85,7 +91,7 @@ Check Reports At Locker page
     Sleep    10s
 
 Check Reports At Counter page
-    Login
+    Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Access page    ${shipments}    ${reports_at_locker}
@@ -101,7 +107,7 @@ Check Changes Tracking page
     Sleep    10s
 
 Check Shipment Transfer page
-    Login
+    Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Access page    ${shipments}    ${shipment_transfer}
@@ -109,7 +115,7 @@ Check Shipment Transfer page
     Sleep    10s
 
 Check Door Issue page
-    Login
+    Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Access page    ${shipments}    ${door_issue}
@@ -117,7 +123,7 @@ Check Door Issue page
     Sleep    10s
 
 Check MAWB Monitoring page
-    Login
+    Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Access page    ${shipments}    ${mawb_monitoring}
@@ -125,14 +131,14 @@ Check MAWB Monitoring page
     Sleep    10s
 
 Check Link thirdparty shipments page
-    Login
+    Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Access page    ${shipments}    ${link_thirdparty_shipments}
     Verify element exits    //button[contains(text(),'Submit')]
     Sleep    10s
 Sales KPIs Page
-    Login
+    Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Access page    ${admin_reports}    ${sale_kpis}
@@ -141,7 +147,7 @@ Sales KPIs Page
     Sleep    10s
 
 Merchant Data page
-    Login
+    Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Access page    ${admin_reports}    ${merchant_data}
@@ -150,7 +156,7 @@ Merchant Data page
     Sleep    10s
 
 Network page
-    Login
+    Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Access page    ${admin_reports}    ${network}
@@ -159,7 +165,7 @@ Network page
     Sleep    10s
 
 SLA Monitoring page
-    Login
+    Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Access page    ${admin_reports}    ${sla_monitoring}
@@ -167,7 +173,7 @@ SLA Monitoring page
     Sleep    10s
 
 Merchant Performance page
-    Login
+    Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Access page    ${admin_reports}    ${merchant_performance}
@@ -186,14 +192,14 @@ Internal Board page
     Sleep    10s
 
 Check WH Shipment Scan Tracking
-    Create shipment    Test_WH_Shipment_Scan_Tracking    dev
+    Create shipment    Test_WH_Shipment_Scan_Tracking_1    dev
     ${file_content}    Get File    ${shipment_id_file}
     ${lines}    Split String    ${file_content}    \n
     ${first_line} =    Set Variable    ${lines}[1]
     ${values} =    Split String    ${first_line}
     ${tracking_number}    Set Variable    ${values}[1]
     API Driver picks up shipment from business    ${tracking_number}    ${warehouse_id}    dev
-    Login
+    Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Click Element    ${warehouses}
@@ -203,7 +209,7 @@ Check WH Shipment Scan Tracking
     Sleep    5s
 
 Check Warehouse List
-    Login
+    Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Click Element    ${warehouses}
@@ -214,7 +220,7 @@ Check Warehouse List
 
     
 Check WH Returning Shipment
-    Login
+    Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Click Element    ${warehouses}
