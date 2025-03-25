@@ -7,7 +7,8 @@ Resource          vaiables.robot
 
 *** Keywords ***
 Login
-    Open browser    ${base_url}    chrome
+    [Arguments]    ${env}
+    Open browser    ${ENVIRONMENT["${env}"]}    chrome
     Maximize Browser Window
     Input Text    email-login    ${email_login}
     Input Text    password-login    ${password_login}
