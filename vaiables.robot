@@ -1,9 +1,9 @@
 *** Variables ***
-${base_url}       https://dev.redboxsa.com/login
+${base_url}       https://app.redboxsa.com/login
 ${BASE_API}       https://dev.api.redboxsa.com/v3
-${env}    dev
-${email_login}    anhth58.it.uet@gmail.com
-${password_login}    Re@@Bo2025
+${env}    prod
+${email_login}    lehuong16.17@gmail.com
+${password_login}    Redboxsa@123
 ${submit_login}    submit-login
 ${otp_login}      submit-confirm-otp
 ${logo}           logo

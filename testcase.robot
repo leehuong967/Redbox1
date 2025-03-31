@@ -29,7 +29,7 @@ API Get shipment details
     Should Be True    ${succes}    Message=Shipment retrieval failed!
 
 Check Shipments list page
-    Create shipment    Test_shipment_list    ${env}
+    Create shipment    Test_shipment_list_page    ${env}
     ${file_content}    Get File    ${shipment_id_file}
     ${lines}    Split String    ${file_content}    \n
     ${first_line} =    Set Variable    ${lines}[1]
@@ -40,7 +40,7 @@ Check Shipments list page
     Sleep    5s
     Access page    ${shipments}    ${shipments_list}
     Search and check page contains text    ${shipments_list_search_box}    ${tracking_number}    DevSalla4
-    Sleep    10s
+    Sleep    5s
 
 Check Home Delivery page
     Set Environment
@@ -59,11 +59,17 @@ Check Redbox Now page
     Sleep    10s
 
 Check Customer Support page
+    Create shipment    Test_customer_support_page    ${env}
+    ${file_content}    Get File    ${shipment_id_file}
+    ${lines}    Split String    ${file_content}    \n
+    ${first_line} =    Set Variable    ${lines}[1]
+    ${values} =    Split String    ${first_line}
+    ${tracking_number}    Set Variable    ${values}[1]
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Access page    ${shipments}    ${customer_support}
-    Search and check page contains text    ${customer_support_search_box}    WTH    No data available in table
+    Search and check page contains text    ${customer_support_search_box}    ${tracking_number}    DevSalla4
     Sleep    10s
 
 Check Auto Pick Fail page
@@ -192,13 +198,13 @@ Internal Board page
     Sleep    10s
 
 Check WH Shipment Scan Tracking
-    Create shipment    Test_WH_Shipment_Scan_Tracking_1    dev
+    Create shipment    Test_WH_Shipment_Scan_Tracking_1    ${env}
     ${file_content}    Get File    ${shipment_id_file}
     ${lines}    Split String    ${file_content}    \n
     ${first_line} =    Set Variable    ${lines}[1]
     ${values} =    Split String    ${first_line}
     ${tracking_number}    Set Variable    ${values}[1]
-    API Driver picks up shipment from business    ${tracking_number}    ${warehouse_id}    dev
+    API Driver picks up shipment from business    ${tracking_number}    ${warehouse_id}    ${env}
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
