@@ -47,3 +47,10 @@ ${internal_board}    menu-link-internal-board
 ${internal_board_codtype_dropDownList}    cod-type
 ${internal_board_with_cod_option}    op-with-cod
 ${shipment_id_file}    shipment_id.txt
+${storage}        menu-storage
+${storage_shipments}    menu-link-storage-shipments
+${storage_shipments_search_box}    customSearch
+${storage_settings}    menu-link-storage-settings
+${storage_settings_search_box}    customSearch
+${organizations}    xpath=//*[text()='Organizations']
+${organizations_list}    xpath=//*[text()='List']
