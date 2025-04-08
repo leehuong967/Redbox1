@@ -88,55 +88,54 @@ Check Expired Shipments page
     Search and check page contains text    ${expired_shipments_search_box}    WTH    No data available in table
     Sleep    10s
 
-Check Reports At Locker page
+Reports At Locker page
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Access page    ${shipments}    ${reports_at_locker}
-    Search and check page contains text    ${reports_at_locker_search_box}    629503965859    629503965859
+    Search and check page contains text    ${reports_at_locker_search_box}    QA_TEST    No data available in table
     Sleep    10s
 
-Check Reports At Counter page
+Reports At Counter page
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Access page    ${shipments}    ${reports_at_locker}
-    Search and check page contains text    ${reports_at_counter_search_box}    ABC    No data available in table
+    Search and check page contains text    ${reports_at_counter_search_box}    QA_TEST    No data available in table
     Sleep    10s
 
-Check Changes Tracking page
+Changes Tracking page
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Access page    ${shipments}    ${changes_tracking}
-    Search and check page contains text    ${changes_tracking_search_box}    ABC    No data available in table
+    Search and check page contains text    ${changes_tracking_search_box}    QA_TEST    No data available in table
     Sleep    10s
-
-Check Shipment Transfer page
+Shipment Transfer page
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Access page    ${shipments}    ${shipment_transfer}
-    Search and check page contains text    ${shipment_transfer_search_box}    ABC    No data avaiable in table
+    Search and check page contains text    ${shipment_transfer_search_box}    QA_TEST    No data available in table
     Sleep    10s
 
-Check Door Issue page
+Door Issue page
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Access page    ${shipments}    ${door_issue}
-    Search and check page contains text    ${door_issue_search_box}    ABC    No data available in table
+    Search and check page contains text    ${door_issue_search_box}    QA_TEST    No data available in table
     Sleep    10s
 
-Check MAWB Monitoring page
+Door Issue page
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
-    Access page    ${shipments}    ${mawb_monitoring}
-    Verify element exits    //button[contains(text(),'Import MAWB')]
+    Access page    ${shipments}    ${door_issue}
+    Search and check page contains text    ${door_issue_search_box}    QA_TEST    No data available in table
     Sleep    10s
 
-Check Link thirdparty shipments page
+Link thirdparty shipments page
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
@@ -235,6 +234,15 @@ Check WH Returning Shipment
     Search and check page contains text    ${warehouses_returning_shipment_seach_box}    670662016672    966508981797
     Sleep    5s
 
+Storage Shipments page
+    Click Link    ${redbox_dashboard_href}
+    Sleep    5s
+    Click Element    ${warehouses}
+    Sleep    5s
+    Click Link    ${warehouses_returning_shipment}
+    Search and check page contains text    ${warehouses_returning_shipment_seach_box}    670662016672    966508981797
+    Sleep    5s
+
 Express shipments page
     Set Environment
     Click Link    ${redbox_dashboard_href}
@@ -255,6 +263,7 @@ Express Settings page
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
+    Access page    ${organizations}    ${organizations_list}
     Access page    ${express_tab}    ${express_settings}
     Wait Until Element Is Visible    ${express_settings_domesticPrice}
     Capture Element Screenshot    ${express_settings_domesticPrice}
