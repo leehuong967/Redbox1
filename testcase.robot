@@ -35,7 +35,7 @@ Check Shipments list page
     ${first_line} =    Set Variable    ${lines}[1]
     ${values} =    Split String    ${first_line}
     ${tracking_number}    Set Variable    ${values}[1]
-    Set Environment    
+    Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Access page    ${shipments}    ${shipments_list}
@@ -111,7 +111,6 @@ Changes Tracking page
     Access page    ${shipments}    ${changes_tracking}
     Search and check page contains text    ${changes_tracking_search_box}    QA_TEST    No data available in table
     Sleep    10s
-
 Shipment Transfer page
     Set Environment
     Click Link    ${redbox_dashboard_href}
@@ -128,12 +127,12 @@ Door Issue page
     Search and check page contains text    ${door_issue_search_box}    QA_TEST    No data available in table
     Sleep    10s
 
-MAWB Monitoring page
+Door Issue page
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
-    Access page    ${shipments}    ${mawb_monitoring}
-    Verify element exits    //button[contains(text(),'Import MAWB')]
+    Access page    ${shipments}    ${door_issue}
+    Search and check page contains text    ${door_issue_search_box}    QA_TEST    No data available in table
     Sleep    10s
 
 Link thirdparty shipments page
@@ -145,7 +144,7 @@ Link thirdparty shipments page
     Sleep    10s
 
 Sales KPIs Page
-    Login
+    Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Access page    ${admin_reports}    ${sale_kpis}
@@ -225,28 +224,47 @@ Check Warehouse List
     Page Should Contain    966534502300
     Sleep    5s
 
-    
 Check WH Returning Shipment
     Set Environment
+    Click Link    ${redbox_dashboard_href}
+    Sleep    5s
+    Click Element    ${warehouses}
+    Sleep    5s
+    Click Link    ${warehouses_returning_shipment}
+    Search and check page contains text    ${warehouses_returning_shipment_seach_box}    670662016672    966508981797
+    Sleep    5s
 
 Storage Shipments page
+    Click Link    ${redbox_dashboard_href}
+    Sleep    5s
+    Click Element    ${warehouses}
+    Sleep    5s
+    Click Link    ${warehouses_returning_shipment}
+    Search and check page contains text    ${warehouses_returning_shipment_seach_box}    670662016672    966508981797
+    Sleep    5s
+
+Express shipments page
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
-    Access page    ${storage}    ${storage_shipments}
-    Search and check page contains text    ${storage_shipments_search_box}    LAnk    No data available in table
+    Access page    ${express_tab}    ${express_shipments_list}
+    Search and check page contains text    ${express_shipmentList_searchBox}    357831985482    357831985482
     Sleep    10s
 
-Storage Settings page
+Express Locker to Door page
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
-    Access page    ${storage}    ${storage_settings}
-    Search and check page contains text    ${storage_settings_search_box}    Panda Market    RedBox RUH-103
+    Access page    ${express_tab}    ${express_locker_to_door}
+    Search and check page contains text    ${express_ltd_searchBox}    693320129221    693320129221
     Sleep    10s
 
-Organizations List page
+Express Settings page
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Access page    ${organizations}    ${organizations_list}
+    Access page    ${express_tab}    ${express_settings}
+    Wait Until Element Is Visible    ${express_settings_domesticPrice}
+    Capture Element Screenshot    ${express_settings_domesticPrice}
+    Sleep    10s

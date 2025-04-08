@@ -62,3 +62,20 @@ ${warehouses_shipment_scan_tracking_search_box}    customSearch
 ${warehouses_returning_shipment}    /redbox/warehouse-management/returning-shipment
 ${warehouses_returning_shipment_seach_box}    customSearch
 ${warehouse_id}    67162398f4064122f9697b1e
+${express_tab}    menu-express
+${express_shipments_list}    menu-link-express-shipments
+${express_shipmentList_searchBox}    customSearchShipment
+${express_shipmentList_dropdown_moreFilter}    //*[text()='More filter']
+${order_date}     //*[text()='Ordered date']
+${date_picker}    //input[@class='date-range start-time with-border']
+${date_picker_table}    //div[@class='daterangepicker ltr show-calendar opensright']
+${START_DATE_FIELD}    //td[@class='weekend active start-date available in-range']
+${END_DATE_FIELD}    //td[contains(@class, 'weekend') and contains(@class, 'available') and contains(@class, 'in-range')][normalize-space()='16']
+${START_DATE}     2025-03-09
+${END_DATE}       2025-03-16
+${Apply_button}    //*[text()='Apply']
+${Filter_button}    filter-shipment-button
+${express_locker_to_door}    menu-link-express-ltd
+${express_ltd_searchBox}    customSearchShipment
+${express_settings}    menu-link-express-settings
+${express_settings_domesticPrice}    domesticPrice
