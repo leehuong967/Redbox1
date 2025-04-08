@@ -1,7 +1,6 @@
 *** Settings ***
 Library           Selenium2Library
 Resource          Environment.robot
-Resource    vaiables.robot
 
 *** Variables ***
 ${ENV}            stage    # Môi trường mặc định
@@ -14,6 +13,8 @@ Set Environment
     Maximize Browser Window
     Input Text    id=email-login    ${email_login}
     Input Text    id=password-login    ${password_login}
+    Input Text    id=email-login    ${email_login["${ENV}"]}
+    Input Text    id=password-login    ${password_login["${ENV}"]}
     Sleep    1s
     Click button    ${submit_login}
     Wait Until Page Contains Element    ${logo}    timeout=10
