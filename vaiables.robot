@@ -1,8 +1,9 @@
 *** Variables ***
-${base_url}       https://dev.redboxsa.com/login
-${BASE_API}       https://dev.api.redboxsa.com/v3/shipments
-${email_login}    anhth58.it.uet@gmail.com
-${password_login}    Re@@Bo2025
+${base_url}       https://app.redboxsa.com/login
+${BASE_API}       https://dev.api.redboxsa.com/v3
+${env}            prod
+${email_login}    lehuong16.17@gmail.com
+${password_login}    Redboxsa@123
 ${submit_login}    submit-login
 ${otp_login}      submit-confirm-otp
 ${logo}           logo
@@ -54,3 +55,10 @@ ${storage_settings}    menu-link-storage-settings
 ${storage_settings_search_box}    customSearch
 ${organizations}    xpath=//*[text()='Organizations']
 ${organizations_list}    xpath=//*[text()='List']
+${warehouses}     xpath=//*[text()='Warehouses']
+${warehouses_list}    /redbox/warehouse-management/redbox-warehouse
+${warehouses_shipment_scan_tracking}    /redbox/support-tool/shipment-tracking-tool
+${warehouses_shipment_scan_tracking_search_box}    customSearch
+${warehouses_returning_shipment}    /redbox/warehouse-management/returning-shipment
+${warehouses_returning_shipment_seach_box}    customSearch
+${warehouse_id}    67162398f4064122f9697b1e

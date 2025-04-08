@@ -5,6 +5,7 @@ Resource          Environment.robot
 Library           Collections
 Library           RequestsLibrary
 Library           OperatingSystem
+Library           String
 
 *** Test Cases ***
 API Create shipment
@@ -28,12 +29,18 @@ API Get shipment details
     Should Be True    ${succes}    Message=Shipment retrieval failed!
 
 Check Shipments list page
-    Set Environment
+    Create shipment    Test_shipment_list_page    ${env}
+    ${file_content}    Get File    ${shipment_id_file}
+    ${lines}    Split String    ${file_content}    \n
+    ${first_line} =    Set Variable    ${lines}[1]
+    ${values} =    Split String    ${first_line}
+    ${tracking_number}    Set Variable    ${values}[1]
+    Set Environment    
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Access page    ${shipments}    ${shipments_list}
-    Search and check page contains text    ${shipments_list_search_box}    WTH    No data available in table
-    Sleep    10s
+    Search and check page contains text    ${shipments_list_search_box}    ${tracking_number}    DevSalla4
+    Sleep    5s
 
 Check Home Delivery page
     Set Environment
@@ -52,15 +59,21 @@ Check Redbox Now page
     Sleep    10s
 
 Check Customer Support page
+    Create shipment    Test_customer_support_page    ${env}
+    ${file_content}    Get File    ${shipment_id_file}
+    ${lines}    Split String    ${file_content}    \n
+    ${first_line} =    Set Variable    ${lines}[1]
+    ${values} =    Split String    ${first_line}
+    ${tracking_number}    Set Variable    ${values}[1]
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Access page    ${shipments}    ${customer_support}
-    Search and check page contains text    ${customer_support_search_box}    WTH    No data available in table
+    Search and check page contains text    ${customer_support_search_box}    ${tracking_number}    DevSalla4
     Sleep    10s
 
 Check Auto Pick Fail page
-    Login
+    Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Access page    ${shipments}    ${auto_pick_fail}
@@ -68,7 +81,7 @@ Check Auto Pick Fail page
     Sleep    5s
 
 Check Expired Shipments page
-    Login
+    Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Access page    ${shipments}    ${expired_shipments}
@@ -141,7 +154,7 @@ Sales KPIs Page
     Sleep    10s
 
 Merchant Data page
-    Login
+    Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Access page    ${admin_reports}    ${merchant_data}
@@ -150,7 +163,7 @@ Merchant Data page
     Sleep    10s
 
 Network page
-    Login
+    Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Access page    ${admin_reports}    ${network}
@@ -159,15 +172,15 @@ Network page
     Sleep    10s
 
 SLA Monitoring page
-    Login
+    Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Access page    ${admin_reports}    ${sla_monitoring}
-    Search and check page contains text    ${sla_monitoring_search_box}    Riyadh Riyadh
+    Search and check page contains text    ${sla_monitoring_search_box}    Riyadh    Riyadh
     Sleep    10s
 
 Merchant Performance page
-    Login
+    Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Access page    ${admin_reports}    ${merchant_performance}
@@ -185,7 +198,35 @@ Internal Board page
     Click Element    ${internal_board_with_cod_option}
     Sleep    10s
 
-Login
+Check WH Shipment Scan Tracking
+    Create shipment    Test_WH_Shipment_Scan_Tracking_1    ${env}
+    ${file_content}    Get File    ${shipment_id_file}
+    ${lines}    Split String    ${file_content}    \n
+    ${first_line} =    Set Variable    ${lines}[1]
+    ${values} =    Split String    ${first_line}
+    ${tracking_number}    Set Variable    ${values}[1]
+    API Driver picks up shipment from business    ${tracking_number}    ${warehouse_id}    ${env}
+    Set Environment
+    Click Link    ${redbox_dashboard_href}
+    Sleep    5s
+    Click Element    ${warehouses}
+    Sleep    5s
+    Click Link    ${warehouses_shipment_scan_tracking}
+    Search and check page contains text    ${warehouses_shipment_scan_tracking_search_box}    ${tracking_number}    Driver submit pick up shipment
+    Sleep    5s
+
+Check Warehouse List
+    Set Environment
+    Click Link    ${redbox_dashboard_href}
+    Sleep    5s
+    Click Element    ${warehouses}
+    Sleep    5s
+    Click Link    ${warehouses_list}
+    Page Should Contain    966534502300
+    Sleep    5s
+
+    
+Check WH Returning Shipment
     Set Environment
 
 Storage Shipments page
