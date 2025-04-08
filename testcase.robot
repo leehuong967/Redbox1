@@ -1,4 +1,5 @@
 *** Settings ***
+Test Teardown     Close Browser
 Resource          keywords.robot
 Resource          Config.robot
 Resource          Environment.robot
