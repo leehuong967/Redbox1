@@ -35,7 +35,7 @@ Check Shipments list page
     ${first_line} =    Set Variable    ${lines}[1]
     ${values} =    Split String    ${first_line}
     ${tracking_number}    Set Variable    ${values}[1]
-    Set Environment    
+    Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Access page    ${shipments}    ${shipments_list}
@@ -143,6 +143,7 @@ Check Link thirdparty shipments page
     Access page    ${shipments}    ${link_thirdparty_shipments}
     Verify element exits    //button[contains(text(),'Submit')]
     Sleep    10s
+
 Sales KPIs Page
     Set Environment
     Click Link    ${redbox_dashboard_href}
@@ -224,7 +225,6 @@ Check Warehouse List
     Page Should Contain    966534502300
     Sleep    5s
 
-    
 Check WH Returning Shipment
     Set Environment
     Click Link    ${redbox_dashboard_href}
@@ -232,7 +232,30 @@ Check WH Returning Shipment
     Click Element    ${warehouses}
     Sleep    5s
     Click Link    ${warehouses_returning_shipment}
-    Search and check page contains text    ${warehouses_returning_shipment_seach_box}    670662016672    	966508981797	
+    Search and check page contains text    ${warehouses_returning_shipment_seach_box}    670662016672    966508981797
     Sleep    5s
 
-    
+Express shipments page
+    Set Environment
+    Click Link    ${redbox_dashboard_href}
+    Sleep    5s
+    Access page    ${express_tab}    ${express_shipments_list}
+    Search and check page contains text    ${express_shipmentList_searchBox}    357831985482    357831985482
+    Sleep    10s
+
+Express Locker to Door page
+    Set Environment
+    Click Link    ${redbox_dashboard_href}
+    Sleep    5s
+    Access page    ${express_tab}    ${express_locker_to_door}
+    Search and check page contains text    ${express_ltd_searchBox}    693320129221    693320129221
+    Sleep    10s
+
+Express Settings page
+    Set Environment
+    Click Link    ${redbox_dashboard_href}
+    Sleep    5s
+    Access page    ${express_tab}    ${express_settings}
+    Wait Until Element Is Visible    ${express_settings_domesticPrice}
+    Capture Element Screenshot    ${express_settings_domesticPrice}
+    Sleep    10s
