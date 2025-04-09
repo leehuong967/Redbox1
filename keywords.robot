@@ -33,6 +33,13 @@ Search and check page contains text
     Sleep    5s
     Page Should Contain    ${expected_text}
 
+Search and wait page contains text 
+    [Arguments]    ${locator}    ${text}    ${expected_text}
+    [Documentation]    To search and check the page contains expected text without using fixed sleep time.
+    Input Text    ${locator}    ${text}
+    Press Keys    None    RETURN
+    Wait Until Page Contains    ${expected_text}    timeout=10
+
 Verify element exits
     [Arguments]    ${element_locator}
     [Documentation]    Verify that the given element exists on the page

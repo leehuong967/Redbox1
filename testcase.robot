@@ -87,62 +87,56 @@ Check Expired Shipments page
     Sleep    5s
     Access page    ${shipments}    ${expired_shipments}
     Search and check page contains text    ${expired_shipments_search_box}    WTH    No data available in table
-    Sleep    10s
+    Sleep    5s
 
 Reports At Locker page
     Set Environment
     Click Link    ${redbox_dashboard_href}
-    Sleep    5s
+    Wait Until Page Contains Element    ${shipments}    timeout=10
     Access page    ${shipments}    ${reports_at_locker}
-    Search and check page contains text    ${reports_at_locker_search_box}    QA_TEST    No data available in table
-    Sleep    10s
+    Search and wait page contains text    ${reports_at_locker_search_box}    ${search_text}    No data available in table
 
 Reports At Counter page
     Set Environment
     Click Link    ${redbox_dashboard_href}
-    Sleep    5s
+    Wait Until Page Contains Element    ${shipments}    timeout=10
     Access page    ${shipments}    ${reports_at_locker}
-    Search and check page contains text    ${reports_at_counter_search_box}    QA_TEST    No data available in table
-    Sleep    10s
+    Search and wait page contains text    ${reports_at_counter_search_box}    ${search_text}    No data available in table
 
 Changes Tracking page
     Set Environment
     Click Link    ${redbox_dashboard_href}
-    Sleep    5s
+    Wait Until Page Contains Element    ${shipments}    timeout=10
     Access page    ${shipments}    ${changes_tracking}
-    Search and check page contains text    ${changes_tracking_search_box}    QA_TEST    No data available in table
-    Sleep    10s
+    Search and wait page contains text    ${changes_tracking_search_box}    ${search_text}    No data available in table
+    
 Shipment Transfer page
     Set Environment
     Click Link    ${redbox_dashboard_href}
-    Sleep    5s
+    Wait Until Page Contains Element    ${shipments}    timeout=10
     Access page    ${shipments}    ${shipment_transfer}
-    Search and check page contains text    ${shipment_transfer_search_box}    QA_TEST    No data available in table
-    Sleep    10s
+    Search and wait page contains text    ${shipment_transfer_search_box}    ${search_text}    No data available in table
 
 Door Issue page
     Set Environment
     Click Link    ${redbox_dashboard_href}
-    Sleep    5s
+    Wait Until Page Contains Element    ${shipments}    timeout=10
     Access page    ${shipments}    ${door_issue}
-    Search and check page contains text    ${door_issue_search_box}    QA_TEST    No data available in table
-    Sleep    10s
+    Search and wait page contains text    ${door_issue_search_box}    ${search_text}    No data available in table
 
-Door Issue page
+MAWB Monitoring page
     Set Environment
     Click Link    ${redbox_dashboard_href}
-    Sleep    5s
-    Access page    ${shipments}    ${door_issue}
-    Search and check page contains text    ${door_issue_search_box}    QA_TEST    No data available in table
-    Sleep    10s
+    Wait Until Page Contains Element    ${shipments}    timeout=10
+    Access page    ${shipments}    ${mawb_monitoring}
+    Verify element exits    //button[contains(text(),'Import MAWB')]
 
 Link thirdparty shipments page
     Set Environment
     Click Link    ${redbox_dashboard_href}
-    Sleep    5s
+    Wait Until Page Contains Element    ${shipments}    timeout=10
     Access page    ${shipments}    ${link_thirdparty_shipments}
     Verify element exits    //button[contains(text(),'Submit')]
-    Sleep    10s
 
 Sales KPIs Page
     Set Environment

@@ -76,3 +76,4 @@ ${express_locker_to_door}    menu-link-express-ltd
 ${express_ltd_searchBox}    customSearchShipment
 ${express_settings}    menu-link-express-settings
 ${express_settings_domesticPrice}    domesticPrice
+${search_text}    NOT_EXIST_9999
