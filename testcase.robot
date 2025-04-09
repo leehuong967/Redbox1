@@ -129,6 +129,7 @@ MAWB Monitoring page
     Click Link    ${redbox_dashboard_href}
     Wait Until Page Contains Element    ${shipments}    timeout=10
     Access page    ${shipments}    ${mawb_monitoring}
+
     Verify element exits    //button[contains(text(),'Import MAWB')]
 
 Link thirdparty shipments page
@@ -230,13 +231,18 @@ Check WH Returning Shipment
     Sleep    5s
 
 Storage Shipments page
+    Set Environment
     Click Link    ${redbox_dashboard_href}
-    Sleep    5s
-    Click Element    ${warehouses}
-    Sleep    5s
-    Click Link    ${warehouses_returning_shipment}
-    Search and check page contains text    ${warehouses_returning_shipment_seach_box}    670662016672    966508981797
-    Sleep    5s
+    Wait Until Page Contains Element    ${storage}    timeout=10
+    Access page    ${storage}    ${storage_shipments}
+    Search and wait page contains text    ${storage_shipments_search_box}    ${search_text}    No data available in table
+
+Storage Settings page
+    Set Environment
+    Click Link    ${redbox_dashboard_href}
+    Wait Until Page Contains Element    ${storage}    timeout=10
+    Access page    ${storage}    ${storage_settings}
+    Search and wait page contains text    ${storage_settings_search_box}    ${search_text}    No data available in table
 
 Express shipments page
     Set Environment
