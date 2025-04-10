@@ -267,6 +267,7 @@ Express Settings page
     Access page    ${express_tab}    ${express_settings}
     Wait Until Element Is Visible    ${express_settings_domesticPrice}
     Capture Element Screenshot    ${express_settings_domesticPrice}
+<<<<<<< HEAD
     Sleep    10s
 
 Check Organizations list page
@@ -342,3 +343,16 @@ Check Global MAWB Monitoring
     Access page    ${Global_box}    ${Global_MAWB Monitoring}
     Verify element exits    //button[contains(text(),'Import MAWB')]
     Sleep    5s
+=======
+    #Sleep    10s
+
+API create return shipment
+    Create Session    redbox    ${BASE_URL1}
+    ${headers}=    Create Dictionary    Content-Type=application/json    Authorization=${AUTH_TOKEN}
+    ${payload}=    Create Dictionary    original_shipment_id=67ecf96894f3d9b158badcb4
+    ${response}=    POST On Session    redbox    ${ENDPOINT}    json=${payload}    headers=${headers}
+    Log    ${response.status_code}
+    ${response_body}=    Evaluate    $response.json()
+    Log    Response Body (JSON): ${response_body}
+    Should Be Equal As Integers    ${response.status_code}    200
+>>>>>>> a46df2df5432c03882d681ef73c2ff0b35fcd20d
