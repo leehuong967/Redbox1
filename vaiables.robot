@@ -96,3 +96,6 @@ ${Global_box_shipments}    //li[*[text()='Global Box']]//li[*[text()='Shipments'
 ${shipment_search_mainifest_box}    customSearchShipment
 ${Packages}       xpath=//*[text()='Packages']
 ${Global_MAWB Monitoring}    //li[*[text()='Global Box']]//li[*[text()='MAWB Monitoring']]
+${BASE_URL1}      https://dev.api.redboxsa.com
+${ENDPOINT}       /v3/shipments/returns
+${AUTH_TOKEN}     Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25faWQiOiI2NGJlMmZjNTdiMzVlYTQ4YmRlY2IwNzAiLCJrZXkiOiIyMDIzLTEwLTE5VDExOjA2OjUwLjc1MloiLCJpYXQiOjE2OTc3MTM2MTB9.5L_YOpJtrfPMUR2wQvFCT9rNCsvSQkSqMTX3f-klUuk
