@@ -109,7 +109,7 @@ Changes Tracking page
     Wait Until Page Contains Element    ${shipments}    timeout=10
     Access page    ${shipments}    ${changes_tracking}
     Search and wait page contains text    ${changes_tracking_search_box}    ${search_text}    No data available in table
-    
+
 Shipment Transfer page
     Set Environment
     Click Link    ${redbox_dashboard_href}
@@ -129,7 +129,6 @@ MAWB Monitoring page
     Click Link    ${redbox_dashboard_href}
     Wait Until Page Contains Element    ${shipments}    timeout=10
     Access page    ${shipments}    ${mawb_monitoring}
-
     Verify element exits    //button[contains(text(),'Import MAWB')]
 
 Link thirdparty shipments page
@@ -208,7 +207,7 @@ Check WH Shipment Scan Tracking
     Sleep    5s
     Click Link    ${warehouses_shipment_scan_tracking}
     Search and check page contains text    ${warehouses_shipment_scan_tracking_search_box}    ${tracking_number}    Driver submit pick up shipment
-    Sleep    5s
+    #Sleep    5s
 
 Check Warehouse List
     Set Environment
@@ -269,6 +268,7 @@ Express Settings page
     Wait Until Element Is Visible    ${express_settings_domesticPrice}
     Capture Element Screenshot    ${express_settings_domesticPrice}
     Sleep    10s
+
 Check Organizations list page
     Set Environment
     Click Link    ${redbox_dashboard_href}
