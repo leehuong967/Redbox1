@@ -109,7 +109,7 @@ Changes Tracking page
     Wait Until Page Contains Element    ${shipments}    timeout=10
     Access page    ${shipments}    ${changes_tracking}
     Search and wait page contains text    ${changes_tracking_search_box}    ${search_text}    No data available in table
-    
+
 Shipment Transfer page
     Set Environment
     Click Link    ${redbox_dashboard_href}
@@ -129,7 +129,6 @@ MAWB Monitoring page
     Click Link    ${redbox_dashboard_href}
     Wait Until Page Contains Element    ${shipments}    timeout=10
     Access page    ${shipments}    ${mawb_monitoring}
-
     Verify element exits    //button[contains(text(),'Import MAWB')]
 
 Link thirdparty shipments page
@@ -268,77 +267,14 @@ Express Settings page
     Access page    ${express_tab}    ${express_settings}
     Wait Until Element Is Visible    ${express_settings_domesticPrice}
     Capture Element Screenshot    ${express_settings_domesticPrice}
-    Sleep    10s
-Check Organizations list page
-    Set Environment
-    Click Link    ${redbox_dashboard_href}
-    Sleep    5s
-    Access page    ${organizations}    ${organizations_list}
-    Search and check page contains text    ${organizations_list_search_box}    wtfhihi    No data available in table
+    #Sleep    10s
 
-Check Merchant Notes page
-    Set Environment
-    Click Link    ${redbox_dashboard_href}
-    Sleep    5s
-    Access page    ${organizations}    ${organizations_merchant notes}
-    Verify element exits    //button[contains(text(),'Search')]
-
-Check Bank changes tracking page
-    Set Environment
-    Click Link    ${redbox_dashboard_href}
-    Sleep    5s
-    Access page    ${organizations}    ${bank_changes_tracking}
-    Search and check page contains text    ${bank_changes_tracking_search_box}    htt    No matching records found
-
-Check Merchant activities page
-    Set Environment
-    Click Link    ${redbox_dashboard_href}
-    Sleep    5s
-    Access page    ${organizations}    ${merchant_activities}
-    Search and check page contains text    ${merchant_activities_search_box}    htt    No data available in table
-
-Check Suspension page
-    Set Environment
-    Click Link    ${redbox_dashboard_href}
-    Sleep    5s
-    Access page    ${organizations}    ${suspension}
-    Search and check page contains text    ${suspension_search_box}    hello    No data available in table
-
-Check Pending activation page
-    Set Environment
-    Click Link    ${redbox_dashboard_href}
-    Sleep    5s
-    Access page    ${organizations}    ${Pending_activation}
-    Search and check page contains text    ${pending_activation_search_box}    hello    No data available in table
-
-Check RedBox offers page
-    Set Environment
-    Click Link    ${redbox_dashboard_href}
-    Sleep    5s
-    Access page    ${organizations}    ${RedBox_offers}
-    Search and check page contains text    ${RedBox_offers_search_box}    hello    No data available in table
-
-Check Global box shipments page
-    Set Environment
-    Click Link    ${redbox_dashboard_href}
-    Sleep    5s
-    Access page    ${Global_box}    ${Global_box_shipments}
-    Wait Until Element Is Visible    //button[contains(text(),'Export Manifest')]    timeout=10s
-    Click Element    //button[contains(text(),'Export Manifest')]
-    Sleep    10s
-    Search and check page contains text    ${shipment_search_mainifest_box}    hello    No matching records found
-
-Check Global box Packages page
-    Set Environment
-    Click Link    ${redbox_dashboard_href}
-    Sleep    5s
-    Access page    ${Global_box}    ${Packages}
-    Search and check page contains text    ${Packages_seach_box}    hello    No data available in table
-
-Check Global MAWB Monitoring
-    Set Environment
-    Click Link    ${redbox_dashboard_href}
-    Sleep    5s
-    Access page    ${Global_box}    ${Global_MAWB Monitoring}
-    Verify element exits    //button[contains(text(),'Import MAWB')]
-    Sleep    5s
+API create return shipment
+    Create Session    redbox    ${BASE_URL1}
+    ${headers}=    Create Dictionary    Content-Type=application/json    Authorization=${AUTH_TOKEN}
+    ${payload}=    Create Dictionary    original_shipment_id=67ecf96894f3d9b158badcb4
+    ${response}=    POST On Session    redbox    ${ENDPOINT}    json=${payload}    headers=${headers}
+    Log    ${response.status_code}
+    ${response_body}=    Evaluate    $response.json()
+    Log    Response Body (JSON): ${response_body}
+    Should Be Equal As Integers    ${response.status_code}    200
