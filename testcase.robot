@@ -269,3 +269,76 @@ Express Settings page
     Wait Until Element Is Visible    ${express_settings_domesticPrice}
     Capture Element Screenshot    ${express_settings_domesticPrice}
     Sleep    10s
+Check Organizations list page
+    Set Environment
+    Click Link    ${redbox_dashboard_href}
+    Sleep    5s
+    Access page    ${organizations}    ${organizations_list}
+    Search and check page contains text    ${organizations_list_search_box}    wtfhihi    No data available in table
+
+Check Merchant Notes page
+    Set Environment
+    Click Link    ${redbox_dashboard_href}
+    Sleep    5s
+    Access page    ${organizations}    ${organizations_merchant notes}
+    Verify element exits    //button[contains(text(),'Search')]
+
+Check Bank changes tracking page
+    Set Environment
+    Click Link    ${redbox_dashboard_href}
+    Sleep    5s
+    Access page    ${organizations}    ${bank_changes_tracking}
+    Search and check page contains text    ${bank_changes_tracking_search_box}    htt    No matching records found
+
+Check Merchant activities page
+    Set Environment
+    Click Link    ${redbox_dashboard_href}
+    Sleep    5s
+    Access page    ${organizations}    ${merchant_activities}
+    Search and check page contains text    ${merchant_activities_search_box}    htt    No data available in table
+
+Check Suspension page
+    Set Environment
+    Click Link    ${redbox_dashboard_href}
+    Sleep    5s
+    Access page    ${organizations}    ${suspension}
+    Search and check page contains text    ${suspension_search_box}    hello    No data available in table
+
+Check Pending activation page
+    Set Environment
+    Click Link    ${redbox_dashboard_href}
+    Sleep    5s
+    Access page    ${organizations}    ${Pending_activation}
+    Search and check page contains text    ${pending_activation_search_box}    hello    No data available in table
+
+Check RedBox offers page
+    Set Environment
+    Click Link    ${redbox_dashboard_href}
+    Sleep    5s
+    Access page    ${organizations}    ${RedBox_offers}
+    Search and check page contains text    ${RedBox_offers_search_box}    hello    No data available in table
+
+Check Global box shipments page
+    Set Environment
+    Click Link    ${redbox_dashboard_href}
+    Sleep    5s
+    Access page    ${Global_box}    ${Global_box_shipments}
+    Wait Until Element Is Visible    //button[contains(text(),'Export Manifest')]    timeout=10s
+    Click Element    //button[contains(text(),'Export Manifest')]
+    Sleep    10s
+    Search and check page contains text    ${shipment_search_mainifest_box}    hello    No matching records found
+
+Check Global box Packages page
+    Set Environment
+    Click Link    ${redbox_dashboard_href}
+    Sleep    5s
+    Access page    ${Global_box}    ${Packages}
+    Search and check page contains text    ${Packages_seach_box}    hello    No data available in table
+
+Check Global MAWB Monitoring
+    Set Environment
+    Click Link    ${redbox_dashboard_href}
+    Sleep    5s
+    Access page    ${Global_box}    ${Global_MAWB Monitoring}
+    Verify element exits    //button[contains(text(),'Import MAWB')]
+    Sleep    5s
