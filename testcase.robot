@@ -267,7 +267,6 @@ Express Settings page
     Access page    ${express_tab}    ${express_settings}
     Wait Until Element Is Visible    ${express_settings_domesticPrice}
     Capture Element Screenshot    ${express_settings_domesticPrice}
-<<<<<<< HEAD
     Sleep    10s
 
 Check Organizations list page
@@ -289,35 +288,35 @@ Check Bank changes tracking page
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Access page    ${organizations}    ${bank_changes_tracking}
-    Search and check page contains text    ${bank_changes_tracking_search_box}    htt    No matching records found
+    Search and check page contains text    ${bank_changes_tracking_search_box}    wtfhihi    No matching records found
 
 Check Merchant activities page
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Access page    ${organizations}    ${merchant_activities}
-    Search and check page contains text    ${merchant_activities_search_box}    htt    No data available in table
+    Search and check page contains text    ${merchant_activities_search_box}    wtfhihi    No data available in table
 
 Check Suspension page
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Access page    ${organizations}    ${suspension}
-    Search and check page contains text    ${suspension_search_box}    hello    No data available in table
+    Search and check page contains text    ${suspension_search_box}    wtfhihi    No data available in table
 
 Check Pending activation page
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Access page    ${organizations}    ${Pending_activation}
-    Search and check page contains text    ${pending_activation_search_box}    hello    No data available in table
+    Search and check page contains text    ${pending_activation_search_box}    wtfhihi    No data available in table
 
 Check RedBox offers page
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Access page    ${organizations}    ${RedBox_offers}
-    Search and check page contains text    ${RedBox_offers_search_box}    hello    No data available in table
+    Search and check page contains text    ${RedBox_offers_search_box}    wtfhihi    No data available in table
 
 Check Global box shipments page
     Set Environment
@@ -327,14 +326,14 @@ Check Global box shipments page
     Wait Until Element Is Visible    //button[contains(text(),'Export Manifest')]    timeout=10s
     Click Element    //button[contains(text(),'Export Manifest')]
     Sleep    10s
-    Search and check page contains text    ${shipment_search_mainifest_box}    hello    No matching records found
+    Search and check page contains text    ${shipment_search_mainifest_box}    wtfhihi    No matching records found
 
 Check Global box Packages page
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Access page    ${Global_box}    ${Packages}
-    Search and check page contains text    ${Packages_seach_box}    hello    No data available in table
+    Search and check page contains text    ${Packages_seach_box}    wtfhihi    No data available in table
 
 Check Global MAWB Monitoring
     Set Environment
@@ -343,8 +342,6 @@ Check Global MAWB Monitoring
     Access page    ${Global_box}    ${Global_MAWB Monitoring}
     Verify element exits    //button[contains(text(),'Import MAWB')]
     Sleep    5s
-=======
-    #Sleep    10s
 
 API create return shipment
     Create Session    redbox    ${BASE_URL1}
@@ -355,4 +352,3 @@ API create return shipment
     ${response_body}=    Evaluate    $response.json()
     Log    Response Body (JSON): ${response_body}
     Should Be Equal As Integers    ${response.status_code}    200
->>>>>>> a46df2df5432c03882d681ef73c2ff0b35fcd20d
