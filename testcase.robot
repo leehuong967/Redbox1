@@ -129,7 +129,6 @@ MAWB Monitoring page
     Click Link    ${redbox_dashboard_href}
     Wait Until Page Contains Element    ${shipments}    timeout=10
     Access page    ${shipments}    ${mawb_monitoring}
-
     Verify element exits    //button[contains(text(),'Import MAWB')]
 
 Link thirdparty shipments page
