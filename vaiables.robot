@@ -77,3 +77,25 @@ ${express_ltd_searchBox}    customSearchShipment
 ${express_settings}    menu-link-express-settings
 ${express_settings_domesticPrice}    domesticPrice
 ${search_text}    NOT_EXIST_9999
+${organizations}    xpath=//*[text()='Organizations']
+${organizations_list}    xpath=//*[text()='List']
+${organizations_list_search_box}    customSearch
+${organizations_merchant notes}    xpath=//*[text()='Merchant Notes']
+${bank_changes_tracking}    xpath=//*[text()='Bank Changes Tracking']
+${bank_changes_tracking_search_box}    customSearch
+${merchant_activities}    xpath=//*[text()='Merchant activities']
+${merchant_activities_search_box}    customSearch
+${suspension}     xpath=//*[text()='Suspension']
+${suspension_search_box}    customSearch
+${Pending_activation}    xpath=//*[text()='Pending activation']
+${pending_activation_search_box}    customSearch
+${RedBox_offers}    xpath=//*[text()='RedBox offers']
+${RedBox_offers_search_box}    customSearch
+${Global_box}     xpath=//*[text()='Global Box']
+${Global_box_shipments}    //li[*[text()='Global Box']]//li[*[text()='Shipments']]
+${shipment_search_mainifest_box}    customSearchShipment
+${Packages}       xpath=//*[text()='Packages']
+${Global_MAWB Monitoring}    //li[*[text()='Global Box']]//li[*[text()='MAWB Monitoring']]
+${BASE_URL1}      https://dev.api.redboxsa.com
+${ENDPOINT}       /v3/shipments/returns
+${AUTH_TOKEN}     Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25faWQiOiI2NGJlMmZjNTdiMzVlYTQ4YmRlY2IwNzAiLCJrZXkiOiIyMDIzLTEwLTE5VDExOjA2OjUwLjc1MloiLCJpYXQiOjE2OTc3MTM2MTB9.5L_YOpJtrfPMUR2wQvFCT9rNCsvSQkSqMTX3f-klUuk
