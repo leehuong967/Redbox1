@@ -10,24 +10,19 @@ Library           String
 
 *** Test Cases ***
 API Create shipment
-    ${BODY}    Create Dictionary    reference=20250312_004    customer_name=Lee    customer_phone=+84335299001    customer_address=King Saud University King Saud University, 2813 - King Saud University, Riyadh 12372 - 7463, Saudi Arabia    cod_currency=SAR    cod_amount=10
-    ${HEADERS}    Create Dictionary    Content-Type=application/json    Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25faWQiOiI2NGZhZDU4MDY1ZWExYjJhNjUxZGIyZDIiLCJrZXkiOiIyMDIzLTA5LTA4VDA4OjA0OjE2LjkzOVoiLCJpYXQiOjE2OTQxNjAyNTZ9.ORJWJt_uwO1dHf4s-5bg_gwTTyawGGBIPuHAKOZvUpI    cookie=connect.sid=s%3AWOAKd-qpcmp6vgEQo6FmIg5AUpEChN9d.8VOl2rP7eV61zNGDDVd1VLSpAP66cTBCmVnt%2B%2FF7AAc
-    ${RESPONSE}    POST    ${BASE_API}    json=${BODY}    headers=${HEADERS}
-    ${json_data}    Set variable    ${RESPONSE.json()}
-    Log    ${RESPONSE.json()}
-    ${shipment_id}    Get From Dictionary    ${json_data}    shipment_id
-    #Set Suite Variable    ${shipment_id}
-    Create File    ${shipment_id_file}    ${shipment_id}
-    Should Not Be Empty    ${shipment_id}
+    Comment    ${BODY}    Create Dictionary    reference=20250312_004    customer_name=Lee    customer_phone=+84335299001    customer_address=King Saud University King Saud University, 2813 - King Saud University, Riyadh 12372 - 7463, Saudi Arabia    cod_currency=SAR    cod_amount=10
+    Comment    ${HEADERS}    Create Dictionary    Content-Type=application/json    Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25faWQiOiI2NGZhZDU4MDY1ZWExYjJhNjUxZGIyZDIiLCJrZXkiOiIyMDIzLTA5LTA4VDA4OjA0OjE2LjkzOVoiLCJpYXQiOjE2OTQxNjAyNTZ9.ORJWJt_uwO1dHf4s-5bg_gwTTyawGGBIPuHAKOZvUpI    cookie=connect.sid=s%3AWOAKd-qpcmp6vgEQo6FmIg5AUpEChN9d.8VOl2rP7eV61zNGDDVd1VLSpAP66cTBCmVnt%2B%2FF7AAc
+    Comment    ${RESPONSE}    POST    ${BASE_API}    json=${BODY}    headers=${HEADERS}
+    Comment    ${json_data}    Set variable    ${RESPONSE.json()}
+    Comment    Log    ${RESPONSE.json()}
+    Comment    ${shipment_id}    Get From Dictionary    ${json_data}    shipment_id
+    Comment    #Set Suite Variable    ${shipment_id}
+    Comment    Create File    ${shipment_id_file}    ${shipment_id}
+    Comment    Should Not Be Empty    ${shipment_id}
+    Create shipment    20251404_005    stage
 
 API Get shipment details
-    ${shipment_id}    Get File    ${shipment_id_file}
-    ${header}    Create Dictionary    Content-Type=application/json    Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25faWQiOiI2NGZhZDU4MDY1ZWExYjJhNjUxZGIyZDIiLCJrZXkiOiIyMDIzLTA5LTA4VDA4OjA0OjE2LjkzOVoiLCJpYXQiOjE2OTQxNjAyNTZ9.ORJWJt_uwO1dHf4s-5bg_gwTTyawGGBIPuHAKOZvUpI
-    ${response}    Get    ${BASE_API}/${shipment_id}    headers=${header}
-    Should Be Equal As Numbers    ${response.status_code}    200
-    ${json_data}    Set Variable    ${response.json()}
-    ${succes}    Get From Dictionary    ${json_data}    success
-    Should Be True    ${succes}    Message=Shipment retrieval failed!
+    API details shipment    stage
 
 Check Shipments list page
     Create shipment    Test_shipment_list_page    ${env}

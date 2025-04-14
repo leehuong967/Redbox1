@@ -9,3 +9,4 @@ Resource          Config.robot
 &{shipments_api}    dev=https://dev.api.redboxsa.com/v3/shipments    stage=https://stage.api.redboxsa.com/v3/shipments    prod=https://app.api.redboxsa.com/v3/shipments
 &{email_login}    dev=anhth58.it.uet@gmail.com    stage=anhth58.it.uet@gmail.com    prod=lehuong16.17@gmail.com
 &{password_login}    dev=Re@@Bo2025    stage=Re@@Bo2025    prod=Redboxsa@123
+&{point_id}       dev=5d2855e065889422de40f2fe    stage=5d2855e065889422de40f2fe    prod=5d2855e065889422de40f2fe
