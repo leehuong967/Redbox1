@@ -137,55 +137,49 @@ Sales KPIs Page
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
-    Access page    ${admin_reports}    ${sale_kpis}
+    Access page    ${dashboard}    ${sale_kpis}
     Wait Until Element Is Visible    ${sale_kpis_new_account}
     Capture Element Screenshot    ${sale_kpis_new_account}
-    Sleep    10s
 
 Merchant Data page
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
-    Access page    ${admin_reports}    ${merchant_data}
+    Access page    ${dashboard}    ${merchant_data}
     Wait Until Element Is Visible    ${merchant_data_active_account}
     Capture Element Screenshot    ${merchant_data_active_account}
-    Sleep    10s
 
 Network page
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
-    Access page    ${admin_reports}    ${network}
+    Access page    ${dashboard}    ${network}
     Wait Until Element Is Visible    ${network_point_status_box}
     Capture Element Screenshot    ${network_point_status_box}
-    Sleep    10s
 
 SLA Monitoring page
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
-    Access page    ${admin_reports}    ${sla_monitoring}
+    Access page    ${operations_tab}    ${sla_monitoring}
     Search and check page contains text    ${sla_monitoring_search_box}    Riyadh    Riyadh
-    Sleep    10s
 
 Merchant Performance page
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
-    Access page    ${admin_reports}    ${merchant_performance}
-    Search and check page contains text    ${merchant_performance_search_box}    PhanhBillOdoo    PhanhBillOdoo
-    Sleep    10s
+    Access page    ${dashboard}    ${merchant_performance}
+    Search and check page contains text    ${merchant_performance_search_box}    Ha Ha    PhanhBillOdoo
 
 Internal Board page
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
-    Access page    ${admin_reports}    ${internal_board}
+    Access page    ${dashboard}    ${internal_board}
     Wait Until Element Is Visible    ${internal_board_codtype_dropDownList}    timeout=10s
     Click Element    ${internal_board_codtype_dropDownList}
     Sleep    10s
     Click Element    ${internal_board_with_cod_option}
-    Sleep    10s
 
 Check WH Shipment Scan Tracking
     Create shipment    Test_WH_Shipment_Scan_Tracking_1    ${env}
@@ -243,7 +237,7 @@ Express shipments page
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Access page    ${express_tab}    ${express_shipments_list}
-    Search and check page contains text    ${express_shipmentList_searchBox}    357831985482    357831985482
+    Search and check page contains text    ${express_shipmentList_searchBox}    ${search_text}    No data available in table
     Sleep    10s
 
 Express Locker to Door page
