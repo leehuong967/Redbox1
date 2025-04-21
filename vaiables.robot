@@ -100,3 +100,5 @@ ${BASE_URL1}      https://dev.api.redboxsa.com
 ${ENDPOINT}       /v3/shipments/returns
 ${AUTH_TOKEN}     Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25faWQiOiI2NGJlMmZjNTdiMzVlYTQ4YmRlY2IwNzAiLCJrZXkiOiIyMDIzLTEwLTE5VDExOjA2OjUwLjc1MloiLCJpYXQiOjE2OTc3MTM2MTB9.5L_YOpJtrfPMUR2wQvFCT9rNCsvSQkSqMTX3f-klUuk
 ${Packages_seach_box}    customSearchShipment
+${operations}    xpath=//*[text()='Operations']
+${support_tools}    xpath=//*[text()='Support Tools']

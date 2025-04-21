@@ -87,15 +87,15 @@ Check Expired Shipments page
 Reports At Locker page
     Set Environment
     Click Link    ${redbox_dashboard_href}
-    Wait Until Page Contains Element    ${shipments}    timeout=10
-    Access page    ${shipments}    ${reports_at_locker}
+    Wait Until Page Contains Element    ${operations}    timeout=10
+    Access page    ${operations}    ${reports_at_locker}
     Search and wait page contains text    ${reports_at_locker_search_box}    ${search_text}    No data available in table
 
 Reports At Counter page
     Set Environment
     Click Link    ${redbox_dashboard_href}
-    Wait Until Page Contains Element    ${shipments}    timeout=10
-    Access page    ${shipments}    ${reports_at_locker}
+    Wait Until Page Contains Element    ${operations}    timeout=10
+    Access page    ${operations}    ${reports_at_locker}
     Search and wait page contains text    ${reports_at_counter_search_box}    ${search_text}    No data available in table
 
 Changes Tracking page
@@ -115,8 +115,8 @@ Shipment Transfer page
 Door Issue page
     Set Environment
     Click Link    ${redbox_dashboard_href}
-    Wait Until Page Contains Element    ${shipments}    timeout=10
-    Access page    ${shipments}    ${door_issue}
+    Wait Until Page Contains Element    ${operations}    timeout=10
+    Access page    ${operations}    ${door_issue}
     Search and wait page contains text    ${door_issue_search_box}    ${search_text}    No data available in table
 
 MAWB Monitoring page
@@ -129,8 +129,8 @@ MAWB Monitoring page
 Link thirdparty shipments page
     Set Environment
     Click Link    ${redbox_dashboard_href}
-    Wait Until Page Contains Element    ${shipments}    timeout=10
-    Access page    ${shipments}    ${link_thirdparty_shipments}
+    Wait Until Page Contains Element    ${support_tools}    timeout=10
+    Access page    ${support_tools}    ${link_thirdparty_shipments}
     Verify element exits    //button[contains(text(),'Submit')]
 
 Sales KPIs Page
@@ -236,7 +236,7 @@ Storage Settings page
     Click Link    ${redbox_dashboard_href}
     Wait Until Page Contains Element    ${storage}    timeout=10
     Access page    ${storage}    ${storage_settings}
-    Search and wait page contains text    ${storage_settings_search_box}    ${search_text}    No data available in table
+    Search and wait page contains text    ${storage_settings_search_box}    ${search_text}    No matching records found
 
 Express shipments page
     Set Environment
