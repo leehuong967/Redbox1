@@ -30,18 +30,18 @@ ${door_issue}     menu-link-door-issue
 ${door_issue_search_box}    customSearch
 ${mawb_monitoring}    menu-link-mawb-monitoring
 ${link_thirdparty_shipments}    menu-link-link-thirdparty-shipments
-${admin_reports}    sub-menu-admin-report
-${sale_kpis}      menu-link-sales-kpis
+${dashboard}      xpath=//*[text()='Dashboard']
+${sale_kpis}      xpath=//*[text()='Sales KPIs']
 ${sale_kpis_new_account}    new-acount
-${merchant_data}    menu-link-merchant-data
+${merchant_data}    xpath=//*[text()='Merchant data']
 ${merchant_data_active_account}    active-account
-${network}        menu-link-network
+${network}        xpath=//*[text()='Network']
 ${network_point_status_box}    chartTop10Cities
 ${sla_monitoring}    menu-link-sla-monitoring
 ${sla_monitoring_search_box}    customSearch
 ${merchant_performance}    menu-link-merchant-performance
 ${merchant_performance_search_box}    customSearchShipment
-${internal_board}    menu-link-internal-board
+${internal_board}    xpath=//*[text()='Internal board']
 ${internal_board_codtype_dropDownList}    cod-type
 ${internal_board_with_cod_option}    op-with-cod
 ${shipment_id_file}    shipment_id.txt
@@ -100,3 +100,4 @@ ${BASE_URL1}      https://dev.api.redboxsa.com
 ${ENDPOINT}       /v3/shipments/returns
 ${AUTH_TOKEN}     Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25faWQiOiI2NGJlMmZjNTdiMzVlYTQ4YmRlY2IwNzAiLCJrZXkiOiIyMDIzLTEwLTE5VDExOjA2OjUwLjc1MloiLCJpYXQiOjE2OTc3MTM2MTB9.5L_YOpJtrfPMUR2wQvFCT9rNCsvSQkSqMTX3f-klUuk
 ${Packages_seach_box}    customSearchShipment
+${operations_tab}    xpath=//*[text()='Operations']
