@@ -4,7 +4,7 @@ Resource          Environment.robot
 Resource          vaiables.robot
 
 *** Variables ***
-${ENV}            stage    # Môi trường mặc định
+${ENV}            dev    # Môi trường mặc định
 ${BASE_URL1}      \
 
 *** Keywords ***

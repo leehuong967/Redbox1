@@ -12,11 +12,12 @@ ${home_delivery}    menu-link-home-delivery
 ${home_delivery_search_box}    customSearch
 ${redbox_now}     menu-link-door-to-door
 ${redbox_now_search_box}    customSearch
-${customer_support}    menu-link-customer-support
+${customer_support}    xpath=//*[text()='Customer Support']
+${note_tracking}    xpath=//*[text()='Note tracking']
 ${customer_support_search_box}    customSearch
 ${expired_shipments}    menu-link-expired-shipments
 ${expired_shipments_search_box}    customSearch
-${auto_pick_fail}    menu-link-auto-pick-fail
+${auto_pick_fail}    xpath=//*[text()='Auto Pick Fail']
 ${auto_pick_fail_search_box}    customSearch
 ${reports_at_locker}    menu-link-reports-locker-tracking
 ${reports_at_locker_search_box}    customSearch
@@ -54,10 +55,11 @@ ${organizations}    xpath=//*[text()='Organizations']
 ${organizations_list}    xpath=//*[text()='List']
 ${warehouses}     xpath=//*[text()='Warehouses']
 ${warehouses_list}    /redbox/warehouse-management/redbox-warehouse
-${warehouses_shipment_scan_tracking}    /redbox/support-tool/shipment-tracking-tool
-${warehouses_shipment_scan_tracking_search_box}    customSearch
-${warehouses_returning_shipment}    /redbox/warehouse-management/returning-shipment
-${warehouses_returning_shipment_seach_box}    customSearch
+${operations}    xpath=//*[text()='Operations']
+${operations_shipment_scan_tracking}    xpath=//*[text()='Shipment Scan Tracking']
+${operations_shipment_scan_tracking_search_box}    customSearch
+${operations_returning_shipment}    /redbox/warehouse-management/returning-shipment
+${operations_returning_shipment_seach_box}    customSearch
 ${warehouse_id}    67162398f4064122f9697b1e
 ${express_tab}    menu-express
 ${express_shipments_list}    menu-link-express-shipments
