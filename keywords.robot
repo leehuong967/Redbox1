@@ -79,3 +79,16 @@ API details shipment
     ${json_data}    Set Variable    ${response.json()}
     ${succes}    Get From Dictionary    ${json_data}    success
     Should Be True    ${succes}    Message=Shipment retrieval failed!
+
+API Create Return shipments
+    [Arguments]    ${enviroment}
+    ${file_content}    Get File    ${shipment_id_file}
+    ${lines}    Split String    ${file_content}
+    ${shipment_id}    Set Variable    ${lines}[1]
+    ${body}    Create Dictionary    original_shipment_id=${shipment_id}
+    ${headers}    Create Dictionary    Content-Type=application/json    Authorization=${business_authorization["${enviroment}"]}
+    ${response}    POST    ${shipments_api["${enviroment}"]}    json=${body}    headers=${headers}
+    Log    ${response.status_code}
+    ${response_body}=    Evaluate    $response.json()
+    Log    Response Body (JSON): ${response_body}
+    Should Be Equal As Integers    ${response.status_code}    200
