@@ -77,7 +77,7 @@ Dashboard > Merchant Performance page
 
 #Organizations
 Organizations > List page
-    [Tags]   Organizations 
+    [Tags]    Organizations 
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
@@ -85,7 +85,7 @@ Organizations > List page
     Search and check page contains text    ${organizations_list_search_box}    wtfhihi    No data available in table
 
 Organizations > Merchant Notes page
-    [Tags]   Organizations 
+    [Tags]    Organizations 
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
@@ -93,7 +93,7 @@ Organizations > Merchant Notes page
     Verify element exits    //button[contains(text(),'Search')]
 
 Organizations > Bank changes tracking page
-    [Tags]   Organizations
+    [Tags]    Organizations
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
@@ -101,7 +101,7 @@ Organizations > Bank changes tracking page
     Search and check page contains text    ${bank_changes_tracking_search_box}    wtfhihi    No matching records found
 
 Organizations > Merchant activities page
-    [Tags]   Organizations
+    [Tags]    Organizations
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
@@ -109,7 +109,7 @@ Organizations > Merchant activities page
     Search and check page contains text    ${merchant_activities_search_box}    wtfhihi    No data available in table
 
 Organizations > Suspension page
-    [Tags]   Organizations
+    [Tags]    Organizations
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
@@ -117,7 +117,7 @@ Organizations > Suspension page
     Search and check page contains text    ${suspension_search_box}    wtfhihi    No data available in table
 
 Organizations > Pending activation page
-    [Tags]   Organizations
+    [Tags]    Organizations
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
@@ -125,7 +125,7 @@ Organizations > Pending activation page
     Search and check page contains text    ${pending_activation_search_box}    wtfhihi    No data available in table
 
 Organizations > RedBox offers page
-    [Tags]   Organizations
+    [Tags]    Organizations
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
@@ -134,7 +134,7 @@ Organizations > RedBox offers page
 
 #Shipments
 Shipments > List page
-    [Tags]   Shipments
+    [Tags]    Shipments
     Create shipment    Test_shipment_list_page_dev    ${env}
     ${file_content}    Get File    ${shipment_id_file}
     ${lines}    Split String    ${file_content}    \n
@@ -149,7 +149,7 @@ Shipments > List page
     Sleep    5s
 
 Shipments > Home Delivery page
-    [Tags]   Shipments
+    [Tags]    Shipments
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
@@ -157,7 +157,7 @@ Shipments > Home Delivery page
     Search and check page contains text    ${home_delivery_search_box}    WTH    No data available in table
 
 Shipments > Redbox Now page
-    [Tags]   Shipments
+    [Tags]    Shipments
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
@@ -165,7 +165,7 @@ Shipments > Redbox Now page
     Search and check page contains text    ${redbox_now_search_box}    WTH    No data available in table
 
 Shipments > Expired Shipments page
-    [Tags]   Shipments
+    [Tags]    Shipments
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
@@ -189,7 +189,7 @@ Shipments > MAWB Monitoring page
     Verify element exits    //button[contains(text(),'Import MAWB')]
 
 Shipments > Shipment Transfer page
-    [Tags]   Shipments
+    [Tags]    Shipments
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Wait Until Page Contains Element    ${shipments}    timeout=10
@@ -204,7 +204,7 @@ Shipments > Shipment Transfer page
 #     Search and wait page contains text    ${shipment_transfer_search_box}    ${search_text}    No data available in table
 
 Operations > Shipment Scan Tracking
-    [Tags]   operations
+    [Tags]    operations
     Create shipment    Test_WH_Shipment_Scan_Tracking_1    ${env}
     ${file_content}    Get File    ${shipment_id_file}
     ${lines}    Split String    ${file_content}    \n
@@ -221,7 +221,7 @@ Operations > Shipment Scan Tracking
     Search and check page contains text    ${operations_shipment_scan_tracking_search_box}    ${tracking_number}    Driver submit pick up shipment
 
 Operations > SLA Monitoring page
-    [Tags]   operations
+    [Tags]    operations
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
@@ -229,7 +229,7 @@ Operations > SLA Monitoring page
     Search and check page contains text    ${sla_monitoring_search_box}    Riyadh    Riyadh
 
 Operations > Returning Shipment
-    [Tags]   operations
+    [Tags]    operations
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
@@ -239,7 +239,7 @@ Operations > Returning Shipment
     Search and check page contains text    ${operations_returning_shipment_seach_box}    670662016672    966508981797
 
 Operations > Reports At Locker page
-    [Tags]   operations
+    [Tags]    operations
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Wait Until Page Contains Element    ${operations}    timeout=10
@@ -247,7 +247,7 @@ Operations > Reports At Locker page
     Search and wait page contains text    ${reports_at_locker_search_box}    ${search_text}    No data available in table
 
 Operations > Reports At Counter page
-    [Tags]   operations
+    [Tags]    operations
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Wait Until Page Contains Element    ${operations}    timeout=10
@@ -255,7 +255,7 @@ Operations > Reports At Counter page
     Search and wait page contains text    ${reports_at_counter_search_box}    ${search_text}    No data available in table
 
 Operations > Door Issue page
-    [Tags]   operations
+    [Tags]    operations
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Wait Until Page Contains Element    ${operations}    timeout=10
@@ -264,7 +264,7 @@ Operations > Door Issue page
     
 #Customer support
 Customer Support > Note Tracking page
-    [Tags]   Customer support
+    [Tags]    Customer support
     Create shipment    Test_customer_support_page    ${env}
     ${file_content}    Get File    ${shipment_id_file}
     ${lines}    Split String    ${file_content}    \n
@@ -278,7 +278,7 @@ Customer Support > Note Tracking page
     Search and check page contains text    ${customer_support_search_box}    ${tracking_number}    DevSalla4
 
 Customer Support > Auto Pick Fail page
-    [Tags]   Customer support
+    [Tags]    Customer support
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
@@ -287,7 +287,7 @@ Customer Support > Auto Pick Fail page
 
 #Express
 Express > Shipments page
-    [Tags]   Express
+    [Tags]    Express
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
@@ -296,7 +296,7 @@ Express > Shipments page
     Sleep    10s
 
 Express > Locker to Door page
-    [Tags]   Express
+    [Tags]    Express
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
@@ -305,7 +305,7 @@ Express > Locker to Door page
     Sleep    10s
 
 Express > Settings page
-    [Tags]   Express
+    [Tags]    Express
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
@@ -317,7 +317,7 @@ Express > Settings page
 
 #Storage
 Storage > Storage
-    [Tags]   Storage
+    [Tags]    Storage
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Wait Until Page Contains Element    ${storage}    timeout=10
@@ -325,7 +325,7 @@ Storage > Storage
     Search and wait page contains text    ${storage_shipments_search_box}    ${search_text}    No data available in table
 
 Storage > Settings page
-    [Tags]   Storage
+    [Tags]    Storage
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Wait Until Page Contains Element    ${storage}    timeout=10
@@ -334,7 +334,7 @@ Storage > Settings page
 
 #Global box
 Global Box > Shipments page
-    [Tags]   Global box
+    [Tags]    Global box
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
@@ -345,7 +345,7 @@ Global Box > Shipments page
     Search and check page contains text    ${shipment_search_mainifest_box}    wtfhihi    No matching records found
 
 Global Box > Packages page
-    [Tags]   Global box
+    [Tags]    Global box
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
@@ -353,7 +353,7 @@ Global Box > Packages page
     Search and check page contains text    ${Packages_seach_box}    wtfhihi    No data available in table
 
 Global Box > MAWB Monitoring
-    [Tags]   Global box
+    [Tags]    Global box
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
@@ -363,6 +363,7 @@ Global Box > MAWB Monitoring
 
 #Warehouses
 Warehouse List
+    [Tags]    Warehouses
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
@@ -371,6 +372,7 @@ Warehouse List
 
 #Support tools
 Support tools > Link thirdparty shipments page
+    [Tags]    Support Tools
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Wait Until Page Contains Element    ${support_tools}    timeout=10
