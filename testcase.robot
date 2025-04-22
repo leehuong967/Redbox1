@@ -25,6 +25,9 @@ API create return shipment
     Log    Response Body (JSON): ${response_body}
     Should Be Equal As Integers    ${response.status_code}    200
 
+API Return shipment
+    API Create Return shipments    stage
+
 Dashboard > Sales KPIs Page
     Set Environment
     Click Link    ${redbox_dashboard_href}
@@ -322,6 +325,3 @@ Support tools > Link thirdparty shipments page
     Wait Until Page Contains Element    ${shipments}    timeout=10
     Access page    ${shipments}    ${link_thirdparty_shipments}
     Verify element exits    //button[contains(text(),'Submit')]
-
-te
-    API Create Return shipments    stage

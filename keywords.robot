@@ -87,7 +87,7 @@ API Create Return shipments
     ${shipment_id}    Set Variable    ${lines}[1]
     ${body}    Create Dictionary    original_shipment_id=${shipment_id}
     ${headers}    Create Dictionary    Content-Type=application/json    Authorization=${business_authorization["${enviroment}"]}
-    ${response}    POST    ${shipments_api["${enviroment}"]}    json=${body}    headers=${headers}
+    ${response}    POST    ${shipments_api["${enviroment}"]}/returns    json=${body}    headers=${headers}
     Log    ${response.status_code}
     ${response_body}=    Evaluate    $response.json()
     Log    Response Body (JSON): ${response_body}
