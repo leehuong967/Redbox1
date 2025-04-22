@@ -25,7 +25,7 @@ API Get shipment details
     API details shipment    stage
 
 Check Shipments list page
-    Create shipment    Test_shipment_list_page    ${env}
+    Create shipment    Test_shipment_list_page_dev    ${env}
     ${file_content}    Get File    ${shipment_id_file}
     ${lines}    Split String    ${file_content}    \n
     ${first_line} =    Set Variable    ${lines}[1]
@@ -44,7 +44,6 @@ Check Home Delivery page
     Sleep    5s
     Access page    ${shipments}    ${home_delivery}
     Search and check page contains text    ${home_delivery_search_box}    WTH    No data available in table
-    Sleep    10s
 
 Check Redbox Now page
     Set Environment
@@ -52,7 +51,6 @@ Check Redbox Now page
     Sleep    5s
     Access page    ${shipments}    ${redbox_now}
     Search and check page contains text    ${redbox_now_search_box}    WTH    No data available in table
-    Sleep    10s
 
 Check Customer Support page
     Create shipment    Test_customer_support_page    ${env}
@@ -64,17 +62,15 @@ Check Customer Support page
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
-    Access page    ${shipments}    ${customer_support}
+    Access page    ${customer_support}    ${note_tracking}
     Search and check page contains text    ${customer_support_search_box}    ${tracking_number}    DevSalla4
-    Sleep    10s
 
 Check Auto Pick Fail page
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
-    Access page    ${shipments}    ${auto_pick_fail}
+    Access page    ${customer_support}    ${note_tracking}
     Search and check page contains text    ${auto_pick_fail_search_box}    WTH    No data available in table
-    Sleep    5s
 
 Check Expired Shipments page
     Set Environment
@@ -82,7 +78,6 @@ Check Expired Shipments page
     Sleep    5s
     Access page    ${shipments}    ${expired_shipments}
     Search and check page contains text    ${expired_shipments_search_box}    WTH    No data available in table
-    Sleep    5s
 
 Reports At Locker page
     Set Environment
@@ -137,55 +132,49 @@ Sales KPIs Page
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
-    Access page    ${admin_reports}    ${sale_kpis}
+    Access page    ${dashboard}    ${sale_kpis}
     Wait Until Element Is Visible    ${sale_kpis_new_account}
     Capture Element Screenshot    ${sale_kpis_new_account}
-    Sleep    10s
 
 Merchant Data page
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
-    Access page    ${admin_reports}    ${merchant_data}
+    Access page    ${dashboard}    ${merchant_data}
     Wait Until Element Is Visible    ${merchant_data_active_account}
     Capture Element Screenshot    ${merchant_data_active_account}
-    Sleep    10s
 
 Network page
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
-    Access page    ${admin_reports}    ${network}
+    Access page    ${dashboard}    ${network}
     Wait Until Element Is Visible    ${network_point_status_box}
     Capture Element Screenshot    ${network_point_status_box}
-    Sleep    10s
 
 SLA Monitoring page
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
-    Access page    ${admin_reports}    ${sla_monitoring}
+    Access page    ${operations_tab}    ${sla_monitoring}
     Search and check page contains text    ${sla_monitoring_search_box}    Riyadh    Riyadh
-    Sleep    10s
 
 Merchant Performance page
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
-    Access page    ${admin_reports}    ${merchant_performance}
-    Search and check page contains text    ${merchant_performance_search_box}    PhanhBillOdoo    PhanhBillOdoo
-    Sleep    10s
+    Access page    ${dashboard}    ${merchant_performance}
+    Search and check page contains text    ${merchant_performance_search_box}    Ha Ha    PhanhBillOdoo
 
 Internal Board page
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
-    Access page    ${admin_reports}    ${internal_board}
+    Access page    ${dashboard}    ${internal_board}
     Wait Until Element Is Visible    ${internal_board_codtype_dropDownList}    timeout=10s
     Click Element    ${internal_board_codtype_dropDownList}
     Sleep    10s
     Click Element    ${internal_board_with_cod_option}
-    Sleep    10s
 
 Check WH Shipment Scan Tracking
     Create shipment    Test_WH_Shipment_Scan_Tracking_1    ${env}
@@ -198,31 +187,26 @@ Check WH Shipment Scan Tracking
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
-    Click Element    ${warehouses}
+    Click Element    ${operations}
     Sleep    5s
-    Click Link    ${warehouses_shipment_scan_tracking}
-    Search and check page contains text    ${warehouses_shipment_scan_tracking_search_box}    ${tracking_number}    Driver submit pick up shipment
-    #Sleep    5s
+    Click Link    ${operations_shipment_scan_tracking}
+    Search and check page contains text    ${operations_shipment_scan_tracking_search_box}    ${tracking_number}    Driver submit pick up shipment
 
 Check Warehouse List
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
-    Click Element    ${warehouses}
-    Sleep    5s
     Click Link    ${warehouses_list}
     Page Should Contain    966534502300
-    Sleep    5s
 
 Check WH Returning Shipment
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
-    Click Element    ${warehouses}
+    Click Element    ${operations}
     Sleep    5s
-    Click Link    ${warehouses_returning_shipment}
-    Search and check page contains text    ${warehouses_returning_shipment_seach_box}    670662016672    966508981797
-    Sleep    5s
+    Click Link    ${operations_returning_shipment}
+    Search and check page contains text    ${operations_returning_shipment_seach_box}    670662016672    966508981797
 
 Storage Shipments page
     Set Environment
@@ -243,7 +227,7 @@ Express shipments page
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
     Access page    ${express_tab}    ${express_shipments_list}
-    Search and check page contains text    ${express_shipmentList_searchBox}    357831985482    357831985482
+    Search and check page contains text    ${express_shipmentList_searchBox}    ${search_text}    No data available in table
     Sleep    10s
 
 Express Locker to Door page
