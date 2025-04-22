@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.1.1 (Python 3.12.8 on win32)" generated="2025-03-25T13:36:00.891124" rpa="false" schemaversion="5">
-<suite id="s1" name="Robot Interactive Console" source="c:\Users\RedBox 016\.vscode\extensions\robocorp.robotframework-lsp-1.13.0\src\robotframework_ls\vendored\robotframework_interactive\robot_interactive_console.robot">
+<robot generator="Robot 7.1.1 (Python 3.12.8 on win32)" generated="2025-04-22T13:31:27.681454" rpa="false" schemaversion="5">
+<suite id="s1" name="Robot Interactive Console" source="c:\Users\Lan Anh\.vscode\extensions\robocorp.robotframework-lsp-1.13.0\src\robotframework_ls\vendored\robotframework_interactive\robot_interactive_console.robot">
 <test id="s1-t1" name="Default Task/Test" line="5">
 <kw name="Interpreter Main Loop" owner="MainLoop">
-<status status="PASS" start="2025-03-25T13:36:00.934021" elapsed="5.984695"/>
+<status status="PASS" start="2025-04-22T13:31:27.710377" elapsed="1.667469"/>
 </kw>
-<status status="PASS" start="2025-03-25T13:36:00.933024" elapsed="5.986690"/>
+<status status="PASS" start="2025-04-22T13:31:27.710377" elapsed="1.667469"/>
 </test>
-<status status="PASS" start="2025-03-25T13:36:00.892126" elapsed="6.027588"/>
+<status status="PASS" start="2025-04-22T13:31:27.682452" elapsed="1.695394"/>
 </suite>
 <statistics>
 <total>
@@ -20,6 +20,6 @@
 </suite>
 </statistics>
 <errors>
-<msg time="2025-03-25T13:36:00.882945" level="WARN">Error in file 'c:\Users\RedBox 016\.vscode\extensions\robocorp.robotframework-lsp-1.13.0\src\robotframework_ls\vendored\robotframework_interactive\robot_interactive_console.robot' on line 4: Singular section headers like '*** Test Case ***' are deprecated. Use plural format like '*** Test Cases ***' instead.</msg>
+<msg time="2025-04-22T13:31:27.676341" level="WARN">Error in file 'c:\Users\Lan Anh\.vscode\extensions\robocorp.robotframework-lsp-1.13.0\src\robotframework_ls\vendored\robotframework_interactive\robot_interactive_console.robot' on line 4: Singular section headers like '*** Test Case ***' are deprecated. Use plural format like '*** Test Cases ***' instead.</msg>
 </errors>
 </robot>
