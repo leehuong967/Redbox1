@@ -28,7 +28,6 @@ API create return shipment
 API Return shipment
     API Create Return shipments    stage
 
-#Dashboard
 Dashboard > Sales KPIs Page
     [Tags]    Dashboard
     Set Environment
@@ -75,9 +74,8 @@ Dashboard > Merchant Performance page
     Access page    ${dashboard}    ${merchant_performance}
     Search and check page contains text    ${merchant_performance_search_box}    Ha Ha    PhanhBillOdoo
 
-#Organizations
 Organizations > List page
-    [Tags]    Organizations 
+    [Tags]    Organizations
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
@@ -85,7 +83,7 @@ Organizations > List page
     Search and check page contains text    ${organizations_list_search_box}    wtfhihi    No data available in table
 
 Organizations > Merchant Notes page
-    [Tags]    Organizations 
+    [Tags]    Organizations
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
@@ -132,7 +130,6 @@ Organizations > RedBox offers page
     Access page    ${organizations}    ${RedBox_offers}
     Search and check page contains text    ${RedBox_offers_search_box}    wtfhihi    No data available in table
 
-#Shipments
 Shipments > List page
     [Tags]    Shipments
     Create shipment    Test_shipment_list_page_dev    ${env}
@@ -195,13 +192,10 @@ Shipments > Shipment Transfer page
     Wait Until Page Contains Element    ${shipments}    timeout=10
     Access page    ${shipments}    ${shipment_transfer}
     Search and wait page contains text    ${shipment_transfer_search_box}    ${search_text}    No data available in table
-
-#Operations
-# Operations > Shipment Scan Tracking
-#     Create shipment    Test_WH_Shipment_Scan_Tracking_1    ${env}
-#     Wait Until Page Contains Element    ${shipments}    timeout=10
-#     Access page    ${shipments}    ${shipment_transfer}
-#     Search and wait page contains text    ${shipment_transfer_search_box}    ${search_text}    No data available in table
+    Create shipment    Test_WH_Shipment_Scan_Tracking_1    ${env}
+    Wait Until Page Contains Element    ${shipments}    timeout=10
+    Access page    ${shipments}    ${shipment_transfer}
+    Search and wait page contains text    ${shipment_transfer_search_box}    ${search_text}    No data available in table
 
 Operations > Shipment Scan Tracking
     [Tags]    operations
@@ -261,8 +255,7 @@ Operations > Door Issue page
     Wait Until Page Contains Element    ${operations}    timeout=10
     Access page    ${operations}    ${door_issue}
     Search and wait page contains text    ${door_issue_search_box}    ${search_text}    No data available in table
-    
-#Customer support
+
 Customer Support > Note Tracking page
     [Tags]    Customer support
     Create shipment    Test_customer_support_page    ${env}
@@ -285,7 +278,6 @@ Customer Support > Auto Pick Fail page
     Access page    ${customer_support}    ${note_tracking}
     Search and check page contains text    ${auto_pick_fail_search_box}    WTH    No data available in table
 
-#Express
 Express > Shipments page
     [Tags]    Express
     Set Environment
@@ -315,7 +307,6 @@ Express > Settings page
     Capture Element Screenshot    ${express_settings_domesticPrice}
     Sleep    10s
 
-#Storage
 Storage > Storage
     [Tags]    Storage
     Set Environment
@@ -332,7 +323,6 @@ Storage > Settings page
     Access page    ${storage}    ${storage_settings}
     Search and wait page contains text    ${storage_settings_search_box}    ${search_text}    No matching records found
 
-#Global box
 Global Box > Shipments page
     [Tags]    Global box
     Set Environment
@@ -361,7 +351,6 @@ Global Box > MAWB Monitoring
     Verify element exits    //button[contains(text(),'Import MAWB')]
     Sleep    5s
 
-#Warehouses
 Warehouse List
     [Tags]    Warehouses
     Set Environment
@@ -370,7 +359,6 @@ Warehouse List
     Click Link    ${warehouses_list}
     Page Should Contain    966534502300
 
-#Support tools
 Support tools > Link thirdparty shipments page
     [Tags]    Support Tools
     Set Environment
@@ -378,3 +366,9 @@ Support tools > Link thirdparty shipments page
     Wait Until Page Contains Element    ${support_tools}    timeout=10
     Access page    ${support_tools}    ${link_thirdparty_shipments}
     Verify element exits    //button[contains(text(),'Submit')]
+
+Delivery Flow
+    Create shipment    Auto_230425010    dev
+    API Driver picks up shipment from business    dev
+    API Confirm Deposit    dev
+    API Customer pickup    dev
