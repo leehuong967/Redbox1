@@ -55,7 +55,7 @@ ${organizations}    xpath=//*[text()='Organizations']
 ${organizations_list}    xpath=//*[text()='List']
 ${warehouses}     xpath=//*[text()='Warehouses']
 ${warehouses_list}    /redbox/warehouse-management/redbox-warehouse
-${operations}    xpath=//*[text()='Operations']
+${operations}     xpath=//*[text()='Operations']
 ${operations_shipment_scan_tracking}    xpath=//*[text()='Shipment Scan Tracking']
 ${operations_shipment_scan_tracking_search_box}    customSearch
 ${operations_returning_shipment}    /redbox/warehouse-management/returning-shipment
@@ -103,5 +103,8 @@ ${ENDPOINT}       /v3/shipments/returns
 ${AUTH_TOKEN}     Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25faWQiOiI2NGJlMmZjNTdiMzVlYTQ4YmRlY2IwNzAiLCJrZXkiOiIyMDIzLTEwLTE5VDExOjA2OjUwLjc1MloiLCJpYXQiOjE2OTc3MTM2MTB9.5L_YOpJtrfPMUR2wQvFCT9rNCsvSQkSqMTX3f-klUuk
 ${Packages_seach_box}    customSearchShipment
 ${operations_tab}    xpath=//*[text()='Operations']
-${operations}    xpath=//*[text()='Operations']
+${operations}     xpath=//*[text()='Operations']
 ${support_tools}    xpath=//*[text()='Support Tools']
+${point_id}       5d2855e065889422de40f2fe
+${locker_id}      65aa37553a403d2b4b366b47
+${uuid}           866732032337033

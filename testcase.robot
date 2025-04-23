@@ -366,3 +366,9 @@ Support tools > Link thirdparty shipments page
     Wait Until Page Contains Element    ${support_tools}    timeout=10
     Access page    ${support_tools}    ${link_thirdparty_shipments}
     Verify element exits    //button[contains(text(),'Submit')]
+
+Delivery Flow
+    Create shipment    Auto_230425010    dev
+    API Driver picks up shipment from business    dev
+    API Confirm Deposit    dev
+    API Customer pickup    dev
