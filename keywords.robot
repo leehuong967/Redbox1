@@ -3,6 +3,7 @@ Library           Selenium2Library
 Library           RequestsLibrary
 Library           Collections
 Library           OperatingSystem
+Library           String
 Resource          vaiables.robot
 
 *** Keywords ***
@@ -10,8 +11,8 @@ Login
     [Arguments]    ${env}
     Open browser    ${ENVIRONMENT["${env}"]}    chrome
     Maximize Browser Window
-    Input Text    email-login    ${email_login}
-    Input Text    password-login    ${password_login}
+    Input Text    email-login    ${email_login["${env}"]}
+    Input Text    password-login    ${password_login["${env}"]}
     Sleep    1s
     Click button    ${submit_login}
     Sleep    5s
