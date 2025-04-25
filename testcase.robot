@@ -230,7 +230,7 @@ Operations > Returning Shipment
     Click Element    ${operations}
     Sleep    5s
     Click Link    ${operations_returning_shipment}
-    Search and check page contains text    ${operations_returning_shipment_seach_box}    ${operations_returning_shipment_search_data}["${ENV}"]    ${operations_returning_shipment_compared_data}["${ENV}"]
+    Search and check page contains text    ${operations_returning_shipment_seach_box}    ${operations_returning_shipment_search_data}[${ENV}]    ${operations_returning_shipment_compared_data}[${ENV}]
 
 Operations > Reports At Locker page
     [Tags]    operations
