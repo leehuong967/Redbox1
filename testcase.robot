@@ -205,7 +205,7 @@ Operations > Shipment Scan Tracking
     ${first_line} =    Set Variable    ${lines}[1]
     ${values} =    Split String    ${first_line}
     ${tracking_number}    Set Variable    ${values}[1]
-    API Driver picks up shipment from business    ${tracking_number}    ${warehouse_id}    ${env}
+    API Driver picks up shipment from business    ${env}
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
@@ -230,7 +230,7 @@ Operations > Returning Shipment
     Click Element    ${operations}
     Sleep    5s
     Click Link    ${operations_returning_shipment}
-    Search and check page contains text    ${operations_returning_shipment_seach_box}    670662016672    966508981797
+    Search and check page contains text    ${operations_returning_shipment_seach_box}    ${operations_returning_shipment_search_data}[${ENV}]    ${operations_returning_shipment_compared_data}[${ENV}]
 
 Operations > Reports At Locker page
     [Tags]    operations

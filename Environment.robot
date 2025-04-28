@@ -13,3 +13,6 @@ Resource          Config.robot
 &{customer_api}    dev=https://dev.redboxsa.com/v3/api/customer    stage=https://stage.redboxsa.com/v3/api/customer    prod=https://dev.redboxsa.com/v3/api/customer
 &{locker_api}     dev=https://dev.redboxsa.com/v3/api    stage=https://stage.redboxsa.com/v3/api
 &{door_id}        dev=65aa377b3a403d2b4b366b4c    stage=65aa377b3a403d2b4b366b4c
+&{operations_returning_shipment_search_data}    dev=84972786721    stage=84972786721    prod=966549737894	
+&{operations_returning_shipment_compared_data}    dev=DLEEL    stage=Redbox store    prod=318520
+
