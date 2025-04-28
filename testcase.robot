@@ -1,5 +1,5 @@
 *** Settings ***
-Task Teardown     Close Browser
+Test Teardown     Close Browser
 Resource          keywords.robot
 Resource          Config.robot
 Resource          Environment.robot
@@ -75,7 +75,7 @@ Dashboard > Merchant Performance page
     Search and check page contains text    ${merchant_performance_search_box}    Ha Ha    PhanhBillOdoo
 
 Organizations > List page
-    [Tags]    Organizations
+    [Tags]    Organizations 
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
@@ -83,7 +83,7 @@ Organizations > List page
     Search and check page contains text    ${organizations_list_search_box}    wtfhihi    No data available in table
 
 Organizations > Merchant Notes page
-    [Tags]    Organizations
+    [Tags]    Organizations 
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
