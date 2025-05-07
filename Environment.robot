@@ -15,4 +15,7 @@ Resource          Config.robot
 &{door_id}        dev=65aa377b3a403d2b4b366b4c    stage=65aa377b3a403d2b4b366b4c
 &{operations_returning_shipment_search_data}    dev=84972786721    stage=84972786721    prod=966549737894	
 &{operations_returning_shipment_compared_data}    dev=DLEEL    stage=Redbox store    prod=318520
-
+&{organization_redbox_id}    dev=5d2853e265889422de40f2f3    stage=5d2853e265889422de40f2f3    prod=5e1080621cbabf0a2c0a0298
+&{locker_id}    dev=65aa37553a403d2b4b366b47    stage=65aa37553a403d2b4b366b47    prod=[]
+&{point_id}    dev=5d2855e065889422de40f2fe    stage=5d2855e065889422de40f2fe    prod=[]
+&{locker_authorization}    dev=Bearer eyJhbGciOi
