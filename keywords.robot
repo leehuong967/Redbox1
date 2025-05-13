@@ -130,3 +130,78 @@ API Confirm Deposit
     ${return_shipmentId}    Get From Dictionary    ${json_data['data']}    shipmentId
     Log    ${return_shipmentId}
     Should Be Equal As Strings    ${shipment_id}    ${return_shipmentId}
+
+Create express shipment
+    [Arguments]    ${env}
+
+    ${BODY}    Create Dictionary
+    ...    service_type=LockerToLocker
+    ...    point_from_id=5d2855e065889422de40f2fe
+    ...    point_to_id=6087d7cb25cf0a31292245f7
+    ...    receiver_name=LA
+    ...    receiver_phone=+84375684357
+    ...    shipment_note=Notes
+    ...    item_description=Items 1
+    ...    declared_value=12
+    ...    sender_name=LAnk
+    ...    sender_phone=+84335299002
+
+    ${auth_token}    Get From Dictionary    ${express_authorization}    ${env}
+    ${HEADERS}    Create Dictionary
+    ...    Content-Type=application/json
+    ...    Authorization=${auth_token}
+
+    ${url}    Get From Dictionary    ${express_create_shipment_api}    ${env}
+    ${RESPONSE}    POST    ${url}    json=${BODY}    headers=${HEADERS}
+
+    Log    Status Code: ${RESPONSE.status_code}
+    Log    Response Content: ${RESPONSE.content}
+
+    Should Be Equal As Numbers    ${RESPONSE.status_code}    200
+
+    ${json_data}    Set Variable    ${RESPONSE.json()}
+    Log    Parsed JSON: ${json_data}
+
+    ${shipment_id}    Get From Dictionary    ${json_data}    shipment_id
+    ${tracking_number}    Get From Dictionary    ${json_data}    tracking_number
+
+    Log    Shipment ID (raw): ${shipment_id}
+    Log    Tracking Number (raw): ${tracking_number}
+
+    # Kiểm tra dữ liệu không được rỗng
+    Run Keyword If    '${shipment_id}' == '' or '${tracking_number}' == ''    Fail    Invalid response: Shipment ID or Tracking Number is missing
+
+    Create File    ${shipment_id_file}    shipment_id: ${shipment_id}\ntracking_number: ${tracking_number}
+
+Customer Confirm Deposit Express
+    [Arguments]    ${shipment_id}    ${tracking_number}    ${env}
+
+    Log    Confirming deposit with Shipment ID: ${shipment_id}, Tracking Number: ${tracking_number}
+
+    ${deposit_url}    Set Variable    https://dev.redboxsa.com/v3/api/customer/confirm-deposit-express
+
+    ${headers}    Create Dictionary
+    ...    Content-Type=application/json
+    ...    locker-id=65aa37553a403d2b4b366b47
+    ...    point-id=5d2855e065889422de40f2fe
+    ...    Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiODY2NzMyMDMyMzM3MDMzIiwidG9rZW5JZCI6IjZkZTkzMDY5LWE3M2ItNDJkMS1iOWViLTljNTIwZjk4ZGE3MCIsImlhdCI6MTc0NzEzNTU5OH0.gp-IZaXm9FPYAKazu0TxQSCCVLj-Vhfghs_IUU2b79U
+    ${payload}    Create Dictionary
+    ...    shipment_id=${shipment_id}
+    ...    tracking_number=${tracking_number}
+    ...    door_id=65aa377b3a403d2b4b366b65
+    ...    is_empty=False
+
+    ${response}    POST    ${deposit_url}    json=${payload}    headers=${headers}
+
+    Log    Status Code: ${response.status_code}
+    Log    Response Content: ${response.content}
+
+    Should Be Equal As Numbers    ${response.status_code}    200
+
+    ${is_invalid}    Evaluate    "${shipment_id}" == "" or "${tracking_number}" == ""
+    Run Keyword If    ${is_invalid}    Fail    Invalid response: Shipment ID or Tracking Number is missing
+
+
+
+
+    
