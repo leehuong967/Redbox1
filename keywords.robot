@@ -5,6 +5,8 @@ Library           Collections
 Library           OperatingSystem
 Library           String
 Resource          vaiables.robot
+Resource          Config.robot
+Resource          Environment.robot
 
 *** Keywords ***
 Login
@@ -202,6 +204,3 @@ Customer Confirm Deposit Express
     Run Keyword If    ${is_invalid}    Fail    Invalid response: Shipment ID or Tracking Number is missing
 
 
-
-
-    
