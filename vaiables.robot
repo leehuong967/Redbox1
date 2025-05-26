@@ -107,11 +107,14 @@ ${operations}     xpath=//*[text()='Operations']
 ${support_tools}    xpath=//*[text()='Support Tools']
 ${point_id}       5d2855e065889422de40f2fe
 ${locker_id}      65aa37553a403d2b4b366b47
+${door_id}    65aa377b3a403d2b4b366b62
 ${uuid}           866732032337033
-${point_from}    5d2855e065889422de40f2fe
-${point_to}      6087d7cb25cf0a31292245f7
+${point_from_id}    5d2855e065889422de40f2fe
+${point_to_id}      6087d7cb25cf0a31292245f7
 &{express_create_shipment_api}    dev=https://dev.redboxsa.com/api/business/v1/shipments/express
 &{express_authorization}
 ...    dev=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25faWQiOiI2NDA4NmQ0NzYwOTMyMzc1OTY3NjEyMDIiLCJrZXkiOiIyMDIzLTAzLTA4VDExOjE0OjEwLjE3OVoiLCJpYXQiOjE2NzgyNzQwNTB9.e4HrRLDPjdWZo6DCmKM9RMWHS2DtIryeGN1Y15j_DLA
 ...    staging=Bearer eyJhbGciOiStagingToken...
 ${shipment_id_file}    shipment_data.txt
+${get_token_locker_authen}    Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiODY2NzMyMDMyMzM3MDMzIiwidG9rZW5JZCI6IjQzYzhiNGEzLTAzOWYtNDJkZC1hOWJiLWZiMTYwYWQ5YWYzZCIsImlhdCI6MTc0NzIwNjIzMH0.xQHJVfXaRjDrNEC4jyVUUDAQvQqrDd8LldGX4IVLd7Y
+${express_deposit_shipment_api}    dev=ttps://dev.redboxsa.com/v3/api/customer/confirm-deposit-express
