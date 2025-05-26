@@ -108,3 +108,10 @@ ${support_tools}    xpath=//*[text()='Support Tools']
 ${point_id}       5d2855e065889422de40f2fe
 ${locker_id}      65aa37553a403d2b4b366b47
 ${uuid}           866732032337033
+${point_from}    5d2855e065889422de40f2fe
+${point_to}      6087d7cb25cf0a31292245f7
+&{express_create_shipment_api}    dev=https://dev.redboxsa.com/api/business/v1/shipments/express
+&{express_authorization}
+...    dev=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25faWQiOiI2NDA4NmQ0NzYwOTMyMzc1OTY3NjEyMDIiLCJrZXkiOiIyMDIzLTAzLTA4VDExOjE0OjEwLjE3OVoiLCJpYXQiOjE2NzgyNzQwNTB9.e4HrRLDPjdWZo6DCmKM9RMWHS2DtIryeGN1Y15j_DLA
+...    staging=Bearer eyJhbGciOiStagingToken...
+${shipment_id_file}    shipment_data.txt

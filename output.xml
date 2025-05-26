@@ -1,129 +1,331 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.1.1 (Python 3.12.8 on win32)" generated="2025-04-22T14:26:11.984633" rpa="false" schemaversion="5">
+<robot generator="Robot 7.1.1 (Python 3.12.8 on win32)" generated="2025-05-13T18:26:58.526306" rpa="false" schemaversion="5">
 <suite id="s1" name="Redbox1" source="c:\Users\Lan Anh\Documents\GitHub\Redbox1">
 <suite id="s1-s1" name="Testcase" source="c:\Users\Lan Anh\Documents\GitHub\Redbox1\testcase.robot">
-<test id="s1-s1-t1" name="Support tools &gt; Link thirdparty shipments page" line="373">
-<kw name="Set Environment" owner="Config">
+<test id="s1-s1-t1" name="Express Flow" line="376">
 <kw name="Set Variable" owner="BuiltIn">
-<msg time="2025-04-22T14:26:12.623283" level="INFO">${BASE_URL1} = https://dev.redboxsa.com/login</msg>
-<var>${BASE_URL1}</var>
-<arg>${ENVIRONMENT["${ENV}"]}</arg>
+<msg time="2025-05-13T18:26:59.199575" level="INFO">${env} = dev</msg>
+<var>${env}</var>
+<arg>dev</arg>
 <doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2025-04-22T14:26:12.622287" elapsed="0.001995"/>
+<status status="PASS" start="2025-05-13T18:26:59.199575" elapsed="0.001994"/>
 </kw>
-<kw name="Open Browser" owner="Selenium2Library">
-<msg time="2025-04-22T14:26:12.625278" level="INFO">Opening browser 'chrome' to base url 'https://dev.redboxsa.com/login'.</msg>
-<arg>${BASE_URL1}</arg>
-<arg>chrome</arg>
-<doc>Opens a new browser instance to the optional ``url``.</doc>
-<status status="PASS" start="2025-04-22T14:26:12.625278" elapsed="5.900610"/>
+<kw name="Create express shipment" owner="keywords">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-05-13T18:26:59.203563" level="INFO">${BODY} = {'service_type': 'LockerToLocker', 'point_from_id': '5d2855e065889422de40f2fe', 'point_to_id': '6087d7cb25cf0a31292245f7', 'receiver_name': 'LA', 'receiver_phone': '+84375684357', 'shipment_note': 'No...</msg>
+<var>${BODY}</var>
+<arg>service_type=LockerToLocker</arg>
+<arg>point_from_id=5d2855e065889422de40f2fe</arg>
+<arg>point_to_id=6087d7cb25cf0a31292245f7</arg>
+<arg>receiver_name=LA</arg>
+<arg>receiver_phone=+84375684357</arg>
+<arg>shipment_note=Notes</arg>
+<arg>item_description=Items 1</arg>
+<arg>declared_value=12</arg>
+<arg>sender_name=LAnk</arg>
+<arg>sender_phone=+84335299002</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-05-13T18:26:59.202566" elapsed="0.000997"/>
 </kw>
-<kw name="Maximize Browser Window" owner="Selenium2Library">
-<doc>Maximizes current browser window.</doc>
-<status status="PASS" start="2025-04-22T14:26:18.526886" elapsed="0.029954"/>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-05-13T18:26:59.204561" level="INFO">${auth_token} = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25faWQiOiI2NDA4NmQ0NzYwOTMyMzc1OTY3NjEyMDIiLCJrZXkiOiIyMDIzLTAzLTA4VDExOjE0OjEwLjE3OVoiLCJpYXQiOjE2NzgyNzQwNTB9.e4HrRLDPjdWZo6DCmKM9RMWHS2D...</msg>
+<var>${auth_token}</var>
+<arg>${express_authorization}</arg>
+<arg>${env}</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-05-13T18:26:59.203563" elapsed="0.000998"/>
 </kw>
-<kw name="Input Text" owner="Selenium2Library">
-<msg time="2025-04-22T14:26:18.558834" level="INFO">Typing text 'anhth58.it.uet@gmail.com' into text field 'id=email-login'.</msg>
-<arg>id=email-login</arg>
-<arg>${email_login["${ENV}"]}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-04-22T14:26:18.556840" elapsed="0.087887"/>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-05-13T18:26:59.204561" level="INFO">${HEADERS} = {'Content-Type': 'application/json', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25faWQiOiI2NDA4NmQ0NzYwOTMyMzc1OTY3NjEyMDIiLCJrZXkiOiIyMDIzLTAzLTA4VDExOjE0OjEwLjE3O...</msg>
+<var>${HEADERS}</var>
+<arg>Content-Type=application/json</arg>
+<arg>Authorization=${auth_token}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-05-13T18:26:59.204561" elapsed="0.000000"/>
 </kw>
-<kw name="Input Text" owner="Selenium2Library">
-<msg time="2025-04-22T14:26:18.645724" level="INFO">Typing text 'Re@@Bo2025' into text field 'id=password-login'.</msg>
-<arg>id=password-login</arg>
-<arg>${password_login["${ENV}"]}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-04-22T14:26:18.644727" elapsed="0.051861"/>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-05-13T18:26:59.205558" level="INFO">${url} = https://dev.redboxsa.com/api/business/v1/shipments/express</msg>
+<var>${url}</var>
+<arg>${express_create_shipment_api}</arg>
+<arg>${env}</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-05-13T18:26:59.205558" elapsed="0.000000"/>
 </kw>
-<kw name="Sleep" owner="BuiltIn">
-<msg time="2025-04-22T14:26:19.696810" level="INFO">Slept 1 second.</msg>
-<arg>1s</arg>
-<doc>Pauses the test executed for the given time.</doc>
-<status status="PASS" start="2025-04-22T14:26:18.696588" elapsed="1.000222"/>
+<kw name="POST" owner="RequestsLibrary">
+<msg time="2025-05-13T18:27:00.126391" level="INFO">POST Request : url=https://dev.redboxsa.com/api/business/v1/shipments/express 
+ path_url=/api/business/v1/shipments/express 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25faWQiOiI2NDA4NmQ0NzYwOTMyMzc1OTY3NjEyMDIiLCJrZXkiOiIyMDIzLTAzLTA4VDExOjE0OjEwLjE3OVoiLCJpYXQiOjE2NzgyNzQwNTB9.e4HrRLDPjdWZo6DCmKM9RMWHS2DtIryeGN1Y15j_DLA', 'Content-Length': '315'} 
+ body=b'{"service_type": "LockerToLocker", "point_from_id": "5d2855e065889422de40f2fe", "point_to_id": "6087d7cb25cf0a31292245f7", "receiver_name": "LA", "receiver_phone": "+84375684357", "shipment_note": "Notes", "item_description": "Items 1", "declared_value": "12", "sender_name": "LAnk", "sender_phone": "+84335299002"}' 
+ </msg>
+<msg time="2025-05-13T18:27:00.126391" level="INFO">POST Response : url=https://dev.redboxsa.com/api/business/v1/shipments/express 
+ status=200, reason=OK 
+ headers={'Server': 'nginx/1.18.0 (Ubuntu)', 'Date': 'Tue, 13 May 2025 11:26:59 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '191', 'Connection': 'keep-alive', 'Access-Control-Allow-Origin': '*', 'RateLimit-Policy': '500;w=30', 'RateLimit-Limit': '500', 'RateLimit-Remaining': '499', 'RateLimit-Reset': '15', 'x-frame-options': 'SAMEORIGIN', 'x-xss-protection': '1; mode=block', 'ETag': 'W/"bf-hxbaucOL1FWmplX1mkcD1aa1Uw8"', 'Vary': 'Accept-Encoding'} 
+ body={"success":true,"shipment_id":"68232c82fc3ed7d0c154638b","shipping_label_url":"https://dev.redboxsa.com/download/shipping-label/68232c82fc3ed7d0c154638b.pdf","tracking_number":"413870305578"} 
+ </msg>
+<msg time="2025-05-13T18:27:00.126391" level="INFO">${RESPONSE} = &lt;Response [200]&gt;</msg>
+<var>${RESPONSE}</var>
+<arg>${url}</arg>
+<arg>json=${BODY}</arg>
+<arg>headers=${HEADERS}</arg>
+<doc>Sends a POST request.</doc>
+<status status="PASS" start="2025-05-13T18:26:59.205558" elapsed="0.921830"/>
 </kw>
-<kw name="Click Button" owner="Selenium2Library">
-<msg time="2025-04-22T14:26:19.698814" level="INFO">Clicking button 'submit-login'.</msg>
-<arg>${submit_login}</arg>
-<doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2025-04-22T14:26:19.697818" elapsed="5.191556"/>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-13T18:27:00.128386" level="INFO">Status Code: 200</msg>
+<arg>Status Code: ${RESPONSE.status_code}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-13T18:27:00.127388" elapsed="0.001994"/>
 </kw>
-<kw name="Wait Until Page Contains Element" owner="Selenium2Library">
-<arg>${logo}</arg>
-<arg>timeout=10</arg>
-<doc>Waits until the element ``locator`` appears on the current page.</doc>
-<status status="PASS" start="2025-04-22T14:26:24.889374" elapsed="0.009966"/>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-13T18:27:00.130351" level="INFO">Response Content: {"success":true,"shipment_id":"68232c82fc3ed7d0c154638b","shipping_label_url":"https://dev.redboxsa.com/download/shipping-label/68232c82fc3ed7d0c154638b.pdf","tracking_number":"413870305578"}</msg>
+<arg>Response Content: ${RESPONSE.content}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-13T18:27:00.129382" elapsed="0.000969"/>
 </kw>
-<kw name="Page Should Contain Element" owner="Selenium2Library">
-<msg time="2025-04-22T14:26:24.905322" level="INFO">Current page contains element 'logo'.</msg>
-<arg>${logo}</arg>
-<doc>Verifies that element ``locator`` is found on the current page.</doc>
-<status status="PASS" start="2025-04-22T14:26:24.899340" elapsed="0.006979"/>
+<kw name="Should Be Equal As Numbers" owner="BuiltIn">
+<msg time="2025-05-13T18:27:00.132374" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${RESPONSE.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="PASS" start="2025-05-13T18:27:00.131377" elapsed="0.000997"/>
 </kw>
-<status status="PASS" start="2025-04-22T14:26:12.621288" elapsed="12.285031"/>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-05-13T18:27:00.134341" level="INFO">${json_data} = {'success': True, 'shipment_id': '68232c82fc3ed7d0c154638b', 'shipping_label_url': 'https://dev.redboxsa.com/download/shipping-label/68232c82fc3ed7d0c154638b.pdf', 'tracking_number': '413870305578'}</msg>
+<var>${json_data}</var>
+<arg>${RESPONSE.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-05-13T18:27:00.132374" elapsed="0.001967"/>
 </kw>
-<kw name="Click Link" owner="Selenium2Library">
-<msg time="2025-04-22T14:26:24.906319" level="INFO">Clicking link '/redbox'.</msg>
-<arg>${redbox_dashboard_href}</arg>
-<doc>Clicks a link identified by ``locator``.</doc>
-<status status="PASS" start="2025-04-22T14:26:24.906319" elapsed="2.714411"/>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-13T18:27:00.135340" level="INFO">Parsed JSON: {'success': True, 'shipment_id': '68232c82fc3ed7d0c154638b', 'shipping_label_url': 'https://dev.redboxsa.com/download/shipping-label/68232c82fc3ed7d0c154638b.pdf', 'tracking_number': '413870305578'}</msg>
+<arg>Parsed JSON: ${json_data}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-13T18:27:00.135340" elapsed="0.000000"/>
 </kw>
-<kw name="Wait Until Page Contains Element" owner="Selenium2Library">
-<arg>${support_tools}</arg>
-<arg>timeout=10</arg>
-<doc>Waits until the element ``locator`` appears on the current page.</doc>
-<status status="PASS" start="2025-04-22T14:26:27.621727" elapsed="0.007979"/>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-05-13T18:27:00.136336" level="INFO">${shipment_id} = 68232c82fc3ed7d0c154638b</msg>
+<var>${shipment_id}</var>
+<arg>${json_data}</arg>
+<arg>shipment_id</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-05-13T18:27:00.135340" elapsed="0.000996"/>
 </kw>
-<kw name="Access page" owner="keywords">
-<kw name="Click Element" owner="Selenium2Library">
-<msg time="2025-04-22T14:26:27.631702" level="INFO">Clicking element 'xpath=//*[text()='Support Tools']'.</msg>
-<arg>${title}</arg>
-<doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2025-04-22T14:26:27.630703" elapsed="0.045878"/>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-05-13T18:27:00.137332" level="INFO">${tracking_number} = 413870305578</msg>
+<var>${tracking_number}</var>
+<arg>${json_data}</arg>
+<arg>tracking_number</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-05-13T18:27:00.136336" elapsed="0.000996"/>
 </kw>
-<kw name="Sleep" owner="BuiltIn">
-<msg time="2025-04-22T14:26:32.676752" level="INFO">Slept 5 seconds.</msg>
-<arg>5s</arg>
-<doc>Pauses the test executed for the given time.</doc>
-<status status="PASS" start="2025-04-22T14:26:27.676581" elapsed="5.000171"/>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-13T18:27:00.137332" level="INFO">Shipment ID (raw): 68232c82fc3ed7d0c154638b</msg>
+<arg>Shipment ID (raw): ${shipment_id}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-13T18:27:00.137332" elapsed="0.000000"/>
 </kw>
-<kw name="Click Element" owner="Selenium2Library">
-<msg time="2025-04-22T14:26:32.678785" level="INFO">Clicking element 'menu-link-link-thirdparty-shipments'.</msg>
-<arg>${subtitle}</arg>
-<doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2025-04-22T14:26:32.677788" elapsed="1.957618"/>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-13T18:27:00.138330" level="INFO">Tracking Number (raw): 413870305578</msg>
+<arg>Tracking Number (raw): ${tracking_number}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-13T18:27:00.137332" elapsed="0.000998"/>
 </kw>
-<arg>${support_tools}</arg>
-<arg>${link_thirdparty_shipments}</arg>
-<doc>To access any page under the main operation tab</doc>
-<status status="PASS" start="2025-04-22T14:26:27.630703" elapsed="7.005701"/>
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>'${shipment_id}' == '' or '${tracking_number}' == ''</arg>
+<arg>Fail</arg>
+<arg>Invalid response: Shipment ID or Tracking Number is missing</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-05-13T18:27:00.138330" elapsed="0.000000"/>
 </kw>
-<kw name="Verify element exits" owner="keywords">
-<kw name="Wait Until Element Is Visible" owner="Selenium2Library">
-<arg>${element_locator}</arg>
-<arg>timeout=20</arg>
-<doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2025-04-22T14:26:34.637400" elapsed="0.018211"/>
+<kw name="Create File" owner="OperatingSystem">
+<msg time="2025-05-13T18:27:00.139327" level="INFO" html="true">Created file '&lt;a href="file://C:\Users\Lan Anh\Documents\GitHub\Redbox1\shipment_id.txt"&gt;C:\Users\Lan Anh\Documents\GitHub\Redbox1\shipment_id.txt&lt;/a&gt;'.</msg>
+<arg>${shipment_id_file}</arg>
+<arg>shipment_id: ${shipment_id}\ntracking_number: ${tracking_number}</arg>
+<doc>Creates a file with the given content and encoding.</doc>
+<status status="PASS" start="2025-05-13T18:27:00.138330" elapsed="0.001995"/>
 </kw>
-<kw name="Element Should Be Visible" owner="Selenium2Library">
-<msg time="2025-04-22T14:26:34.669575" level="INFO">Element '//button[contains(text(),'Submit')]' is displayed.</msg>
-<arg>${element_locator}</arg>
-<doc>Verifies that the element identified by ``locator`` is visible.</doc>
-<status status="PASS" start="2025-04-22T14:26:34.655611" elapsed="0.013964"/>
+<arg>${env}</arg>
+<status status="PASS" start="2025-05-13T18:26:59.202566" elapsed="0.937759"/>
 </kw>
-<arg>//button[contains(text(),'Submit')]</arg>
-<doc>Verify that the given element exists on the page</doc>
-<status status="PASS" start="2025-04-22T14:26:34.636404" elapsed="0.034167"/>
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2025-05-13T18:27:00.141321" level="INFO" html="true">Getting file '&lt;a href="file://C:\Users\Lan Anh\Documents\GitHub\Redbox1\shipment_id.txt"&gt;C:\Users\Lan Anh\Documents\GitHub\Redbox1\shipment_id.txt&lt;/a&gt;'.</msg>
+<msg time="2025-05-13T18:27:00.147305" level="INFO">${file_content} = shipment_id: 68232c82fc3ed7d0c154638b
+tracking_number: 413870305578</msg>
+<var>${file_content}</var>
+<arg>${shipment_id_file}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2025-05-13T18:27:00.140325" elapsed="0.006980"/>
+</kw>
+<kw name="Split To Lines" owner="String">
+<msg time="2025-05-13T18:27:00.148302" level="INFO">2 lines returned</msg>
+<msg time="2025-05-13T18:27:00.148302" level="INFO">${lines} = ['shipment_id: 68232c82fc3ed7d0c154638b', 'tracking_number: 413870305578']</msg>
+<var>${lines}</var>
+<arg>${file_content}</arg>
+<doc>Splits the given string to lines.</doc>
+<status status="PASS" start="2025-05-13T18:27:00.148302" elapsed="0.000000"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-05-13T18:27:00.149299" level="INFO">${shipment_id_line} = shipment_id: 68232c82fc3ed7d0c154638b</msg>
+<var>${shipment_id_line}</var>
+<arg>${lines}[0]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-05-13T18:27:00.149299" elapsed="0.000000"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-05-13T18:27:00.150298" level="INFO">${tracking_number_line} = tracking_number: 413870305578</msg>
+<var>${tracking_number_line}</var>
+<arg>${lines}[1]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-05-13T18:27:00.150298" elapsed="0.000000"/>
+</kw>
+<kw name="Replace String" owner="String">
+<msg time="2025-05-13T18:27:00.151295" level="INFO">${shipment_id} =  68232c82fc3ed7d0c154638b</msg>
+<var>${shipment_id}</var>
+<arg>${shipment_id_line}</arg>
+<arg>shipment_id:</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<status status="PASS" start="2025-05-13T18:27:00.150298" elapsed="0.000997"/>
+</kw>
+<kw name="Strip String" owner="String">
+<msg time="2025-05-13T18:27:00.152292" level="INFO">${shipment_id} = 68232c82fc3ed7d0c154638b</msg>
+<var>${shipment_id}</var>
+<arg>${shipment_id}</arg>
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<status status="PASS" start="2025-05-13T18:27:00.152292" elapsed="0.000000"/>
+</kw>
+<kw name="Replace String" owner="String">
+<msg time="2025-05-13T18:27:00.154287" level="INFO">${tracking_number} =  413870305578</msg>
+<var>${tracking_number}</var>
+<arg>${tracking_number_line}</arg>
+<arg>tracking_number:</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<status status="PASS" start="2025-05-13T18:27:00.153289" elapsed="0.000998"/>
+</kw>
+<kw name="Strip String" owner="String">
+<msg time="2025-05-13T18:27:00.154287" level="INFO">${tracking_number} = 413870305578</msg>
+<var>${tracking_number}</var>
+<arg>${tracking_number}</arg>
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<status status="PASS" start="2025-05-13T18:27:00.154287" elapsed="0.000998"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-13T18:27:00.155285" level="INFO">Shipment ID: 68232c82fc3ed7d0c154638b</msg>
+<arg>Shipment ID: ${shipment_id}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-13T18:27:00.155285" elapsed="0.000000"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-13T18:27:00.156280" level="INFO">Tracking Number: 413870305578</msg>
+<arg>Tracking Number: ${tracking_number}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-13T18:27:00.156280" elapsed="0.000000"/>
+</kw>
+<kw name="Customer Confirm Deposit Express" owner="keywords">
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-13T18:27:00.160271" level="INFO">Confirming deposit with Shipment ID: 68232c82fc3ed7d0c154638b, Tracking Number: 413870305578</msg>
+<arg>Confirming deposit with Shipment ID: ${shipment_id}, Tracking Number: ${tracking_number}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-13T18:27:00.159273" elapsed="0.000998"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-05-13T18:27:00.160271" level="INFO">${deposit_url} = https://dev.redboxsa.com/v3/api/customer/confirm-deposit-express</msg>
+<var>${deposit_url}</var>
+<arg>https://dev.redboxsa.com/v3/api/customer/confirm-deposit-express</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-05-13T18:27:00.160271" elapsed="0.000997"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-05-13T18:27:00.161268" level="INFO">${headers} = {'Content-Type': 'application/json', 'locker-id': '65aa37553a403d2b4b366b47', 'point-id': '5d2855e065889422de40f2fe', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiODY2NzMy...</msg>
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<arg>locker-id=65aa37553a403d2b4b366b47</arg>
+<arg>point-id=5d2855e065889422de40f2fe</arg>
+<arg>Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiODY2NzMyMDMyMzM3MDMzIiwidG9rZW5JZCI6IjZkZTkzMDY5LWE3M2ItNDJkMS1iOWViLTljNTIwZjk4ZGE3MCIsImlhdCI6MTc0NzEzNTU5OH0.gp-IZaXm9FPYAKazu0TxQSCCVLj-Vhfghs_IUU2b79U</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-05-13T18:27:00.161268" elapsed="0.000000"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-05-13T18:27:00.162265" level="INFO">${payload} = {'shipment_id': '68232c82fc3ed7d0c154638b', 'tracking_number': '413870305578', 'door_id': '65aa377b3a403d2b4b366b65', 'is_empty': 'False'}</msg>
+<var>${payload}</var>
+<arg>shipment_id=${shipment_id}</arg>
+<arg>tracking_number=${tracking_number}</arg>
+<arg>door_id=65aa377b3a403d2b4b366b65</arg>
+<arg>is_empty=False</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-05-13T18:27:00.162265" elapsed="0.000000"/>
+</kw>
+<kw name="POST" owner="RequestsLibrary">
+<msg time="2025-05-13T18:27:00.925673" level="INFO">POST Request : url=https://dev.redboxsa.com/v3/api/customer/confirm-deposit-express 
+ path_url=/v3/api/customer/confirm-deposit-express 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'locker-id': '65aa37553a403d2b4b366b47', 'point-id': '5d2855e065889422de40f2fe', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiODY2NzMyMDMyMzM3MDMzIiwidG9rZW5JZCI6IjZkZTkzMDY5LWE3M2ItNDJkMS1iOWViLTljNTIwZjk4ZGE3MCIsImlhdCI6MTc0NzEzNTU5OH0.gp-IZaXm9FPYAKazu0TxQSCCVLj-Vhfghs_IUU2b79U', 'Content-Length': '138'} 
+ body=b'{"shipment_id": "68232c82fc3ed7d0c154638b", "tracking_number": "413870305578", "door_id": "65aa377b3a403d2b4b366b65", "is_empty": "False"}' 
+ </msg>
+<msg time="2025-05-13T18:27:00.926671" level="INFO">POST Response : url=https://dev.redboxsa.com/v3/api/customer/confirm-deposit-express 
+ status=200, reason=OK 
+ headers={'Server': 'nginx/1.18.0 (Ubuntu)', 'Date': 'Tue, 13 May 2025 11:26:59 GMT', 'Content-Type': 'text/html; charset=utf-8', 'Content-Length': '14', 'Connection': 'keep-alive', 'Access-Control-Allow-Origin': '*', 'x-frame-options': 'SAMEORIGIN', 'x-xss-protection': '1; mode=block', 'ETag': 'W/"e-QsuWRrOEkcU9MaZ7Iu4xj/+JUZY"', 'Vary': 'Accept-Encoding'} 
+ body={"state":true} 
+ </msg>
+<msg time="2025-05-13T18:27:00.926671" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>${deposit_url}</arg>
+<arg>json=${payload}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a POST request.</doc>
+<status status="PASS" start="2025-05-13T18:27:00.163262" elapsed="0.764426"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-13T18:27:00.929628" level="INFO">Status Code: 200</msg>
+<arg>Status Code: ${response.status_code}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-13T18:27:00.928666" elapsed="0.000962"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-13T18:27:00.930653" level="INFO">Response Content: {"state":true}</msg>
+<arg>Response Content: ${response.content}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-13T18:27:00.929628" elapsed="0.001025"/>
+</kw>
+<kw name="Should Be Equal As Numbers" owner="BuiltIn">
+<msg time="2025-05-13T18:27:00.932648" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="PASS" start="2025-05-13T18:27:00.931650" elapsed="0.000998"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-05-13T18:27:00.932648" level="INFO">${is_invalid} = False</msg>
+<var>${is_invalid}</var>
+<arg>"${shipment_id}" == "" or "${tracking_number}" == ""</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-05-13T18:27:00.932648" elapsed="0.000000"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>${is_invalid}</arg>
+<arg>Fail</arg>
+<arg>Invalid response: Shipment ID or Tracking Number is missing</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-05-13T18:27:00.932648" elapsed="0.000997"/>
+</kw>
+<arg>${shipment_id}</arg>
+<arg>${tracking_number}</arg>
+<arg>${env}</arg>
+<status status="PASS" start="2025-05-13T18:27:00.158276" elapsed="0.775369"/>
 </kw>
 <kw name="Close Browser" owner="Selenium2Library" type="TEARDOWN">
 <doc>Closes the current browser.</doc>
-<status status="PASS" start="2025-04-22T14:26:34.670571" elapsed="3.676913"/>
+<status status="PASS" start="2025-05-13T18:27:00.934616" elapsed="0.000000"/>
 </kw>
-<status status="PASS" start="2025-04-22T14:26:12.620291" elapsed="25.727193"/>
+<status status="PASS" start="2025-05-13T18:26:59.198606" elapsed="1.737007"/>
 </test>
-<status status="PASS" start="2025-04-22T14:26:12.589373" elapsed="25.760110"/>
+<status status="PASS" start="2025-05-13T18:26:59.164668" elapsed="1.771942"/>
 </suite>
-<status status="PASS" start="2025-04-22T14:26:11.988622" elapsed="26.362481"/>
+<status status="PASS" start="2025-05-13T18:26:58.531317" elapsed="2.406291"/>
 </suite>
 <statistics>
 <total>
