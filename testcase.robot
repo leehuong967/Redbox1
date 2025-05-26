@@ -397,3 +397,13 @@ Express Flow
 
     #customer deposit
     Customer Confirm Deposit Express    ${shipment_id}    ${tracking_number}    ${env}
+    #driver picks up shipment
+    ${driver_token}=    API get token driver    ${env}     Ha driver dev
+    API Driver picks up Express shipments from Locker    ${env}    ${driver_token}
+    #driver confirm deposit
+    API Driver deposits Express shipments    ${env}    ${driver_token}
+    #customer pickup
+    ${locker_token}=    API get token locker    ${env}     866732032337033
+    API Customer pickup Express shipments from Locker    ${env}    ${locker_token}
+
+
