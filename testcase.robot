@@ -376,27 +376,27 @@ Delivery Flow
 Express Flow
     ${env}    Set Variable    dev
 
-    # #create shipment
-    # Create express shipment    ${env}
+    #create shipment
+    Create express shipment    ${env}
 
-    # #đọc file chứa shipment_id và tracking_number
-    # ${file_content}    Get File    ${shipment_id_file}
-    # ${lines}    Split To Lines    ${file_content}
-    # #lấy shipment_id và tracking_number
-    # ${shipment_id_line}       Set Variable    ${lines}[0]
-    # ${tracking_number_line}   Set Variable    ${lines}[1]
+    #đọc file chứa shipment_id và tracking_number
+    ${file_content}    Get File    ${shipment_id_file}
+    ${lines}    Split To Lines    ${file_content}
+    #lấy shipment_id và tracking_number
+    ${shipment_id_line}       Set Variable    ${lines}[0]
+    ${tracking_number_line}   Set Variable    ${lines}[1]
     
-    # ${shipment_id}            Replace String    ${shipment_id_line}    shipment_id:    ${EMPTY}
-    # ${shipment_id}            Strip String      ${shipment_id}
+    ${shipment_id}            Replace String    ${shipment_id_line}    shipment_id:    ${EMPTY}
+    ${shipment_id}            Strip String      ${shipment_id}
 
-    # ${tracking_number}        Replace String    ${tracking_number_line}    tracking_number:    ${EMPTY}
-    # ${tracking_number}        Strip String      ${tracking_number}
+    ${tracking_number}        Replace String    ${tracking_number_line}    tracking_number:    ${EMPTY}
+    ${tracking_number}        Strip String      ${tracking_number}
 
-    # Log    Shipment ID: ${shipment_id}
-    # Log    Tracking Number: ${tracking_number}
+    Log    Shipment ID: ${shipment_id}
+    Log    Tracking Number: ${tracking_number}
 
-    # #customer deposit
-    # Customer Confirm Deposit Express    ${shipment_id}    ${tracking_number}    ${env}
+    #customer deposit
+    Customer Confirm Deposit Express    ${shipment_id}    ${tracking_number}    ${env}
     #driver picks up shipment
     ${driver_token}=    API get token driver    ${env}     Ha driver dev
     API Driver picks up Express shipments from Locker    ${env}    ${driver_token}

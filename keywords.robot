@@ -136,6 +136,9 @@ API Confirm Deposit
 Create express shipment
     [Arguments]    ${env}
 
+    ${point_from_id}    Get From Dictionary    ${point_id}    ${env}
+    ${point_to_id}      Get From Dictionary    ${point_to_id}    ${env}
+
     ${BODY}    Create Dictionary
     ...    service_type=LockerToLocker
     ...    point_from_id=${point_from_id}
@@ -180,20 +183,25 @@ Customer Confirm Deposit Express
 
     Log    Confirming deposit with Shipment ID: ${shipment_id}, Tracking Number: ${tracking_number}
 
-    ${deposit_url}    Set Variable    https://dev.redboxsa.com/v3/api/customer/confirm-deposit-express
-    #${deposit_url}    Get From Dictionary    ${express_deposit_shipment_api}    ${env}
+    #${deposit_url}    Set Variable    https://dev.redboxsa.com/v3/api/customer/confirm-deposit-express
+    ${deposit_url}    Get From Dictionary    ${express_deposit_shipment_api}    ${env}
+    ${locker_id}    Get From Dictionary    ${locker_id}    ${env}
+    ${point_to_id}  Get From Dictionary    ${point_to_id}    ${env}
+    ${door_id}      Get From Dictionary    ${door_id}    ${env}
+    ${Authorization}    Get From Dictionary    ${get_token_locker_authen}    ${env}
 
     ${headers}    Create Dictionary
-    ...    Content_Type=application/json
+    ...    Content-Type=application/json
     ...    locker_id=${locker_id}
-    ...    point_id=${point_id}
-    ...    Authorization=${get_token_locker_authen}
+    ...    point_to_id=${point_to_id}
+    ...    Authorization=${Authorization}
     ${payload}    Create Dictionary
     ...    shipment_id=${shipment_id}
     ...    tracking_number=${tracking_number}
     ...    door_id=${door_id}
     ...    is_empty=False
 
+    #${deposit_url}    Get From Dictionary    ${express_deposit_shipment_api}    ${env}
     ${response}    POST    ${deposit_url}    json=${payload}    headers=${headers}
 
     Log    Status Code: ${response.status_code}

@@ -12,10 +12,18 @@ Resource          Config.robot
 &{shipper_api}    dev=https://dev.redboxsa.com/v3/api/shipper    stage=https://stage.redboxsa.com/v3/api/shipper    prod=https://dev.redboxsa.com/v3/api/shipper
 &{customer_api}    dev=https://dev.redboxsa.com/v3/api/customer    stage=https://stage.redboxsa.com/v3/api/customer    prod=https://dev.redboxsa.com/v3/api/customer
 &{locker_api}     dev=https://dev.redboxsa.com/v3/api    stage=https://stage.redboxsa.com/v3/api
-&{door_id}        dev=65aa377b3a403d2b4b366b4c    stage=65aa377b3a403d2b4b366b4c
+&{door_id}        dev=65aa377b3a403d2b4b366b5c    stage=65aa377b3a403d2b4b366b4c
 &{operations_returning_shipment_search_data}    dev=84972786721    stage=84972786721    prod=966549737894	
 &{operations_returning_shipment_compared_data}    dev=DLEEL    stage=Redbox store    prod=318520
 &{organization_redbox_id}    dev=5d2853e265889422de40f2f3    stage=5d2853e265889422de40f2f3    prod=5e1080621cbabf0a2c0a0298
 &{locker_id}    dev=65aa37553a403d2b4b366b47    stage=65aa37553a403d2b4b366b47    prod=[]
 &{point_id}    dev=5d2855e065889422de40f2fe    stage=5d2855e065889422de40f2fe    prod=[]
 &{locker_authorization}    dev=Bearer eyJhbGciOi
+&{point_from_id}    dev=6087d7cb25cf0a31292245f7
+&{point_to_id}      dev=5d2855e065889422de40f2fe
+&{express_create_shipment_api}    dev=https://dev.redboxsa.com/api/business/v1/shipments/express
+&{express_authorization}
+...    dev=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25faWQiOiI2NDA4NmQ0NzYwOTMyMzc1OTY3NjEyMDIiLCJrZXkiOiIyMDIzLTAzLTA4VDExOjE0OjEwLjE3OVoiLCJpYXQiOjE2NzgyNzQwNTB9.e4HrRLDPjdWZo6DCmKM9RMWHS2DtIryeGN1Y15j_DLA
+...    stage=[]
+&{get_token_locker_authen}    dev=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiODY2NzMyMDMyMzM3MDMzIiwidG9rZW5JZCI6IjQ0ZGFhNDQ1LWIxNDAtNGE2MS04NjliLTdhMDkyMzNjZmNiZSIsImlhdCI6MTc0ODMzNjk5OX0.oSjmE5WTNapbu4Y1p8YKFZyV3_MJmcXS7BgUOFmabxI
+&{express_deposit_shipment_api}    dev=https://dev.redboxsa.com/v3/api/customer/confirm-deposit-express
