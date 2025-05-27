@@ -210,14 +210,19 @@ API get token driver
     ${headers}=    Create Dictionary    Cookie=connect.sid=s%3Ac-C8Ua7JWn_dy3gvH5PC8rUIzj6DPUIz.CtE1ied8oMyXJFLbnHY6zTUAx5ueftByHLPjL8tJMH4
     ${response}    GET    ${shipper_api["${env}"]}/get-list-driver    headers=${headers}
     ${json}=    To Json    ${response.content}
+    ${json_str}=    Convert To String    ${json}
+    Create File    list_driver.txt    ${json_str}
     ${list_drivers}=    Get From Dictionary    ${json}    data
     ${found}=    Set Variable    False
     FOR    ${driver}    IN    @{list_drivers}
         ${name}=    Get From Dictionary    ${driver}    name
-        Run Keyword If    '${name}' == '${driver_name}'    Set Variable    ${found}    True
-        ${driver_token}=    Set Variable If    '${name}' == '${driver_name}'    ${driver['token']}    None
-        Run Keyword If    '${name}' == '${driver_name}'    Append To File    driver_token.txt    ${driver_token}\n
+        Log    Found driver name: "${name}"
+        Log    Target driver name: "${driver_name}"
+        Run Keyword If    "${name}" == "${driver_name}"    Set Test Variable    ${found}    True
+        Run Keyword If    "${name}" == "${driver_name}"    Set Suite Variable    ${driver_token}    ${driver['token']}
+        Run Keyword If    "${name}" == "${driver_name}"    Append To File    driver_token.txt    ${driver['token']}\n
     END
+    
     Should Be True    ${found}    Driver with name "${driver_name}" not found in response
     [Return]    ${driver_token}
     
@@ -238,14 +243,23 @@ API Driver picks up Express shipments from Locker
     [Arguments]    ${env}    ${driver_token}   
     ${timestamp}=    Get Time    epoch
     ${timestamp}=    Evaluate    int(${timestamp} * 1000)
-    ${BODY}    Create Dictionary    door_id=${door_id}["${env}"]    organization_id=${organization_redbox_id}["${env}"]    locker_id=${locker_id}["${env}"]    timestamp=${timestamp}
-    # ${driver_authorization_base}    Set Variable    ${driver_authorization["${env}"]}
-    ${HEADERS}    Create Dictionary    Content-Type=application/json    Authorization=${driver_token}    organization-id=${organization_redbox_id}["${env}"]    locker-id=${locker_id}["${env}"]    point-id=${point_id}["${env}"]    cookie=connect.sid=s%3AWOAKd-qpcmp6vgEQo6FmIg5AUpEChN9d.8VOl2rP7eV61zNGDDVd1VLSpAP66cTBCmVnt%2B%2FF7AAc
+    ${BODY}    Create Dictionary    
+    ...    door_id=${door_id["${env}"]}    
+    ...    organization_id=${organization_redbox_id["${env}"]}    
+    ...    locker_id=${locker_id["${env}"]}    
+    ...    timestamp=${timestamp}
+    ${HEADERS}    Create Dictionary    
+    ...    Content-Type=application/json    
+    ...    Authorization=Bearer ${driver_token}    
+    ...    organization-id=${organization_redbox_id["${env}"]}    
+    ...    locker-id=${locker_id["${env}"]}    
+    ...    point-id=${point_id["${env}"]}    
+    ...    cookie=connect.sid=s%3AWOAKd-qpcmp6vgEQo6FmIg5AUpEChN9d.8VOl2rP7eV61zNGDDVd1VLSpAP66cTBCmVnt%2B%2FF7AAc
     ${RESPONSE}    POST    ${shipper_api["${env}"]}/open-multiple-door-express    json=${BODY}    headers=${HEADERS}
     ${json_data}    Set variable    ${RESPONSE.json()}
     ${doors}    Get From Dictionary    ${json_data}    doors
     Log    ${doors}
-    Should Be Equal As Strings    ${door_id}["${env}"]    ${doors}
+    Should Be Equal As Strings    ${door_id["${env}"]}    ${doors}
 
 API Driver deposits Express shipments
     [Documentation]    Authorization token of driver, locker id, point id, organization id of Redbox are required in Headers
@@ -258,8 +272,18 @@ API Driver deposits Express shipments
     ${shipment_id}    Set Variable    ${shipment_id}[1]
     ${tracking_number}    Split String    ${tracking_number_line}    :    strip=True
     ${tracking_number}    Set Variable    ${tracking_number}[1]
-    ${body}    Create Dictionary    shipment_id=${shipment_id}    tracking_number=${tracking_number}    door_id=${door_id["${env}"]}    is_empty=false
-    ${headers}    Create Dictionary    Content-Type=application/json    organization-id=${organization_redbox_id["${env}"]}    locker-id=${locker_id["${env}"]}    point-id=${point_id["${env}"]}    Authorization=${driver_token}    cookie=connect.sid=s%3AWOAKd-qpcmp6vgEQo6FmIg5AUpEChN9d.8VOl2rP7eV61zNGDDVd1VLSpAP66cTBCmVnt%2B%2FF7AAc
+    ${body}    Create Dictionary    
+    ...    shipment_id=${shipment_id}    
+    ...    tracking_number=${tracking_number}    
+    ...    door_id=${door_id["${env}"]}    
+    ...    is_empty=false
+    ${headers}    Create Dictionary    
+    ...    Content-Type=application/json    
+    ...    organization-id=${organization_redbox_id["${env}"]}    
+    ...    locker-id=${locker_id["${env}"]}    
+    ...    point-id=${point_id["${env}"]}    
+    ...    Authorization=Bearer ${driver_token}    
+    ...    cookie=connect.sid=s%3AWOAKd-qpcmp6vgEQo6FmIg5AUpEChN9d.8VOl2rP7eV61zNGDDVd1VLSpAP66cTBCmVnt%2B%2FF7AAc
     ${response}    POST    ${shipper_api["${env}"]}/confirm-finish-drop-off    json=${body}    headers=${headers}
     ${state}    Get From Dictionary    ${response.json()}    state
     Should Be True    ${state}    Message=Deposit shipment failed!
@@ -274,8 +298,16 @@ API Customer pickup Express shipments from Locker
     ${shipment_id}    Set Variable    ${shipment_id}[1]
     ${timestamp}=    Get Time    epoch
     ${timestamp} =    Evaluate    int(${timestamp} * 1000)
-    ${body}    Create Dictionary    shipment_id=${shipment_id}    timestamp=${timestamp}    pickup_code_number="1"    
-    ${headers}    Create Dictionary    Content-Type=application/json    Authorization=${locker_token}    locker-id=${locker_id["${env}"]}    point-id=${point_id["${env}"]}    cookie=connect.sid=s%3AWOAKd-qpcmp6vgEQo6FmIg5AUpEChN9d.8VOl2rP7eV61zNGDDVd1VLSpAP66cTBCmVnt%2B%2FF7AAc
+    ${body}    Create Dictionary    
+    ...    shipment_id=${shipment_id}    
+    ...    timestamp=${timestamp}    
+    ...    pickup_code_number="1"    
+    ${headers}    Create Dictionary    
+    ...    Content-Type=application/json    
+    ...    Authorization=Bearer ${locker_token}    
+    ...    locker-id=${locker_id["${env}"]}    
+    ...    point-id=${point_id["${env}"]}    
+    ...    cookie=connect.sid=s%3AWOAKd-qpcmp6vgEQo6FmIg5AUpEChN9d.8VOl2rP7eV61zNGDDVd1VLSpAP66cTBCmVnt%2B%2FF7AAc
     ${response}    POST    ${locker_api["${env}"]}/sync-shipment-delivered    json=${body}    headers=${headers}
     Should Be Equal As Numbers    ${response.status_code}    200
     ${json_data}    Set Variable    ${response.json()}
