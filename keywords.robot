@@ -152,21 +152,18 @@ Create express shipment
     ...    sender_phone=+84335299002
 
     ${auth_token}    Get From Dictionary    ${express_authorization}    ${env}
+    ${url}    Get From Dictionary    ${express_create_shipment_api}    ${env}
+
     ${HEADERS}    Create Dictionary
     ...    Content-Type=application/json
     ...    Authorization=${auth_token}
+    
+    ${response}    POST    ${url}    json=${BODY}    headers=${HEADERS}
+    Log    Status Code: ${response.status_code}
+    Log    Response Content: ${response.content}
+    Should Be Equal As Numbers    ${response.status_code}    200
 
-    ${url}    Get From Dictionary    ${express_create_shipment_api}    ${env}
-    ${RESPONSE}    POST    ${url}    json=${BODY}    headers=${HEADERS}
-
-    Log    Status Code: ${RESPONSE.status_code}
-    Log    Response Content: ${RESPONSE.content}
-
-    Should Be Equal As Numbers    ${RESPONSE.status_code}    200
-
-    ${json_data}    Set Variable    ${RESPONSE.json()}
-    Log    Parsed JSON: ${json_data}
-
+    ${json_data}    Set Variable    ${response.json()}
     ${shipment_id}    Get From Dictionary    ${json_data}    shipment_id
     ${tracking_number}    Get From Dictionary    ${json_data}    tracking_number
 
@@ -188,13 +185,13 @@ Customer Confirm Deposit Express
     ${locker_id}    Get From Dictionary    ${locker_id}    ${env}
     ${point_to_id}  Get From Dictionary    ${point_to_id}    ${env}
     ${door_id}      Get From Dictionary    ${door_id}    ${env}
-    ${Authorization}    Get From Dictionary    ${get_token_locker_authen}    ${env}
+    ${auth_token}    Get From Dictionary    ${get_token_locker_authen}    ${env}
 
     ${headers}    Create Dictionary
     ...    Content-Type=application/json
     ...    locker_id=${locker_id}
     ...    point_to_id=${point_to_id}
-    ...    Authorization=${Authorization}
+    ...    Authorization=${auth_token}
     ${payload}    Create Dictionary
     ...    shipment_id=${shipment_id}
     ...    tracking_number=${tracking_number}
@@ -203,10 +200,8 @@ Customer Confirm Deposit Express
 
     #${deposit_url}    Get From Dictionary    ${express_deposit_shipment_api}    ${env}
     ${response}    POST    ${deposit_url}    json=${payload}    headers=${headers}
-
     Log    Status Code: ${response.status_code}
     Log    Response Content: ${response.content}
-
     Should Be Equal As Numbers    ${response.status_code}    200
 
     ${is_invalid}    Evaluate    "${shipment_id}" == "" or "${tracking_number}" == ""
