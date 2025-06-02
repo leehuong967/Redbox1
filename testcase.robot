@@ -11,6 +11,7 @@ Library           String
 *** Test Cases ***
 API Create shipment
     Create shipment    20251404_005    stage
+    Create shipment    dev
 
 API Get shipment details
     API details shipment    stage
@@ -368,6 +369,7 @@ Support tools > Link thirdparty shipments page
     Verify element exits    //button[contains(text(),'Submit')]
 
 Delivery Flow
+    [Tags]    API
     Create shipment    Auto_230425010    dev
     API Driver picks up shipment from business    dev
     API Confirm Deposit    dev
