@@ -31,7 +31,7 @@ ${door_issue}     menu-link-door-issue
 ${door_issue_search_box}    customSearch
 ${mawb_monitoring}    menu-link-mawb-monitoring
 ${link_thirdparty_shipments}    menu-link-link-thirdparty-shipments
-${dashboard}      xpath=//*[text()='Dashboard']
+${dashboard}      xpath=//*[text()='Overview']
 ${sale_kpis}      xpath=//*[text()='Sales KPIs']
 ${sale_kpis_new_account}    new-acount
 ${merchant_data}    xpath=//*[text()='Merchant data']
@@ -108,3 +108,8 @@ ${support_tools}    xpath=//*[text()='Support Tools']
 ${point_id}       5d2855e065889422de40f2fe
 ${locker_id}      65aa37553a403d2b4b366b47
 ${uuid}           866732032337033
+${locale}         en
+${DEFAULT_ORGANIZATION_ID}    5e782d3430892b2a423a0d4e
+${DEFAULT_DOOR_ID}    67e3e9152bfdfe8979a46964
+${DEFAULT_TIMESTAMP}    1747282560396
+${DEFAULT_FILE_NAME}    IMG_67403ca31406129208e1627d_20250515_041536.jpg
