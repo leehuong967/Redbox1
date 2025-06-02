@@ -75,7 +75,7 @@ Dashboard > Merchant Performance page
     Search and check page contains text    ${merchant_performance_search_box}    Ha Ha    PhanhBillOdoo
 
 Organizations > List page
-    [Tags]    Organizations 
+    [Tags]    Organizations
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
@@ -83,7 +83,7 @@ Organizations > List page
     Search and check page contains text    ${organizations_list_search_box}    wtfhihi    No data available in table
 
 Organizations > Merchant Notes page
-    [Tags]    Organizations 
+    [Tags]    Organizations
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
@@ -375,35 +375,55 @@ Delivery Flow
 
 Express Flow
     ${env}    Set Variable    dev
-
     #create shipment
     Create express shipment    ${env}
-
     #đọc file chứa shipment_id và tracking_number
     ${file_content}    Get File    ${shipment_id_file}
     ${lines}    Split To Lines    ${file_content}
-    #lấy shipment_id và tracking_number
-    ${shipment_id_line}       Set Variable    ${lines}[0]
-    ${tracking_number_line}   Set Variable    ${lines}[1]
-    
-    ${shipment_id}            Replace String    ${shipment_id_line}    shipment_id:    ${EMPTY}
-    ${shipment_id}            Strip String      ${shipment_id}
-
-    ${tracking_number}        Replace String    ${tracking_number_line}    tracking_number:    ${EMPTY}
-    ${tracking_number}        Strip String      ${tracking_number}
-
+    ${shipment_id_line}    Set Variable    ${lines}[0]
+    ${tracking_number_line}    Set Variable    ${lines}[1]
+    ${shipment_id}    Replace String    ${shipment_id_line}    shipment_id:    ${EMPTY}
+    ${shipment_id}    Strip String    ${shipment_id}
+    ${tracking_number}    Replace String    ${tracking_number_line}    tracking_number:    ${EMPTY}
+    ${tracking_number}    Strip String    ${tracking_number}
     Log    Shipment ID: ${shipment_id}
     Log    Tracking Number: ${tracking_number}
-
     #customer deposit
     Customer Confirm Deposit Express    ${shipment_id}    ${tracking_number}    ${env}
     #driver picks up shipment
-    ${driver_token}=    API get token driver    ${env}     Ha driver dev
+    ${driver_token}=    API get token driver    ${env}    Ha driver dev
     API Driver picks up Express shipments from Locker    ${env}    ${driver_token}
+    #Log-in shipments
+    Set Environment
+    Click Link    ${redbox_dashboard_href}
+    Sleep    5s
+    Access page    ${operations}    ${Logi-in shipment}
+    Input Text    ${enter tracking number}    ${tracking_number}
+    Log    Tracking Number: ${tracking_number}
+    Click Element    ${Scan button}
+    Wait Until Element Is Visible    ${in-transit label}
+    Click Element    ${submit button}
+    Wait Until Element Is Visible    ${Choose warehouse}    timeount=10s
+    Click Element    ${Choose warehouse}
+    Wait Until Element Is Visible    ${Choose warehouse}[2]
+    Click Element    ${Choose warehouse}[2]
+    Click Element    ${OK button}
+    #Scan Outbound
+    Set Environment
+    Click Link    ${redbox_dashboard_href}
+    Sleep    5s
+    Access page    ${operations}    ${Scan Outbound}
+    Wait Until Page Contains Element    ${Choose driver}
+    Click Element    ${Choose driver}[1]
+    Wait Until Element Is Visible    ${Choose driver}[3]    timeout=10s
+    Click Element ${Choose driver}[3]
+    Input Text    ${enter tracking number}    ${tracking_number}
+    Log    Nhập Tracking Number ${tracking_number}
+    Click Element    ${Scan button}
+    Wait Until Element Is Visible    ${in-transit label}
+    Click Element    ${submit button}
     #driver confirm deposit
     API Driver deposits Express shipments    ${env}    ${driver_token}
     #customer pickup
-    ${locker_token}=    API get token locker    ${env}     866732032337033
+    ${locker_token}=    API get token locker    ${env}    866732032337033
     API Customer pickup Express shipments from Locker    ${env}    ${locker_token}
-
-

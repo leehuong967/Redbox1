@@ -105,8 +105,16 @@ ${Packages_seach_box}    customSearchShipment
 ${operations_tab}    xpath=//*[text()='Operations']
 ${operations}     xpath=//*[text()='Operations']
 ${support_tools}    xpath=//*[text()='Support Tools']
-# ${point_id}       5d2855e065889422de40f2fe
-# ${locker_id}      65aa37553a403d2b4b366b47
-# ${door_id}    65aa377b3a403d2b4b366b62
+# ${point_id}
+# ${locker_id}
+# ${door_id}
 ${uuid}           866732032337033
 ${shipment_id_file}    shipment_data.txt
+${Logi-in shipment}    xpath=//*[text()='Log-in Shipments']
+${enter tracking number}    scan-input
+${Scan button}    scan
+${submit button}    submit-warehouse
+${Choose warehouse}    choose-warehouse-select
+${OK button}      //button[contains(text(),'Ok')]
+${Choose driver}    //span[contains(text(),'Choose driver')]
+${in-transit label}    //span[contains(text(),'In-Transit: 1')]
