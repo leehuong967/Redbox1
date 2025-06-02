@@ -10,7 +10,6 @@ Library           String
 
 *** Test Cases ***
 API Create shipment
-    Create shipment    20251404_005    stage
     Create shipment    dev
 
 API Get shipment details
