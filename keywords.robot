@@ -141,21 +141,9 @@ API Driver Pickup Return Shipment
     [Arguments]    ${tracking_number}    ${environment}
     ${tracking_numbers}    Create List    ${tracking_number}
     ${door_id_lists}    Create List    ${DEFAULT_DOOR_ID}
-    ${body}=    Create Dictionary
-    ...    tracking_numbers=${tracking_numbers}
-    ...    type=return
-    ...    timestamp=${DEFAULT_TIMESTAMP}
-    ...    file_name=${DEFAULT_FILE_NAME}
-    ...    organization_id=${DEFAULT_ORGANIZATION_ID}
-    ...    is_empty=${FALSE}
-    ...    door_id=${door_id_lists}
+    ${body}=    Create Dictionary    tracking_numbers=${tracking_numbers}    type=return    timestamp=${DEFAULT_TIMESTAMP}    file_name=${DEFAULT_FILE_NAME}    organization_id=${DEFAULT_ORGANIZATION_ID}    is_empty=${FALSE}    door_id=${door_id_lists}
     ${url}=    Set Variable    ${URL_shipper_open_multiple_door["${environment}"]}
-    ${headers}=    Create Dictionary
-    ...    Content-Type=application/json
-    ...    Authorization=${driver_token["${environment}"]}
-    ...    point-id=${point_id1["${environment}"]}
-    ...    locker-id=${locker_id1["${environment}"]}
-    ...    locale=${locale}
+    ${headers}=    Create Dictionary    Content-Type=application/json    Authorization=${driver_token["${environment}"]}    point-id=${point_id1["${environment}"]}    locker-id=${locker_id1["${environment}"]}    locale=${locale}
     ${response}=    POST    ${url}    json=${body}    headers=${headers}
     Log    Status code: ${response.status_code}
     ${response_body}=    Evaluate    $response.json()
@@ -164,8 +152,7 @@ API Driver Pickup Return Shipment
 
 API Get Locker Token By UUID
     [Arguments]    ${uuid}    ${environment}
-    ${headers}=    Create Dictionary
-    ...    Content-Type=application/json
+    ${headers}=    Create Dictionary    Content-Type=application/json
     ${response}=    GET    ${URL_get_locker_token["${environment}"]}    headers=${headers}
     Log    Status code: ${response.status_code}
     ${response_body}=    Evaluate    $response.json()
@@ -177,17 +164,8 @@ API Get Locker Token By UUID
 API Customer Deposit Return Shipment
     [Arguments]    ${shipment_id_from_response}    ${door_id}    ${environment}    ${uuid}
     ${token}=    Get Locker Token By UUID    ${uuid}    ${environment}
-    ${body}=    Create Dictionary
-    ...    shipment_id=${shipment_id_from_response}
-    ...    door_id=${door_id}
-    ${headers}=    Create Dictionary
-    ...    Content-Type=application/json
-    ...    Authorization=Bearer ${token}
-    ...    point_id=${point_id1["${environment}"]}
-    ...    locker_id=${locker_id1["${environment}"]}
-    ...    locale=${locale}
-    ...    timestamp=${DEFAULT_TIMESTAMP}
-    ...    accept=application/json
+    ${body}=    Create Dictionary    shipment_id=${shipment_id_from_response}    door_id=${door_id}
+    ${headers}=    Create Dictionary    Content-Type=application/json    Authorization=Bearer ${token}    point_id=${point_id1["${environment}"]}    locker_id=${locker_id1["${environment}"]}    locale=${locale}    timestamp=${DEFAULT_TIMESTAMP}    accept=application/json
     ${url}=    Set Variable    ${URL_customer_deposit_return["${environment}"]}
     ${response}=    POST    ${url}    json=${body}    headers=${headers}
     Log    Status code: ${response.status_code}
