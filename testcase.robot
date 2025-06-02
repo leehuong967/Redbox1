@@ -379,7 +379,7 @@ Express Flow
     Create express shipment    ${env}
     ${file_content}    Get File    ${shipment_id_file}
     ${lines}    Split To Lines    ${file_content}
-    ${shipment_id_line}       Set Variable    ${lines}[0]
+    ${shipment_id_line}    Set Variable    ${lines}[0]
     ${tracking_number_line}   Set Variable    ${lines}[1]   
     ${shipment_id}    Replace String    ${shipment_id_line}    shipment_id:    ${EMPTY}
     ${shipment_id}    Strip String    ${shipment_id}
