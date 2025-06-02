@@ -13,3 +13,9 @@ Resource          Config.robot
 &{customer_api}    dev=https://dev.redboxsa.com/v3/api/customer    stage=https://stage.redboxsa.com/v3/api/customer    prod=https://dev.redboxsa.com/v3/api/customer
 &{locker_api}     dev=https://dev.redboxsa.com/v3/api    stage=https://stage.redboxsa.com/v3/api
 &{door_id}        dev=65aa377b3a403d2b4b366b4c    stage=65aa377b3a403d2b4b366b4c
+&{URL_shipper_open_multiple_door}    dev=https://dev.redboxsa.com/v3/api/shipper/open-multiple-door    stage=https://stage.redboxsa.com/v3/api/shipper/open-multiple-door    prod=https://app.redboxsa.com/v3/api/shipper/open-multiple-door
+&{point_id1}      dev=6087d7cb25cf0a31292245f7    stage=5d2855e065889422de40f2fe
+&{locker_id1}     dev=67403ca31406129208e1627d    stage=65aa37553a403d2b4b366b47
+&{driver_token}    dev=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlODFhYTdmMWRiZGFjNmU4NjQ4YmY0NSIsImtleSI6IjIwMjUtMDUtMTVUMDE6Mjc6MDEuOTQzWiIsImlhdCI6MTc0NzI3MjQyMX0.7BVZFOZQrvOfh1r6yM65j3RX2Mc0o3AKPWzj9pLWEcY
+&{URL_get_locker_token}    dev=https://dev.redboxsa.com/v3/api/get-locker-token?uuid=866732032337033    stage=https://stage.redboxsa.com/v3/api/get-locker-token?uuid=866732032337033
+&{URL_customer_deposit_return}    dev=https://dev.redboxsa.com/v3/api/customer/close-door-return    stage=https://stage.redboxsa.com/v3/api/customer/close-door-return
