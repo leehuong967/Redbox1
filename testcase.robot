@@ -10,7 +10,7 @@ Library           String
 
 *** Test Cases ***
 API Create shipment
-    Create shipment    20251404_005    stage
+    Create shipment    20251404_00    stage
 
 API Get shipment details
     API details shipment    stage
@@ -368,7 +368,52 @@ Support tools > Link thirdparty shipments page
     Verify element exits    //button[contains(text(),'Submit')]
 
 Delivery Flow
-    Create shipment    Auto_230425010    dev
+    Create shipment    Auto_230425013    dev
     API Driver picks up shipment from business    dev
     API Confirm Deposit    dev
     API Customer pickup    dev
+
+Return Flow
+    Create shipment    Auto_230425039    dev
+    API Driver picks up shipment from business    dev
+    API Confirm Deposit    dev
+    API Customer pickup    dev
+    API Create Return shipments    dev
+    API Customer Deposit Return Shipment    dev
+
+API Driver pickup return shipment
+    ${tracking_number}    Set Variable    881489538171
+    ${environment}    Set Variable    dev
+    ${tracking_numbers}    Create List    ${tracking_number}
+    ${door_id_lists}    Create List    ${DEFAULT_DOOR_ID}
+    ${body}=    Create Dictionary    tracking_numbers=${tracking_numbers}    type=return    timestamp=${DEFAULT_TIMESTAMP}    file_name=${DEFAULT_FILE_NAME}    organization_id=${DEFAULT_ORGANIZATION_ID}    is_empty=${FALSE}    door_id=${door_id_lists}
+    ${url}=    Set Variable    ${URL_shipper_open_multiple_door["${environment}"]}
+    ${headers}=    Create Dictionary    Content-Type=application/json    Authorization=${driver_token["${environment}"]}    point-id=${point_id1["${environment}"]}    locker-id=${locker_id1["${environment}"]}    locale=${locale}
+    ${response}=    POST    ${url}    json=${body}    headers=${headers}
+    Log    Status code: ${response.status_code}
+    ${response_body}=    Evaluate    $response.json()
+    Log    Response Body: ${response_body}
+    Should Be Equal As Integers    ${response.status_code}    200
+
+API Get Locker Token By UUID
+    ${uuid}=    Set Variable    866732032337033
+    ${environment}=    Set Variable    dev
+    ${headers}=    Create Dictionary    Content-Type=application/json
+    ${response}=    GET    ${URL_get_locker_token["${environment}"]}    headers=${headers}
+    Log    Status code: ${response.status_code}
+    ${response_body}=    Evaluate    $response.json()
+    Log    Response Body: ${response_body}
+    Should Be Equal As Integers    ${response.status_code}    200
+
+API Customer deposit return shipment
+    ${environment}=    Set Variable    dev
+    ${uuid}=    Set Variable    86673203233703
+    ${token}=    Get Locker Token By UUID    ${uuid}    ${environment}
+    ${body}=    Create Dictionary    shipment_id=${shipment_id_from_response}    door_id=${door_id}
+    ${headers}=    Create Dictionary    Content-Type=application/json    Authorization=Bearer ${token}    point_id=${point_id1["${environment}"]}    locker_id=${locker_id1["${environment}"]}    locale=${locale}    timestamp=${DEFAULT_TIMESTAMP}    accept=application/json
+    ${url}=    Set Variable    ${URL_customer_deposit_return["${environment}"]}
+    ${response}=    POST    ${url}    json=${body}    headers=${headers}
+    Log    Status code: ${response.status_code}
+    ${response_body}=    Evaluate    $response.json()
+    Log    Response body: ${response_body}
+    Should Be Equal As Integers    ${response.status_code}    200
