@@ -4,7 +4,11 @@ Resource          Environment.robot
 Resource          vaiables.robot
 
 *** Variables ***
+<<<<<<< Updated upstream
 ${ENV}            prod    # Môi trường mặc định
+=======
+${ENV}            stage    # Môi trường mặc định
+>>>>>>> Stashed changes
 ${BASE_URL1}      \
 
 *** Keywords ***

@@ -7,6 +7,7 @@ Library           String
 Resource          vaiables.robot
 Resource          Config.robot
 Resource          Environment.robot
+Library           String
 
 *** Keywords ***
 Login
@@ -50,8 +51,10 @@ Verify element exits
     Element Should Be Visible    ${element_locator}
 
 Create shipment
-    [Arguments]    ${reference_id}    ${enviroment}
-    ${BODY}    Create Dictionary    reference=${reference_id}    customer_name=Lee    customer_phone=+84335299001    customer_address=King Saud University King Saud University, 2813 - King Saud University, Riyadh 12372 - 7463, Saudi Arabia    cod_currency=SAR    cod_amount=0    point_id=${point_id}
+    [Arguments]    ${enviroment}
+    #${stt}=    Set Variable    5
+    ${reference}=    Generate Auto Reference With STT
+    ${BODY}    Create Dictionary    reference=${reference}    customer_name=Lee    customer_phone=+84335299001    customer_address=King Saud University King Saud University, 2813 - King Saud University, Riyadh 12372 - 7463, Saudi Arabia    cod_currency=SAR    cod_amount=0    point_id=${point_id}
     ${HEADERS}    Create Dictionary    Content-Type=application/json    Authorization=${business_authorization["${enviroment}"]}    cookie=connect.sid=s%3AWOAKd-qpcmp6vgEQo6FmIg5AUpEChN9d.8VOl2rP7eV61zNGDDVd1VLSpAP66cTBCmVnt%2B%2FF7AAc
     ${RESPONSE}    POST    ${shipments_api["${enviroment}"]}    json=${BODY}    headers=${HEADERS}
     ${json_data}    Set variable    ${RESPONSE.json()}
@@ -135,10 +138,8 @@ API Confirm Deposit
 
 Create express shipment
     [Arguments]    ${env}
-
     ${point_from_id}    Get From Dictionary    ${point_id}    ${env}
-    ${point_to_id}      Get From Dictionary    ${point_to_id}    ${env}
-
+    ${point_to_id}    Get From Dictionary    ${point_to_id}    ${env}
     ${BODY}    Create Dictionary
     ...    service_type=LockerToLocker
     ...    point_from_id=${point_from_id}
@@ -150,43 +151,33 @@ Create express shipment
     ...    declared_value=12
     ...    sender_name=LAnk
     ...    sender_phone=+84335299002
-
     ${auth_token}    Get From Dictionary    ${express_authorization}    ${env}
     ${url}    Get From Dictionary    ${express_create_shipment_api}    ${env}
-
     ${HEADERS}    Create Dictionary
     ...    Content-Type=application/json
     ...    Authorization=${auth_token}
-    
     ${response}    POST    ${url}    json=${BODY}    headers=${HEADERS}
     Log    Status Code: ${response.status_code}
     Log    Response Content: ${response.content}
     Should Be Equal As Numbers    ${response.status_code}    200
-
     ${json_data}    Set Variable    ${response.json()}
     ${shipment_id}    Get From Dictionary    ${json_data}    shipment_id
     ${tracking_number}    Get From Dictionary    ${json_data}    tracking_number
-
     Log    Shipment ID (raw): ${shipment_id}
     Log    Tracking Number (raw): ${tracking_number}
-
     # Kiểm tra dữ liệu không được rỗng
     Run Keyword If    '${shipment_id}' == '' or '${tracking_number}' == ''    Fail    Invalid response: Shipment ID or Tracking Number is missing
-
     Create File    ${shipment_id_file}    shipment_id: ${shipment_id}\ntracking_number: ${tracking_number}
 
 Customer Confirm Deposit Express
     [Arguments]    ${shipment_id}    ${tracking_number}    ${env}
-
     Log    Confirming deposit with Shipment ID: ${shipment_id}, Tracking Number: ${tracking_number}
-
     #${deposit_url}    Set Variable    https://dev.redboxsa.com/v3/api/customer/confirm-deposit-express
     ${deposit_url}    Get From Dictionary    ${express_deposit_shipment_api}    ${env}
     ${locker_id}    Get From Dictionary    ${locker_id}    ${env}
-    ${point_to_id}  Get From Dictionary    ${point_to_id}    ${env}
-    ${door_id}      Get From Dictionary    ${door_id}    ${env}
+    ${point_to_id} Get From Dictionary    ${point_to_id}    ${env}
+    ${door_id}    Get From Dictionary    ${door_id}    ${env}
     ${auth_token}    Get From Dictionary    ${get_token_locker_authen}    ${env}
-
     ${headers}    Create Dictionary
     ...    Content-Type=application/json
     ...    locker_id=${locker_id}
@@ -197,19 +188,17 @@ Customer Confirm Deposit Express
     ...    tracking_number=${tracking_number}
     ...    door_id=${door_id}
     ...    is_empty=False
-
     #${deposit_url}    Get From Dictionary    ${express_deposit_shipment_api}    ${env}
     ${response}    POST    ${deposit_url}    json=${payload}    headers=${headers}
     Log    Status Code: ${response.status_code}
     Log    Response Content: ${response.content}
     Should Be Equal As Numbers    ${response.status_code}    200
-
     ${is_invalid}    Evaluate    "${shipment_id}" == "" or "${tracking_number}" == ""
     Run Keyword If    ${is_invalid}    Fail    Invalid response: Shipment ID or Tracking Number is missing
 
 API get token driver
-    [Documentation]    Call API to get driver list, find driver by name, and write token to driver_token.txt
     [Arguments]    ${env}    ${driver_name}
+    [Documentation]    Call API to get driver list, find driver by name, and write token to driver_token.txt
     ${headers}=    Create Dictionary    Cookie=connect.sid=s%3Ac-C8Ua7JWn_dy3gvH5PC8rUIzj6DPUIz.CtE1ied8oMyXJFLbnHY6zTUAx5ueftByHLPjL8tJMH4
     ${response}    GET    ${shipper_api["${env}"]}/get-list-driver    headers=${headers}
     ${json}=    To Json    ${response.content}
@@ -225,13 +214,12 @@ API get token driver
         Run Keyword If    "${name}" == "${driver_name}"    Set Suite Variable    ${driver_token}    ${driver['token']}
         Run Keyword If    "${name}" == "${driver_name}"    Append To File    driver_token.txt    ${driver['token']}\n
     END
-    
     Should Be True    ${found}    Driver with name "${driver_name}" not found in response
     [Return]    ${driver_token}
-    
+
 API get token locker
-    [Documentation]    Call API to get token of locker
     [Arguments]    ${env}    ${locker_uuid}
+    [Documentation]    Call API to get token of locker
     ${headers}=    Create Dictionary    Cookie=connect.sid=s%3Ac-C8Ua7JWn_dy3gvH5PC8rUIzj6DPUIz.CtE1ied8oMyXJFLbnHY6zTUAx5ueftByHLPjL8tJMH4
     ${params}=    Create Dictionary    uuid=${locker_uuid}
     ${response}    GET    ${locker_api["${env}"]}/get-locker-token?uuid=${locker_id}    headers=${headers}
@@ -242,21 +230,21 @@ API get token locker
     [Return]    ${locker_token}
 
 API Driver picks up Express shipments from Locker
+    [Arguments]    ${env}    ${driver_token}
     [Documentation]    Authorization token of driver, locker id, point id, organization id of Redbox are required in Headers
-    [Arguments]    ${env}    ${driver_token}   
     ${timestamp}=    Get Time    epoch
     ${timestamp}=    Evaluate    int(${timestamp} * 1000)
-    ${BODY}    Create Dictionary    
-    ...    door_id=${door_id["${env}"]}    
-    ...    organization_id=${organization_redbox_id["${env}"]}    
-    ...    locker_id=${locker_id["${env}"]}    
+    ${BODY}    Create Dictionary
+    ...    door_id=${door_id["${env}"]}
+    ...    organization_id=${organization_redbox_id["${env}"]}
+    ...    locker_id=${locker_id["${env}"]}
     ...    timestamp=${timestamp}
-    ${HEADERS}    Create Dictionary    
-    ...    Content-Type=application/json    
-    ...    Authorization=Bearer ${driver_token}    
-    ...    organization-id=${organization_redbox_id["${env}"]}    
-    ...    locker-id=${locker_id["${env}"]}    
-    ...    point-id=${point_id["${env}"]}    
+    ${HEADERS}    Create Dictionary
+    ...    Content-Type=application/json
+    ...    Authorization=Bearer ${driver_token}
+    ...    organization-id=${organization_redbox_id["${env}"]}
+    ...    locker-id=${locker_id["${env}"]}
+    ...    point-id=${point_id["${env}"]}
     ...    cookie=connect.sid=s%3AWOAKd-qpcmp6vgEQo6FmIg5AUpEChN9d.8VOl2rP7eV61zNGDDVd1VLSpAP66cTBCmVnt%2B%2FF7AAc
     ${RESPONSE}    POST    ${shipper_api["${env}"]}/open-multiple-door-express    json=${BODY}    headers=${HEADERS}
     ${json_data}    Set variable    ${RESPONSE.json()}
@@ -265,8 +253,8 @@ API Driver picks up Express shipments from Locker
     Should Be Equal As Strings    ${door_id["${env}"]}    ${doors}
 
 API Driver deposits Express shipments
-    [Documentation]    Authorization token of driver, locker id, point id, organization id of Redbox are required in Headers
     [Arguments]    ${env}    ${driver_token}
+    [Documentation]    Authorization token of driver, locker id, point id, organization id of Redbox are required in Headers
     ${file_content}    Get File    ${shipment_id_file}
     ${lines}    Split String    ${file_content}
     ${shipment_id_line}    Set Variable    ${lines}[0]
@@ -275,25 +263,25 @@ API Driver deposits Express shipments
     ${shipment_id}    Set Variable    ${shipment_id}[1]
     ${tracking_number}    Split String    ${tracking_number_line}    :    strip=True
     ${tracking_number}    Set Variable    ${tracking_number}[1]
-    ${body}    Create Dictionary    
-    ...    shipment_id=${shipment_id}    
-    ...    tracking_number=${tracking_number}    
-    ...    door_id=${door_id["${env}"]}    
+    ${body}    Create Dictionary
+    ...    shipment_id=${shipment_id}
+    ...    tracking_number=${tracking_number}
+    ...    door_id=${door_id["${env}"]}
     ...    is_empty=false
-    ${headers}    Create Dictionary    
-    ...    Content-Type=application/json    
-    ...    organization-id=${organization_redbox_id["${env}"]}    
-    ...    locker-id=${locker_id["${env}"]}    
-    ...    point-id=${point_id["${env}"]}    
-    ...    Authorization=Bearer ${driver_token}    
+    ${headers}    Create Dictionary
+    ...    Content-Type=application/json
+    ...    organization-id=${organization_redbox_id["${env}"]}
+    ...    locker-id=${locker_id["${env}"]}
+    ...    point-id=${point_id["${env}"]}
+    ...    Authorization=Bearer ${driver_token}
     ...    cookie=connect.sid=s%3AWOAKd-qpcmp6vgEQo6FmIg5AUpEChN9d.8VOl2rP7eV61zNGDDVd1VLSpAP66cTBCmVnt%2B%2FF7AAc
     ${response}    POST    ${shipper_api["${env}"]}/confirm-finish-drop-off    json=${body}    headers=${headers}
     ${state}    Get From Dictionary    ${response.json()}    state
     Should Be True    ${state}    Message=Deposit shipment failed!
 
 API Customer pickup Express shipments from Locker
-    [Documentation]    Authorization token of locker, locker id, point id are required in Headers
     [Arguments]    ${env}    ${locker_token}
+    [Documentation]    Authorization token of locker, locker id, point id are required in Headers
     ${file_content}    Get File    ${shipment_id_file}
     ${lines}    Split String    ${file_content}
     ${shipment_id_line}    Set Variable    ${lines}[0]
@@ -301,18 +289,38 @@ API Customer pickup Express shipments from Locker
     ${shipment_id}    Set Variable    ${shipment_id}[1]
     ${timestamp}=    Get Time    epoch
     ${timestamp} =    Evaluate    int(${timestamp} * 1000)
-    ${body}    Create Dictionary    
-    ...    shipment_id=${shipment_id}    
-    ...    timestamp=${timestamp}    
-    ...    pickup_code_number="1"    
-    ${headers}    Create Dictionary    
-    ...    Content-Type=application/json    
-    ...    Authorization=Bearer ${locker_token}    
-    ...    locker-id=${locker_id["${env}"]}    
-    ...    point-id=${point_id["${env}"]}    
+    ${body}    Create Dictionary
+    ...    shipment_id=${shipment_id}
+    ...    timestamp=${timestamp}
+    ...    pickup_code_number="1"
+    ${headers}    Create Dictionary
+    ...    Content-Type=application/json
+    ...    Authorization=Bearer ${locker_token}
+    ...    locker-id=${locker_id["${env}"]}
+    ...    point-id=${point_id["${env}"]}
     ...    cookie=connect.sid=s%3AWOAKd-qpcmp6vgEQo6FmIg5AUpEChN9d.8VOl2rP7eV61zNGDDVd1VLSpAP66cTBCmVnt%2B%2FF7AAc
     ${response}    POST    ${locker_api["${env}"]}/sync-shipment-delivered    json=${body}    headers=${headers}
     Should Be Equal As Numbers    ${response.status_code}    200
     ${json_data}    Set Variable    ${response.json()}
     ${state}    Get From Dictionary    ${response.json()}    state
     Should Be True    ${state}    Message=Call API failed!
+
+Generate Auto Reference With STT
+    [Arguments]    ${file_path}=stt.txt
+    # Kiểm tra xem file có tồn tại không và đọc nội dung
+    ${exists}=    Run Keyword And Return Status    File Should Exist    ${file_path}
+    Run Keyword Unless    ${exists}    Create File    ${file_path}    1
+    ${stt_text}=    Get File    ${file_path}
+    # Nếu file rỗng hoặc không phải số hợp lệ, gán STT = 1
+    Run Keyword If    '${stt_text}' == ''    Set Variable    ${stt_text}    1
+    Run Keyword If    '${stt_text}' == ' '    Set Variable    ${stt_text}    1
+    Run Keyword If    '${stt_text}' == '0'    Set Variable    ${stt_text}    1
+    Run Keyword If    '${stt_text}' != '1'    Set Variable    ${stt_text}}    ${stt_text}
+    # Tạo Reference theo định dạng: Auto_ddmmyySTT
+    ${reference}=    Evaluate    '"Auto_" + __import__("datetime").datetime.now().strftime("%d%m%y") + "{:03d}".format(${stt_text})'
+    Log To Console    ✅ Reference: ${reference}
+    # Tăng STT và ghi lại vào file
+    ${next_stt}=    Evaluate    ${stt_text} + 1
+    ${next_stt_str}=    Convert To String    ${next_stt}
+    Create File    ${file_path}    ${next_stt}
+    [Return]    ${reference}
