@@ -25,5 +25,5 @@ Resource          Config.robot
 &{express_authorization}
 ...    dev=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25faWQiOiI2NDA4NmQ0NzYwOTMyMzc1OTY3NjEyMDIiLCJrZXkiOiIyMDIzLTAzLTA4VDExOjE0OjEwLjE3OVoiLCJpYXQiOjE2NzgyNzQwNTB9.e4HrRLDPjdWZo6DCmKM9RMWHS2DtIryeGN1Y15j_DLA
 ...    stage=[]
-&{get_token_locker_authen}    dev=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiODY2NzMyMDMyMzM3MDMzIiwidG9rZW5JZCI6ImQzNTFlMTRmLWI3NDUtNDM0OC04NTVhLWEyYWM2YzhlNDdjOCIsImlhdCI6MTc0ODg1MzM1N30.aGQ72xq3hOnOg9KqSgLCjJfPbS0pTrfj_vVpGqo3opk
+&{get_token_locker_authen}    dev=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiODY2NzMyMDMyMzM3MDMzIiwidG9rZW5JZCI6ImVjYmQ5YzFhLTY3Y2UtNDQ5Ni04YjA5LWI1YmMxNzM1ZDRjNCIsImlhdCI6MTc0ODg1NDUwNH0.MWHGzGOMNbQqnSrwtPdcUx2LeIhTmcxfvh-c8V7J_ko
 &{express_deposit_shipment_api}    dev=https://dev.redboxsa.com/v3/api/customer/confirm-deposit-express
