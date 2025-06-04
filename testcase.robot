@@ -369,14 +369,15 @@ Support tools > Link thirdparty shipments page
 
 Delivery Flow
     [Tags]    API
-    Create shipment    Auto_230425010    dev
+    Create shipment    dev    LEE_25060402
+    Sleep    5s
     API Driver picks up shipment from business    dev
+    Sleep    5s
     API Confirm Deposit    dev
     API Customer pickup    dev
 
 Express Flow
     ${env}    Set Variable    dev
-<<<<<<< HEAD
     #create shipment
     Create express shipment    ${env}
     #đọc file chứa shipment_id và tracking_number
@@ -384,25 +385,18 @@ Express Flow
     ${lines}    Split To Lines    ${file_content}
     ${shipment_id_line}    Set Variable    ${lines}[0]
     ${tracking_number_line}    Set Variable    ${lines}[1]
-=======
-
     Create express shipment    ${env}
     ${file_content}    Get File    ${shipment_id_file}
     ${lines}    Split To Lines    ${file_content}
     ${shipment_id_line}    Set Variable    ${lines}[0]
-    ${tracking_number_line}   Set Variable    ${lines}[1]   
->>>>>>> 414ac410c56df9f2d781b4e8b520783bc301455b
+    ${tracking_number_line} Set Variable    ${lines}[1]
     ${shipment_id}    Replace String    ${shipment_id_line}    shipment_id:    ${EMPTY}
     ${shipment_id}    Strip String    ${shipment_id}
     ${tracking_number}    Replace String    ${tracking_number_line}    tracking_number:    ${EMPTY}
     ${tracking_number}    Strip String    ${tracking_number}
     Log    Shipment ID: ${shipment_id}
     Log    Tracking Number: ${tracking_number}
-<<<<<<< HEAD
     #customer deposit
-=======
-
->>>>>>> 414ac410c56df9f2d781b4e8b520783bc301455b
     Customer Confirm Deposit Express    ${shipment_id}    ${tracking_number}    ${env}
     #driver picks up shipment
     ${driver_token}=    API get token driver    ${env}    Ha driver dev

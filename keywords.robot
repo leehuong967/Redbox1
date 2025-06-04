@@ -51,10 +51,10 @@ Verify element exits
     Element Should Be Visible    ${element_locator}
 
 Create shipment
-    [Arguments]    ${enviroment}
+    [Arguments]    ${enviroment}    ${reference}
     #${stt}=    Set Variable    5
-    ${reference}=    Generate Auto Reference With STT
-    ${BODY}    Create Dictionary    reference=${reference}    customer_name=Lee    customer_phone=+84335299001    customer_address=King Saud University King Saud University, 2813 - King Saud University, Riyadh 12372 - 7463, Saudi Arabia    cod_currency=SAR    cod_amount=0    point_id=${point_id}
+    #${reference}=    Generate Auto Reference With STT
+    ${BODY}    Create Dictionary    reference=${reference}    customer_name=Lee    customer_phone=+84335299001    customer_address=King Saud University King Saud University, 2813 - King Saud University, Riyadh 12372 - 7463, Saudi Arabia    cod_currency=SAR    cod_amount=0    point_id=${point_id["${enviroment}"]}
     ${HEADERS}    Create Dictionary    Content-Type=application/json    Authorization=${business_authorization["${enviroment}"]}    cookie=connect.sid=s%3AWOAKd-qpcmp6vgEQo6FmIg5AUpEChN9d.8VOl2rP7eV61zNGDDVd1VLSpAP66cTBCmVnt%2B%2FF7AAc
     ${RESPONSE}    POST    ${shipments_api["${enviroment}"]}    json=${BODY}    headers=${HEADERS}
     ${json_data}    Set variable    ${RESPONSE.json()}
@@ -70,7 +70,10 @@ API Driver picks up shipment from business
     ${file_content}    Get File    ${shipment_id_file}
     ${lines}    Split String    ${file_content}
     ${tracking_number} =    Set Variable    ${lines}[3]
-    ${BODY}    Create Dictionary    tracking_number=["${tracking_number}"]    warehouse_id=["${warehouse_id}"]
+    ${timestamp}    Get Time    epoch
+    Log    ${timestamp}
+    ${BODY}    Create Dictionary    tracking_number=["${tracking_number}"]    warehouse_id=["${warehouse_id}"]    timestamp=${timestamp}
+    Log    ${BODY}}
     ${driver_authorization_base}    Set Variable    ${driver_authorization["${enviroment}"]}
     ${HEADERS}    Create Dictionary    Content-Type=application/json    Authorization=${driver_authorization_base}    cookie=connect.sid=s%3AWOAKd-qpcmp6vgEQo6FmIg5AUpEChN9d.8VOl2rP7eV61zNGDDVd1VLSpAP66cTBCmVnt%2B%2FF7AAc
     ${RESPONSE}    POST    ${driver_api["${enviroment}"]}/assign-shipment    json=${BODY}    headers=${HEADERS}
@@ -113,8 +116,8 @@ API Customer pickup
     ${shipment_id} =    Set Variable    ${lines}[1]
     ${timestamp}=    Get Time    epoch
     ${timestamp}    Convert To Integer    ${timestamp}
-    ${body}    Create Dictionary    shipment_id=${shipment_id}    timestamp=${timestamp}    pickup_code_number="1"
-    ${headers}    Create Dictionary    Content-Type=application/json    Authorization=Bearer ${token}    locker-id=${locker_id}    point-id=${point_id}
+    ${body}    Create Dictionary    shipment_id=${shipment_id}    timestamp=${timestamp}
+    ${headers}    Create Dictionary    Content-Type=application/json    Authorization=Bearer ${token}    locker-id=${locker_id["${env}"]}    point-id=${point_id["${env}"]}
     ${response}    POST    ${customer_api["${env}"]}/sync-shipment-delivered    json=${body}    headers=${headers}
     Should Be Equal As Numbers    ${response.status_code}    200
     ${json_data}    Set Variable    ${response.json()}
@@ -128,7 +131,7 @@ API Confirm Deposit
     ${shipment_id}=    Set Variable    ${lines}[1]
     ${tracking_number} =    Set Variable    ${lines}[3]
     ${body}    Create Dictionary    shipment_id=${shipment_id}    is_empty=false    tracking_number=${tracking_number}    door_id=${door_id["${env}"]}
-    ${headers}    Create Dictionary    Content-Type=application/json    organization-id=5e782d3430892b2a423a0d4e    locker-id=${locker_id}    point-id=${point_id}}    Authorization=${driver_authorization["${env}"]}
+    ${headers}    Create Dictionary    Content-Type=application/json    organization-id=5e782d3430892b2a423a0d4e    locker-id=${locker_id["${env}"]}    point-id=${point_id["${env}"]}}    Authorization=${driver_authorization["${env}"]}
     ${response}    POST    ${shipper_api["${env}"]}/confirm-finish-drop-off    json=${body}    headers=${headers}
     Should Be Equal As Numbers    ${response.status_code}    200
     ${json_data}    Set Variable    ${response.json()}

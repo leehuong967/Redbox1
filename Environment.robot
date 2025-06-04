@@ -22,13 +22,8 @@ Resource          Config.robot
 &{point_from_id}    dev=6087d7cb25cf0a31292245f7
 &{point_to_id}    dev=5d2855e065889422de40f2fe
 &{express_create_shipment_api}    dev=https://dev.redboxsa.com/api/business/v1/shipments/express
-<<<<<<< HEAD
 &{express_authorization}    dev=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25faWQiOiI2NDA4NmQ0NzYwOTMyMzc1OTY3NjEyMDIiLCJrZXkiOiIyMDIzLTAzLTA4VDExOjE0OjEwLjE3OVoiLCJpYXQiOjE2NzgyNzQwNTB9.e4HrRLDPjdWZo6DCmKM9RMWHS2DtIryeGN1Y15j_DLA    stage=[]
 &{get_token_locker_authen}    dev=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiODY2NzMyMDMyMzM3MDMzIiwidG9rZW5JZCI6Ijg5Yjg5MThjLTI0MjctNDRkMS1iZjRhLTk5ZjVmYTU0Yzc5YiIsImlhdCI6MTc0ODg2Mzk1Nn0.J1ENmMDx_xaRuKwJLfjwjXdPnqmVmRlnHiZCWI5CZRs
-=======
-&{express_authorization}
-...    dev=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25faWQiOiI2NDA4NmQ0NzYwOTMyMzc1OTY3NjEyMDIiLCJrZXkiOiIyMDIzLTAzLTA4VDExOjE0OjEwLjE3OVoiLCJpYXQiOjE2NzgyNzQwNTB9.e4HrRLDPjdWZo6DCmKM9RMWHS2DtIryeGN1Y15j_DLA
-...    stage=[]
+&{express_authorization}    dev=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25faWQiOiI2NDA4NmQ0NzYwOTMyMzc1OTY3NjEyMDIiLCJrZXkiOiIyMDIzLTAzLTA4VDExOjE0OjEwLjE3OVoiLCJpYXQiOjE2NzgyNzQwNTB9.e4HrRLDPjdWZo6DCmKM9RMWHS2DtIryeGN1Y15j_DLA    stage=[]
 &{get_token_locker_authen}    dev=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiODY2NzMyMDMyMzM3MDMzIiwidG9rZW5JZCI6ImQzNTFlMTRmLWI3NDUtNDM0OC04NTVhLWEyYWM2YzhlNDdjOCIsImlhdCI6MTc0ODg1MzM1N30.aGQ72xq3hOnOg9KqSgLCjJfPbS0pTrfj_vVpGqo3opk
->>>>>>> 414ac410c56df9f2d781b4e8b520783bc301455b
 &{express_deposit_shipment_api}    dev=https://dev.redboxsa.com/v3/api/customer/confirm-deposit-express
