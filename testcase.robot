@@ -7,6 +7,7 @@ Library           Collections
 Library           RequestsLibrary
 Library           OperatingSystem
 Library           String
+Library           DateTime
 
 *** Test Cases ***
 API Create shipment
@@ -375,6 +376,16 @@ Delivery Flow
     Sleep    5s
     API Confirm Deposit    dev
     API Customer pickup    dev
+
+Return Flow > dropoff at merchant
+    Create shipment    Auto_2304293    dev
+    API Driver picks up shipment from business    dev
+    API Confirm Deposit    dev
+    API Customer pickup    dev
+    ${shipment_id_from_response}    ${tracking_number}=    API Create Return shipments    dev
+    API Customer Deposit Return Shipment    ${shipment_id_from_response}    ${door_id}    dev    ${uuid}
+    API Driver Pickup Return Shipment    ${tracking_number}    dev
+    API Driver Scan Dropoff at Merchant    ${tracking_number}    dev
 
 Express Flow
     ${env}    Set Variable    dev

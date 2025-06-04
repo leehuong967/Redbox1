@@ -31,7 +31,7 @@ ${door_issue}     menu-link-door-issue
 ${door_issue_search_box}    customSearch
 ${mawb_monitoring}    menu-link-mawb-monitoring
 ${link_thirdparty_shipments}    menu-link-link-thirdparty-shipments
-${dashboard}      xpath=//*[text()='Dashboard']
+${dashboard}      xpath=//*[text()='Overview']
 ${sale_kpis}      xpath=//*[text()='Sales KPIs']
 ${sale_kpis_new_account}    new-acount
 ${merchant_data}    xpath=//*[text()='Merchant data']
@@ -61,7 +61,7 @@ ${operations_shipment_scan_tracking_search_box}    customSearch
 ${operations_returning_shipment}    /redbox/warehouse-management/returning-shipment
 ${operations_returning_shipment_seach_box}    customSearch
 ${warehouse_id}    67162398f4064122f9697b1e
-${express_tab}    menu-express
+${express_tab}    xpath=//*[text()='Express']
 ${express_shipments_list}    menu-link-express-shipments
 ${express_shipmentList_searchBox}    customSearchShipment
 ${express_shipmentList_dropdown_moreFilter}    //*[text()='More filter']
@@ -109,6 +109,10 @@ ${support_tools}    xpath=//*[text()='Support Tools']
 # ${locker_id}
 # ${door_id}
 ${uuid}           866732032337033
+${locale}         en
+${DEFAULT_ORGANIZATION_ID}    5e782d3430892b2a423a0d4e
+${DEFAULT_FILE_NAME}    IMG_67403ca31406129208e1627d_20250515_041536.jpg
+${operations_tab}    xpath=//*[text()='Operations']
 ${shipment_id_file}    shipment_data.txt
 ${Logi-in shipment}    xpath=//*[text()='Log-in Shipments']
 ${enter tracking number}    scan-input

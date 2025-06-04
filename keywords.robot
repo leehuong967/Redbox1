@@ -3,6 +3,7 @@ Library           Selenium2Library
 Library           RequestsLibrary
 Library           Collections
 Library           OperatingSystem
+Library           DateTime
 Library           String
 Resource          vaiables.robot
 Resource          Config.robot
@@ -104,6 +105,13 @@ API Create Return shipments
     ${response_body}=    Evaluate    $response.json()
     Log    Response Body (JSON): ${response_body}
     Should Be Equal As Integers    ${response.status_code}    200
+    Dictionary Should Contain Key    ${response_body}    tracking_number
+    Dictionary Should Contain Key    ${response_body}    shipment_id
+    ${tracking_number}=    Get From Dictionary    ${response_body}    tracking_number
+    ${shipment_id_from_response}=    Get From Dictionary    ${response_body}    shipment_id
+    Log    Tracking Number: ${tracking_number}
+    Log    Shipment ID: ${shipment_id_from_response}
+    [Return]    ${shipment_id_from_response}    ${tracking_number}
 
 API Customer pickup
     [Arguments]    ${env}
@@ -138,6 +146,58 @@ API Confirm Deposit
     ${return_shipmentId}    Get From Dictionary    ${json_data['data']}    shipmentId
     Log    ${return_shipmentId}
     Should Be Equal As Strings    ${shipment_id}    ${return_shipmentId}
+
+API Driver Pickup Return Shipment
+    [Arguments]    ${tracking_number}    ${environment}
+    ${tracking_numbers}    Create List    ${tracking_number}
+    ${door_id_lists}    Create List    ${door_id["${environment}"]}
+    ${timestamp}=    Get Time    epoch
+    ${body}=    Create Dictionary    tracking_numbers=${tracking_numbers}    type=return    timestamp=${timestamp}    file_name=${DEFAULT_FILE_NAME}    organization_id=${DEFAULT_ORGANIZATION_ID}    is_empty=${FALSE}    door_id=${door_id_lists}
+    ${url}=    Set Variable    ${URL_shipper_open_multiple_door["${environment}"]}
+    ${headers}=    Create Dictionary    Content-Type=application/json    Authorization=${driver_token["${environment}"]}    point-id=${point_id1["${environment}"]}    locker-id=${locker_id1["${environment}"]}    locale=${locale}
+    ${response}=    POST    ${url}    json=${body}    headers=${headers}
+    Log    Status code: ${response.status_code}
+    ${response_body}=    Evaluate    $response.json()
+    Log    Response Body: ${response_body}
+    Should Be Equal As Integers    ${response.status_code}    200
+
+API Get Locker Token By UUID
+    [Arguments]    ${uuid}    ${environment}
+    ${headers}=    Create Dictionary    Content-Type=application/json
+    Log    Environment in Get Locker Token By UUID: ${environment}
+    ${response}=    GET    ${URL_get_locker_token}[${environment}]    headers=${headers}
+    Log    Status code: ${response.status_code}
+    ${response_body}=    Evaluate    $response.json()
+    Log    Response Body: ${response_body}
+    Should Be Equal As Integers    ${response.status_code}    200
+    ${token}=    Set Variable    ${response_body["token"]}
+    [Return]    ${token}
+
+API Customer Deposit Return Shipment
+    [Arguments]    ${shipment_id_from_response}    ${door_id}    ${environment}    ${uuid}
+    ${token}=    API Get Locker Token By UUID    ${uuid}    ${environment}
+    ${timestamp}=    Get Time    epoch
+    ${timestamp}=    Convert To String    ${timestamp}
+    ${body}=    Create Dictionary    shipment_id=${shipment_id_from_response}    door_id=${door_id["${environment}"]}
+    ${headers}=    Create Dictionary    Content-Type=application/json    Authorization=Bearer ${token}    point_id=${point_id1["${environment}"]}    locker_id=${locker_id1["${environment}"]}    locale=${locale}    timestamp=${timestamp}    accept=application/json
+    ${url}=    Set Variable    ${URL_customer_deposit_return}[${environment}]
+    ${response}=    POST    ${url}    json=${body}    headers=${headers}
+    Log    Status code: ${response.status_code}
+    ${response_body}=    Evaluate    $response.json()
+    Log    Response body: ${response_body}
+    Should Be Equal As Integers    ${response.status_code}    200
+    [Return]    ${response_body}
+
+API Driver Scan Dropoff at Merchant
+    [Arguments]    ${tracking_number}    ${environment}
+    ${headers}=    Create Dictionary    Authorization=${driver_token["${environment}"]}    Content-Type=application/json
+    ${tracking_list}=    Create List    ${tracking_number}
+    ${payload}=    Create Dictionary    tracking_number=${tracking_list}
+    Create Session    return_to_merchant    ${URL_driver_scan_dropoff_at_merchant["${environment}"]}    headers=${headers}
+    ${response}=    Post Request    return_to_merchant    ${URL_driver_scan_dropoff_at_merchant["${environment}"]}    json=${payload}
+    Log    Status code: ${response.status_code}
+    Log    Response body: ${response.content}
+    Should Be Equal As Integers    ${response.status_code}    200
 
 Create express shipment
     [Arguments]    ${env}
