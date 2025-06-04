@@ -7,10 +7,11 @@ Library           Collections
 Library           RequestsLibrary
 Library           OperatingSystem
 Library           String
+Library           DateTime
 
 *** Test Cases ***
 API Create shipment
-    Create shipment    dev
+    Create shipment    20251404_00    stage
 
 API Get shipment details
     API details shipment    stage
@@ -205,7 +206,7 @@ Operations > Shipment Scan Tracking
     ${first_line} =    Set Variable    ${lines}[1]
     ${values} =    Split String    ${first_line}
     ${tracking_number}    Set Variable    ${values}[1]
-    API Driver picks up shipment from business    ${env}
+    API Driver picks up shipment from business    ${tracking_number}    ${warehouse_id}    ${env}
     Set Environment
     Click Link    ${redbox_dashboard_href}
     Sleep    5s
@@ -230,7 +231,7 @@ Operations > Returning Shipment
     Click Element    ${operations}
     Sleep    5s
     Click Link    ${operations_returning_shipment}
-    Search and check page contains text    ${operations_returning_shipment_seach_box}    ${operations_returning_shipment_search_data}[${ENV}]    ${operations_returning_shipment_compared_data}[${ENV}]
+    Search and check page contains text    ${operations_returning_shipment_seach_box}    670662016672    966508981797
 
 Operations > Reports At Locker page
     [Tags]    operations
@@ -368,70 +369,17 @@ Support tools > Link thirdparty shipments page
     Verify element exits    //button[contains(text(),'Submit')]
 
 Delivery Flow
-    [Tags]    API
-    Create shipment    dev    LEE_25060402
-    Sleep    5s
+    Create shipment    Auto_230425013    dev
     API Driver picks up shipment from business    dev
-    Sleep    5s
     API Confirm Deposit    dev
     API Customer pickup    dev
 
-Express Flow
-    ${env}    Set Variable    dev
-    #create shipment
-    Create express shipment    ${env}
-    #đọc file chứa shipment_id và tracking_number
-    ${file_content}    Get File    ${shipment_id_file}
-    ${lines}    Split To Lines    ${file_content}
-    ${shipment_id_line}    Set Variable    ${lines}[0]
-    ${tracking_number_line}    Set Variable    ${lines}[1]
-    Create express shipment    ${env}
-    ${file_content}    Get File    ${shipment_id_file}
-    ${lines}    Split To Lines    ${file_content}
-    ${shipment_id_line}    Set Variable    ${lines}[0]
-    ${tracking_number_line} Set Variable    ${lines}[1]
-    ${shipment_id}    Replace String    ${shipment_id_line}    shipment_id:    ${EMPTY}
-    ${shipment_id}    Strip String    ${shipment_id}
-    ${tracking_number}    Replace String    ${tracking_number_line}    tracking_number:    ${EMPTY}
-    ${tracking_number}    Strip String    ${tracking_number}
-    Log    Shipment ID: ${shipment_id}
-    Log    Tracking Number: ${tracking_number}
-    #customer deposit
-    Customer Confirm Deposit Express    ${shipment_id}    ${tracking_number}    ${env}
-    #driver picks up shipment
-    ${driver_token}=    API get token driver    ${env}    Ha driver dev
-    API Driver picks up Express shipments from Locker    ${env}    ${driver_token}
-    #Log-in shipments
-    Set Environment
-    Click Link    ${redbox_dashboard_href}
-    Sleep    5s
-    Access page    ${operations}    ${Logi-in shipment}
-    Input Text    ${enter tracking number}    ${tracking_number}
-    Log    Tracking Number: ${tracking_number}
-    Click Element    ${Scan button}
-    Wait Until Element Is Visible    ${in-transit label}
-    Click Element    ${submit button}
-    Wait Until Element Is Visible    ${Choose warehouse}    timeount=10s
-    Click Element    ${Choose warehouse}
-    Wait Until Element Is Visible    ${Choose warehouse}[2]
-    Click Element    ${Choose warehouse}[2]
-    Click Element    ${OK button}
-    #Scan Outbound
-    Set Environment
-    Click Link    ${redbox_dashboard_href}
-    Sleep    5s
-    Access page    ${operations}    ${Scan Outbound}
-    Wait Until Page Contains Element    ${Choose driver}
-    Click Element    ${Choose driver}[1]
-    Wait Until Element Is Visible    ${Choose driver}[3]    timeout=10s
-    Click Element ${Choose driver}[3]
-    Input Text    ${enter tracking number}    ${tracking_number}
-    Log    Nhập Tracking Number ${tracking_number}
-    Click Element    ${Scan button}
-    Wait Until Element Is Visible    ${in-transit label}
-    Click Element    ${submit button}
-    #driver confirm deposit
-    API Driver deposits Express shipments    ${env}    ${driver_token}
-    #customer pickup
-    ${locker_token}=    API get token locker    ${env}    866732032337033
-    API Customer pickup Express shipments from Locker    ${env}    ${locker_token}
+Return Flow > dropoff at merchant
+    Create shipment    Auto_2304293    dev
+    API Driver picks up shipment from business    dev
+    API Confirm Deposit    dev
+    API Customer pickup    dev
+    ${shipment_id_from_response}    ${tracking_number}=    API Create Return shipments    dev
+    API Customer Deposit Return Shipment    ${shipment_id_from_response}    ${door_id}    dev    ${uuid}
+    API Driver Pickup Return Shipment    ${tracking_number}    dev
+    API Driver Scan Dropoff at Merchant    ${tracking_number}    dev
