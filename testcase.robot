@@ -7,6 +7,7 @@ Library           Collections
 Library           RequestsLibrary
 Library           OperatingSystem
 Library           String
+Library           DateTime
 
 *** Test Cases ***
 API Create shipment
@@ -197,61 +198,8 @@ Shipments > Shipment Transfer page
     Access page    ${shipments}    ${shipment_transfer}
     Search and wait page contains text    ${shipment_transfer_search_box}    ${search_text}    No data available in table
 
-<<<<<<< Updated upstream
 Operations > Shipment Scan Tracking
     [Tags]    operations
-=======
-Sales KPIs Page
-    Set Environment
-    Click Link    ${redbox_dashboard_href}
-    Sleep    5s
-    Access page    ${dashboard}    ${sale_kpis}
-    Wait Until Element Is Visible    ${sale_kpis_new_account}
-    Capture Element Screenshot    ${sale_kpis_new_account}
-
-Merchant Data page
-    Set Environment
-    Click Link    ${redbox_dashboard_href}
-    Sleep    5s
-    Access page    ${dashboard}    ${merchant_data}
-    Wait Until Element Is Visible    ${merchant_data_active_account}
-    Capture Element Screenshot    ${merchant_data_active_account}
-
-Network page
-    Set Environment
-    Click Link    ${redbox_dashboard_href}
-    Sleep    5s
-    Access page    ${dashboard}    ${network}
-    Wait Until Element Is Visible    ${network_point_status_box}
-    Capture Element Screenshot    ${network_point_status_box}
-
-SLA Monitoring page
-    Set Environment
-    Click Link    ${redbox_dashboard_href}
-    Sleep    5s
-    Access page    ${operations_tab}    ${sla_monitoring}
-    Search and check page contains text    ${sla_monitoring_search_box}    Riyadh    Riyadh
-
-Merchant Performance page
-    Set Environment
-    Click Link    ${redbox_dashboard_href}
-    Sleep    5s
-    Access page    ${dashboard}    ${merchant_performance}
-    Search and check page contains text    ${merchant_performance_search_box}    Ha Ha    Ha Ha
-
-Internal Board page
-    Set Environment
-    Click Link    ${redbox_dashboard_href}
-    Sleep    5s
-    Access page    ${dashboard}    ${internal_board}
-    Wait Until Element Is Visible    ${internal_board_codtype_dropDownList}    timeout=10s
-    Click Element    ${internal_board_codtype_dropDownList}
-    Sleep    10s
-    Click Element    ${internal_board_with_cod_option}
-    Sleep    10s
-
-Check WH Shipment Scan Tracking
->>>>>>> Stashed changes
     Create shipment    Test_WH_Shipment_Scan_Tracking_1    ${env}
     ${file_content}    Get File    ${shipment_id_file}
     ${lines}    Split String    ${file_content}    \n
@@ -338,10 +286,7 @@ Express > Shipments page
     Sleep    5s
     Access page    ${express_tab}    ${express_shipments_list}
     Search and check page contains text    ${express_shipmentList_searchBox}    ${search_text}    No data available in table
-<<<<<<< Updated upstream
     Sleep    10s
-=======
->>>>>>> Stashed changes
 
 Express > Locker to Door page
     [Tags]    Express
@@ -350,6 +295,7 @@ Express > Locker to Door page
     Sleep    5s
     Access page    ${express_tab}    ${express_locker_to_door}
     Search and check page contains text    ${express_ltd_searchBox}    693320129221    693320129221
+    Sleep    10s
 
 Express > Settings page
     [Tags]    Express
@@ -360,10 +306,7 @@ Express > Settings page
     Access page    ${express_tab}    ${express_settings}
     Wait Until Element Is Visible    ${express_settings_domesticPrice}
     Capture Element Screenshot    ${express_settings_domesticPrice}
-<<<<<<< Updated upstream
     Sleep    10s
-=======
->>>>>>> Stashed changes
 
 Storage > Storage
     [Tags]    Storage
@@ -408,7 +351,6 @@ Global Box > MAWB Monitoring
     Access page    ${Global_box}    ${Global_MAWB Monitoring}
     Verify element exits    //button[contains(text(),'Import MAWB')]
     Sleep    5s
-<<<<<<< Updated upstream
 
 Warehouse List
     [Tags]    Warehouses
@@ -432,57 +374,12 @@ Delivery Flow
     API Confirm Deposit    dev
     API Customer pickup    dev
 
-Return Flow
-    Create shipment    Auto_230425041    dev
+Return Flow > dropoff at merchant
+    Create shipment    Auto_2304293    dev
     API Driver picks up shipment from business    dev
     API Confirm Deposit    dev
     API Customer pickup    dev
-    API Create Return shipments    dev
-    API Customer Deposit Return Shipment    dev
-
-API Driver pickup return shipment
-    ${tracking_number}    Set Variable    881489538171
-    ${environment}    Set Variable    dev
-    ${tracking_numbers}    Create List    ${tracking_number}
-    ${door_id_lists}    Create List    ${DEFAULT_DOOR_ID}
-    ${body}=    Create Dictionary    tracking_numbers=${tracking_numbers}    type=return    timestamp=${DEFAULT_TIMESTAMP}    file_name=${DEFAULT_FILE_NAME}    organization_id=${DEFAULT_ORGANIZATION_ID}    is_empty=${FALSE}    door_id=${door_id_lists}
-    ${url}=    Set Variable    ${URL_shipper_open_multiple_door["${environment}"]}
-    ${headers}=    Create Dictionary    Content-Type=application/json    Authorization=${driver_token["${environment}"]}    point-id=${point_id1["${environment}"]}    locker-id=${locker_id1["${environment}"]}    locale=${locale}
-    ${response}=    POST    ${url}    json=${body}    headers=${headers}
-    Log    Status code: ${response.status_code}
-=======
-    #Sleep    10s
-
-API create return shipment
-    Create Session    redbox    ${BASE_URL1}
-    ${headers}=    Create Dictionary    Content-Type=application/json    Authorization=${AUTH_TOKEN}
-    ${payload}=    Create Dictionary    original_shipment_id=67ece04ae1a3c4826041b5ac
-    ${response}=    POST On Session    redbox    ${ENDPOINT}    json=${payload}    headers=${headers}
-    Log    ${response.status_code}
->>>>>>> Stashed changes
-    ${response_body}=    Evaluate    $response.json()
-    Log    Response Body: ${response_body}
-    Should Be Equal As Integers    ${response.status_code}    200
-
-API Get Locker Token By UUID
-    ${uuid}=    Set Variable    866732032337033
-    ${environment}=    Set Variable    dev
-    ${headers}=    Create Dictionary    Content-Type=application/json
-    ${response}=    GET    ${URL_get_locker_token["${environment}"]}    headers=${headers}
-    Log    Status code: ${response.status_code}
-    ${response_body}=    Evaluate    $response.json()
-    Log    Response Body: ${response_body}
-    Should Be Equal As Integers    ${response.status_code}    200
-
-API Customer deposit return shipment
-    ${environment}=    Set Variable    dev
-    ${uuid}=    Set Variable    86673203233703
-    ${token}=    Get Locker Token By UUID    ${uuid}    ${environment}
-    ${body}=    Create Dictionary    shipment_id=${shipment_id_from_response}    door_id=${door_id}
-    ${headers}=    Create Dictionary    Content-Type=application/json    Authorization=Bearer ${token}    point_id=${point_id1["${environment}"]}    locker_id=${locker_id1["${environment}"]}    locale=${locale}    timestamp=${DEFAULT_TIMESTAMP}    accept=application/json
-    ${url}=    Set Variable    ${URL_customer_deposit_return["${environment}"]}
-    ${response}=    POST    ${url}    json=${body}    headers=${headers}
-    Log    Status code: ${response.status_code}
-    ${response_body}=    Evaluate    $response.json()
-    Log    Response body: ${response_body}
-    Should Be Equal As Integers    ${response.status_code}    200
+    ${shipment_id_from_response}    ${tracking_number}=    API Create Return shipments    dev
+    API Customer Deposit Return Shipment    ${shipment_id_from_response}    ${door_id}    dev    ${uuid}
+    API Driver Pickup Return Shipment    ${tracking_number}    dev
+    API Driver Scan Dropoff at Merchant    ${tracking_number}    dev

@@ -31,11 +31,7 @@ ${door_issue}     menu-link-door-issue
 ${door_issue_search_box}    customSearch
 ${mawb_monitoring}    menu-link-mawb-monitoring
 ${link_thirdparty_shipments}    menu-link-link-thirdparty-shipments
-<<<<<<< Updated upstream
 ${dashboard}      xpath=//*[text()='Overview']
-=======
-${dashboard}      xpath=//*[text()='Dashboard']
->>>>>>> Stashed changes
 ${sale_kpis}      xpath=//*[text()='Sales KPIs']
 ${sale_kpis_new_account}    new-acount
 ${merchant_data}    xpath=//*[text()='Merchant data']
@@ -105,7 +101,6 @@ ${Global_MAWB Monitoring}    //li[*[text()='Global Box']]//li[*[text()='MAWB Mon
 ${BASE_URL1}      https://dev.api.redboxsa.com
 ${ENDPOINT}       /v3/shipments/returns
 ${AUTH_TOKEN}     Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25faWQiOiI2NGJlMmZjNTdiMzVlYTQ4YmRlY2IwNzAiLCJrZXkiOiIyMDIzLTEwLTE5VDExOjA2OjUwLjc1MloiLCJpYXQiOjE2OTc3MTM2MTB9.5L_YOpJtrfPMUR2wQvFCT9rNCsvSQkSqMTX3f-klUuk
-<<<<<<< Updated upstream
 ${Packages_seach_box}    customSearchShipment
 ${operations_tab}    xpath=//*[text()='Operations']
 ${operations}     xpath=//*[text()='Operations']
@@ -115,9 +110,5 @@ ${locker_id}      65aa37553a403d2b4b366b47
 ${uuid}           866732032337033
 ${locale}         en
 ${DEFAULT_ORGANIZATION_ID}    5e782d3430892b2a423a0d4e
-${DEFAULT_DOOR_ID}    67e3e9152bfdfe8979a46964
-${DEFAULT_TIMESTAMP}    1747282560396
 ${DEFAULT_FILE_NAME}    IMG_67403ca31406129208e1627d_20250515_041536.jpg
-=======
 ${operations_tab}    xpath=//*[text()='Operations']
->>>>>>> Stashed changes
